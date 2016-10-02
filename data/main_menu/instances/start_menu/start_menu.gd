@@ -100,11 +100,11 @@ func change_selection(id):
 		if(count == id):
 			# Set name and color for active selection
 			c.set_text("*" + item_names[count] + extra + "*")
-			c.update_color(1)
+			c.set_color(1)
 		else:
 			# Set name and color for inactive selection
 			c.set_text(item_names[count] + extra)
-			c.update_color(0)
+			c.set_color(0)
 		count += 1
 	# Play sound effect for changing selection
 	# ...
