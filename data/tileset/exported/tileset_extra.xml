@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="TileSet" subresource_count="2" version="2.2" version_name="Godot Engine v2.2.alpha.custom_build">
+	<ext_resource path="res://data/levels/extra.png" type="Texture" index="0"></ext_resource>
+	<main_resource>
+		<string name="0/name"> "1" </string>
+		<resource name="0/texture" external="0">  </resource>
+		<vector2 name="0/tex_offset"> 0, 0 </vector2>
+		<resource name="0/material"></resource>		<rect2 name="0/region"> 0, 0, 16, 16 </rect2>
+		<vector2 name="0/occluder_offset"> -0, -0 </vector2>
+		<resource name="0/occluder"></resource>		<vector2 name="0/navigation_offset"> -0, -0 </vector2>
+		<resource name="0/navigation"></resource>		<vector2 name="0/shape_offset"> 0, 0 </vector2>
+		<array name="0/shapes" len="0" shared="false">
+		</array>
+		<string name="1/name"> "2" </string>
+		<resource name="1/texture" external="0">  </resource>
+		<vector2 name="1/tex_offset"> 0, 0 </vector2>
+		<resource name="1/material"></resource>		<rect2 name="1/region"> 16, 0, 16, 16 </rect2>
+		<vector2 name="1/occluder_offset"> -0, -0 </vector2>
+		<resource name="1/occluder"></resource>		<vector2 name="1/navigation_offset"> -0, -0 </vector2>
+		<resource name="1/navigation"></resource>		<vector2 name="1/shape_offset"> 0, 0 </vector2>
+		<array name="1/shapes" len="0" shared="false">
+		</array>
+
+	</main_resource>
+</resource_file>

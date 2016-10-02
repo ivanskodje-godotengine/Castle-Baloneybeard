@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://data/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://data/main_menu/background.png" type="Texture" id=2]
+[ext_resource path="res://data/main_menu/logo.png" type="Texture" id=3]
+[ext_resource path="res://data/main_menu/instances/menu_item/menu_item.tscn" type="PackedScene" id=4]
 
 [node name="main_menu" type="Control"]
 
@@ -17,9 +19,81 @@ margin/right = 0.0
 margin/bottom = 0.0
 script/script = ExtResource( 1 )
 
+[node name="ColorFrame" type="ColorFrame" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+color = Color( 0.181152, 0.266674, 0.414062, 1 )
+
 [node name="background_image" type="Sprite" parent="."]
 
+visibility/opacity = 0.5
 texture = ExtResource( 2 )
 centered = false
+
+[node name="container" type="Container" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+
+[node name="Sprite" type="Sprite" parent="container"]
+
+transform/pos = Vector2( 0, 10 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="vbox_container" type="VBoxContainer" parent="container"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 50.0
+margin/right = 0.0
+margin/bottom = 0.0
+alignment = 1
+
+[node name="hbox_container" parent="container/vbox_container" instance=ExtResource( 4 )]
+
+anchor/right = 0
+margin/top = 17.0
+margin/right = 160.0
+margin/bottom = 34.0
+text = "Start"
+
+[node name="hbox_container1" parent="container/vbox_container" instance=ExtResource( 4 )]
+
+anchor/right = 0
+margin/top = 38.0
+margin/right = 160.0
+margin/bottom = 55.0
+text = "Level: "
+
+[node name="hbox_container2" parent="container/vbox_container" instance=ExtResource( 4 )]
+
+anchor/right = 0
+margin/top = 59.0
+margin/right = 160.0
+margin/bottom = 76.0
+text = "Music: "
 
 

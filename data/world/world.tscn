@@ -1,6 +1,8 @@
-[gd_scene format=1]
+[gd_scene load_steps=2 format=1]
 
-[node name="level_00" type="Control"]
+[ext_resource path="res://data/world/world.gd" type="Script" id=1]
+
+[node name="world" type="Control"]
 
 anchor/right = 1
 anchor/bottom = 1
@@ -12,5 +14,6 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
+script/script = ExtResource( 1 )
 
 

@@ -1,37 +1,110 @@
 extends Control
 
-onready var START_MENU = preload("res://data/main_menu/instances/start_menu/start_menu.tscn")
-var menu_queue = []
+# Keeps track of current selected item
+var selected_item = 0 
+onready var items = get_node("container/vbox_container").get_children()
+var item_names = []
+var current_level = 1
+var max_level = 1 # TODO: Load number of levels and insert into this var
+var current_music = 100
+var max_music = 100
+
+# Signals for game.gd
+signal start()
+
 
 func _ready():
-	add_menu(START_MENU)
-	pass
+	# Enable input
+	set_process_input(true)
+	
+	# Get item names
+	for i in items:
+		item_names.append(i.get_text())
+		pass
+	
+	change_selection(0)
 
 
-# START MENU
-func start():
-	print("Start level")
-	pass
+func _input(event):
+	# Pressed UI_UP
+	if(event.is_action_pressed("ui_up")):
+		selected_item -= 1
+		if(selected_item < 0):
+			selected_item = items.size()-1
+		change_selection(selected_item)
+	
+	# Pressed UI_DOWN
+	elif(event.is_action_pressed("ui_down")):
+		selected_item += 1
+		if(selected_item > items.size()-1):
+			selected_item = 0
+		change_selection(selected_item)
+	
+	elif(event.is_action_pressed("ui_left")):
+		if(selected_item == 1):
+			decrease_level()
+		elif(selected_item == 2):
+			decrease_music()
+	
+	elif(event.is_action_pressed("ui_right")):
+		if(selected_item == 1):
+			increase_level()
+		elif(selected_item == 2):
+			increase_music()
+	
+	# Pressed UI_ACCEPT
+	elif(event.is_action_pressed("ui_accept")):
+		if(selected_item == 0): # Start
+			emit_signal("start", current_level)
+			# Play sound effect for selected
+		elif(selected_item == 1): # Level
+			increase_level()
+			# Play sound effect for selected
+		elif(selected_item == 2): # Music
+			increase_music()
+			# Play sound effect for selected
 
+func increase_level():
+	current_level += 1
+	if(current_level > max_level):
+		current_level = 1
+	items[1].set_text("*Level: " + str(current_level).pad_zeros(2) + "*")
 
-# Adds a menu to queue (allowing us to add menus on top of menus, be it overlays or whatnot)
-func add_menu(menu_scene):
-	var menu = menu_scene.instance()
-	if(menu_scene == START_MENU):
-		menu.connect("start", self, "start")
-		menu.connect("level", self, "level")
-		menu.connect("music", self, "music")
-	menu_queue.push_front(menu)
-	add_child(menu_queue[0])
+func decrease_level():
+	current_level -= 1
+	if(current_level < 1):
+		current_level = max_level
+	items[1].set_text("*Level: " + str(current_level).pad_zeros(2) + "*")
 
+func increase_music():
+	current_music += 10
+	if(current_music > max_music):
+		current_music = max_music # prevent going above max
+	items[2].set_text("*Music: " + str(current_music).pad_zeros(2) + "*")
 
-# Removes current menu
-func remove_menu():
-	menu_queue[0].queue_free() # clear reference to current menu
-	menu_queue.pop_front() # remove top menu
+func decrease_music():
+	current_music -= 10
+	if(current_music < 0):
+		current_music = 0 # prevent going below 0
+	items[2].set_text("*Music: " + str(current_music).pad_zeros(2) + "*")
 
-
-# Changes current menu to new_menu
-func change_menu_to(new_menu):
-	remove_menu()
-	add_menu(new_menu)
+func change_selection(id):
+	var count = 0
+	for c in items:
+		var extra = ""
+		if(count == 1):
+			extra = str(current_level).pad_zeros(2)
+		elif(count == 2):
+			extra = str(current_music).pad_zeros(2)
+		
+		if(count == id):
+			# Set name and color for active selection
+			c.set_text("*" + item_names[count] + extra + "*")
+			c.set_color(1)
+		else:
+			# Set name and color for inactive selection
+			c.set_text(item_names[count] + extra)
+			c.set_color(0)
+		count += 1
+	# Play sound effect for changing selection
+	# ...
