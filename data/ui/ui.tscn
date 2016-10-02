@@ -35,7 +35,6 @@ time = 45
 
 [node name="color_frame" type="ColorFrame" parent="."]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -44,7 +43,7 @@ margin/left = 0.0
 margin/top = 134.0
 margin/right = 160.0
 margin/bottom = 144.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0.137255, 0.164706, 0.0588235, 1 )
 
 [node name="hbox_time" type="HBoxContainer" parent="color_frame"]
 
