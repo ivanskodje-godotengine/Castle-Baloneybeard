@@ -22,17 +22,14 @@ func _input(event):
 				game_running = true
 			
 			if(game_over && !game_running):
-				print("A2")
 				# Restart level
-				# get_child(0).queue_free() # Remove current level
-				# load_level(current_level) # Reload level
-				print("game is over, attempting to reset")
+				print("Restarting level...")
 				# Game over to false
 				game_over = false
 				get_child(0).queue_free()
 				load_level(current_level)
 		else:
-			# Remove pause and continue
+			# Paused - Pressing USE confirms returning to menu
 			print("Remove pause and continue")
 	
 	# ESCAPE
