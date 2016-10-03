@@ -4,7 +4,6 @@ var game_running = false
 var game_over = false
 var paused = false
 var current_level = 1
-
 var tile_size = 16 # Tile size used for tilemaps - used to move player
 
 func _ready():
@@ -68,8 +67,6 @@ func spawn_player():
 		if(tilemap.get_cell(t.x, t.y) == 0):
 			# Save vec2 pos for tile
 			spawn_vec2 = t
-			
-			# If there are more spawn tiles, ignore the rest
 			break
 	
 	# Create player on spawn position
@@ -87,10 +84,25 @@ func load_level(level):
 	current_level = level
 	
 	# Create level scene
-	var scene = load("res://data/levels/" + str(level).pad_zeros(2) + "/level.tscn").instance()
-	scene.get_node("ui").connect("game_over", self, "game_over")
+	var level_scene = load("res://data/levels/" + str(level).pad_zeros(2) + "/level.tscn")
+	if(level_scene != null):
+		var scene = level_scene.instance()
+		scene.get_node("ui").connect("game_over", self, "game_over")
+		add_child(scene)
+	else:
+		# Go back to menu
+		get_tree().set_pause(false)
+		get_tree().get_root().get_node("game").main_menu()
+		
 
-	add_child(scene)
+# Go to next level (while we are already playing)
+func load_next_level():
+	get_child(0).queue_free() # Remove current level 
+	game_running = false
+	game_over = false
+	paused = false
+	current_level += 1
+	load_level(current_level)
 
 # Set game over
 func game_over():

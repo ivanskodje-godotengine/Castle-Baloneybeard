@@ -4,7 +4,6 @@ extends CanvasLayer
 # Time limit for the map
 export(int) var time = 999 setget set_time
 export(int) var level = 999 setget set_level
-# var level = null
 
 # Timer
 var timer = null
@@ -25,7 +24,6 @@ onready var time_out_node = get_node("time_out")
 
 # Signal for game over
 signal game_over()
-
 
 func _ready():
 	# Make sure to have updated the labels to display correct time and level
@@ -54,15 +52,28 @@ func _countdown():
 		# Game over
 	time_label.set_text(str(time).pad_zeros(3))
 
+
 # Given an number and boolean, enables/disables key (UI)
-func set_key(num, boolean):
-	# If number is 1, 2, 3 or 4
-	if(num > 0 && num < 5):
-		var key = get_node("color_frame/hbox_keys/Container/key_" + str(num))
-		if(boolean):
-			key.show()
-		else:
-			key.hide()
+func update_keys(dict):
+	if(dict["SPADE"] > 0):
+		get_node("color_frame/hbox_keys/Container1/key_2").show()
+	else:
+		get_node("color_frame/hbox_keys/Container1/key_2").hide()
+	
+	if(dict["DIAMOND"] > 0):
+		get_node("color_frame/hbox_keys/Container/key_1").show()
+	else:
+		get_node("color_frame/hbox_keys/Container/key_1").hide()
+	
+	if(dict["CLUB"] > 0):
+		get_node("color_frame/hbox_keys/Container2/key_3").show()
+	else:
+		get_node("color_frame/hbox_keys/Container2/key_3").hide()
+	
+	if(dict["HEART"] > 0):
+		get_node("color_frame/hbox_keys/Container3/key_4").show()
+	else:
+		get_node("color_frame/hbox_keys/Container3/key_4").hide()
 
 func set_time(t):
 	time = t

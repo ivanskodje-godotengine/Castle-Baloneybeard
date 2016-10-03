@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://data/tileset/exported/tileset_world.xml" type="TileSet" id=1]
+[ext_resource path="res://data/tileset/exported/tileset_entities.xml" type="TileSet" id=2]
+[ext_resource path="res://data/tileset/exported/tileset_extra.xml" type="TileSet" id=3]
+[ext_resource path="res://data/ui/ui.tscn" type="PackedScene" id=4]
+
+[node name="level" type="Control"]
+
+process/pause_mode = 1
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+
+[node name="world" type="TileMap" parent="."]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 131073, 3, 131074, 3, 131075, 3, 131076, 3, 131077, 3, 131078, 3, 131079, 3, 131080, 3, 196609, 2, 196610, 2, 196611, 2, 196612, 2, 196613, 2, 196614, 2, 196615, 2, 196616, 3, 262145, 2, 262146, 2, 262147, 2, 262148, 2, 262149, 2, 262150, 2, 262151, 2, 262152, 3, 327681, 2, 327682, 2, 327683, 2, 327684, 2, 327685, 2, 327686, 2, 327687, 2, 327688, 3, 393217, 3, 393218, 3, 393219, 3, 393220, 3, 393221, 3, 393222, 3, 393223, 3, 393224, 3 )
+
+[node name="entities" type="TileMap" parent="."]
+
+mode = 0
+tile_set = ExtResource( 2 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 196615, 9, 262145, 4, 327687, 9 )
+
+[node name="extra" type="TileMap" parent="."]
+
+mode = 0
+tile_set = ExtResource( 3 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 262149, 0 )
+
+[node name="ui" parent="." instance=ExtResource( 4 )]
+
+time = 133
+level = 2
+
+

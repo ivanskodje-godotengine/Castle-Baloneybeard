@@ -5,7 +5,7 @@ var selected_item = 0
 onready var items = get_node("container/vbox_container").get_children()
 var item_names = []
 var current_level = 1
-var max_level = 1 # TODO: Load number of levels and insert into this var
+var max_level = 2 # TODO: Load number of levels and insert into this var
 var current_music = 100
 var max_music = 100
 

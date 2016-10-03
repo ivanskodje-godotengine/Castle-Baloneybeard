@@ -88,7 +88,6 @@ max_lines_visible = -1
 
 [node name="hbox_keys" type="HBoxContainer" parent="color_frame"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -113,6 +112,7 @@ margin/bottom = 17.0
 
 [node name="key_1" type="Sprite" parent="color_frame/hbox_keys/Container"]
 
+visibility/visible = false
 texture = ExtResource( 3 )
 centered = false
 region = true
@@ -132,6 +132,7 @@ margin/bottom = 17.0
 
 [node name="key_2" type="Sprite" parent="color_frame/hbox_keys/Container1"]
 
+visibility/visible = false
 texture = ExtResource( 3 )
 centered = false
 region = true
@@ -151,6 +152,7 @@ margin/bottom = 17.0
 
 [node name="key_3" type="Sprite" parent="color_frame/hbox_keys/Container2"]
 
+visibility/visible = false
 transform/pos = Vector2( 0, 1 )
 texture = ExtResource( 3 )
 centered = false
@@ -171,6 +173,7 @@ margin/bottom = 17.0
 
 [node name="key_4" type="Sprite" parent="color_frame/hbox_keys/Container3"]
 
+visibility/visible = false
 texture = ExtResource( 3 )
 centered = false
 region = true
