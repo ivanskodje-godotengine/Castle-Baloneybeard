@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://data/world/spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://data/items/movable_block/movable_block.gd" type="Script" id=2]
+
+[node name="movable_block" type="Sprite"]
+
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 16, 32, 16, 16 )
+script/script = ExtResource( 2 )
+
+

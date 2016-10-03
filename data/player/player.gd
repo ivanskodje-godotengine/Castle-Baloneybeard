@@ -97,7 +97,7 @@ func move_complete(tween, key):
 # Fill in tile IDs for solid tiles
 var SOLID_TILES = {
 	WORLD = [1,3,5],
-	ENTITIES = [0,1,2,3]
+	ENTITIES = [0,1,2,3,10]
 }
 
 # Ids for the itmes the player can pickup (Entities only)
@@ -175,6 +175,18 @@ func can_move(direction):
 					update_ui()
 				else:
 					return false
+			elif(t == 10):
+				# Push block one step in same direction (if possible)
+				print("Move block one step in direction")
+				# Remove block
+				
+				# Spawn temporary block for tween to the new location
+				
+				# Spawn block
+				
+				
+				# Prevent movement on player
+				return false
 			else:
 				return false
 	
