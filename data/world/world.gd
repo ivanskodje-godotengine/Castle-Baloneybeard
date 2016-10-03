@@ -5,6 +5,8 @@ var game_over = false
 var paused = false
 var current_level = 1
 
+var tile_size = 16 # Tile size used for tilemaps - used to move player
+
 func _ready():
 	# Enable input
 	set_process_input(true)
@@ -15,26 +17,20 @@ func _input(event):
 		if(!paused):
 			# Close Intro overlay and start coutndown
 			if(!game_running && !game_over):
-				print("Starting game")
-				
+				# Spawn player
 				spawn_player()
 
-				
 				# Start game
 				get_child(0).get_node("ui").set_intro(false)
 				get_child(0).get_node("ui").start_countdown() # Start timer
 				game_running = true
 		else:
 			# Return to main menu
-			# game_running = false
 			get_tree().set_pause(false)
 			get_tree().get_root().get_node("game").main_menu()
-			print("Closing game and returning to main menu")
 		
 		if(game_over && !game_running):
 			# Restart level
-			print("Restarting level")
-			# Game over to false
 			game_over = false
 			get_child(0).queue_free()
 			load_level(current_level)
@@ -45,7 +41,6 @@ func _input(event):
 		if(game_running):
 			if(!paused):
 				# Pause
-				print("PAUSE GAME!")
 				paused = true
 				get_child(0).get_node("ui").set_pause(true)
 				get_tree().set_pause(true)
@@ -56,11 +51,10 @@ func _input(event):
 				get_child(0).get_node("ui").set_pause(false)
 				get_tree().set_pause(false)
 				get_child(0).get_node("player").show()
-				print("RESUME GAME!")
 		else:
 			# Return directly to main menu
-			paused = false
-			print("RETURN TO MAIN MENU")
+			get_tree().set_pause(false)
+			get_tree().get_root().get_node("game").main_menu()
 
 
 func spawn_player():
@@ -68,14 +62,12 @@ func spawn_player():
 	var tilemap = get_child(0).get_node("extra")
 	var tiles = tilemap.get_used_cells()
 	var spawn_vec2 = null
+	
 	for t in tiles:
 		# If it is a spawn tile
 		if(tilemap.get_cell(t.x, t.y) == 0):
-			# Convert player pos into world coordinates
-			var vec2_world = tilemap.map_to_world(t)
-			
-			# Store position as player spawn pos
-			spawn_vec2 = vec2_world
+			# Save vec2 pos for tile
+			spawn_vec2 = t
 			
 			# If there are more spawn tiles, ignore the rest
 			break
@@ -84,14 +76,14 @@ func spawn_player():
 	if(spawn_vec2 != null):
 		# Create player instance
 		var player = load("res://data/player/player.tscn").instance()
-		player.set_pos(spawn_vec2)
 		get_child(0).add_child(player)
+		player.spawn_at(spawn_vec2) # Must spawn AFTER being added to child
 	else:
-		print("ERROR: Missing SPAWN tile!")
+		print("LEVEL ERROR: Level is missing a spawn position!")
 
 
 func load_level(level):
-	print("Loading level " + str(level))
+	# Store current level in order to go to next leven when we reach the goal
 	current_level = level
 	
 	# Create level scene
@@ -102,8 +94,6 @@ func load_level(level):
 
 # Set game over
 func game_over():
-	print("Game over - time limit reached")
 	get_child(0).get_node("player").queue_free()
 	game_over = true
 	game_running = false
-	

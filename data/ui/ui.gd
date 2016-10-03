@@ -1,5 +1,5 @@
 tool
-extends Control
+extends CanvasLayer
 
 # Time limit for the map
 export(int) var time = 999 setget set_time
@@ -28,8 +28,9 @@ signal game_over()
 
 
 func _ready():
-	# time_label.set_text(str(time).pad_zeros(3))
-	# level_label.set_text(str(level).pad_zeros(3))
+	# Make sure to have updated the labels to display correct time and level
+	time_label.set_text(str(time).pad_zeros(3))
+	level_label.set_text(str(level).pad_zeros(3))
 	
 	# Create timer and start it
 	timer = Timer.new()

@@ -75,7 +75,4 @@ tile_data = IntArray( 262148, 0 )
 
 [node name="ui" parent="." instance=ExtResource( 4 )]
 
-time = 2
-level = 1
-
 

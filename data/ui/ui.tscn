@@ -18,22 +18,14 @@ font/use_mipmaps = false
 font/use_filter = false
 font/font = ExtResource( 2 )
 
-[node name="ui" type="Control"]
+[node name="ui" type="CanvasLayer"]
 
 process/pause_mode = 1
-anchor/right = 1
-anchor/bottom = 1
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 0.0
-margin/bottom = 0.0
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 script/script = ExtResource( 1 )
-time = 13
-level = 370
 
 [node name="color_frame" type="ColorFrame" parent="."]
 
