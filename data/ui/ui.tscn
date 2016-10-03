@@ -2,7 +2,7 @@
 
 [ext_resource path="res://data/ui/ui.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Early GameBoy.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://data/levels/spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://data/world/spritesheet.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -20,6 +20,7 @@ font/font = ExtResource( 2 )
 
 [node name="ui" type="Control"]
 
+process/pause_mode = 1
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -31,7 +32,8 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 script/script = ExtResource( 1 )
-time = 33
+time = 13
+level = 370
 
 [node name="color_frame" type="ColorFrame" parent="."]
 
@@ -47,6 +49,7 @@ color = Color( 0.137255, 0.164706, 0.0588235, 1 )
 
 [node name="hbox_time" type="HBoxContainer" parent="color_frame"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -83,10 +86,11 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 20.0
 margin/top = 3.0
-margin/right = 20.0
+margin/right = 44.0
 margin/bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
+text = "013"
 valign = 2
 percent_visible = 1.0
 lines_skipped = 0
@@ -94,7 +98,6 @@ max_lines_visible = -1
 
 [node name="hbox_keys" type="HBoxContainer" parent="color_frame"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -107,7 +110,6 @@ alignment = 0
 
 [node name="Container" type="Container" parent="color_frame/hbox_keys"]
 
-editor/display_folded = true
 rect/min_size = Vector2( 8, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -118,16 +120,15 @@ margin/top = 0.0
 margin/right = 8.0
 margin/bottom = 17.0
 
-[node name="Sprite" type="Sprite" parent="color_frame/hbox_keys/Container"]
+[node name="key_1" type="Sprite" parent="color_frame/hbox_keys/Container"]
 
 texture = ExtResource( 3 )
 centered = false
 region = true
-region_rect = Rect2( 208, 32, 16, 16 )
+region_rect = Rect2( 192, 16, 16, 16 )
 
 [node name="Container1" type="Container" parent="color_frame/hbox_keys"]
 
-editor/display_folded = true
 rect/min_size = Vector2( 8, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -138,12 +139,12 @@ margin/top = 0.0
 margin/right = 20.0
 margin/bottom = 17.0
 
-[node name="Sprite" type="Sprite" parent="color_frame/hbox_keys/Container1"]
+[node name="key_2" type="Sprite" parent="color_frame/hbox_keys/Container1"]
 
 texture = ExtResource( 3 )
 centered = false
 region = true
-region_rect = Rect2( 208, 32, 16, 16 )
+region_rect = Rect2( 208, 16, 16, 16 )
 
 [node name="Container2" type="Container" parent="color_frame/hbox_keys"]
 
@@ -157,12 +158,13 @@ margin/top = 0.0
 margin/right = 32.0
 margin/bottom = 17.0
 
-[node name="Sprite" type="Sprite" parent="color_frame/hbox_keys/Container2"]
+[node name="key_3" type="Sprite" parent="color_frame/hbox_keys/Container2"]
 
+transform/pos = Vector2( 0, 1 )
 texture = ExtResource( 3 )
 centered = false
 region = true
-region_rect = Rect2( 208, 32, 16, 16 )
+region_rect = Rect2( 224, 16, 16, 16 )
 
 [node name="Container3" type="Container" parent="color_frame/hbox_keys"]
 
@@ -176,12 +178,12 @@ margin/top = 0.0
 margin/right = 44.0
 margin/bottom = 17.0
 
-[node name="Sprite" type="Sprite" parent="color_frame/hbox_keys/Container3"]
+[node name="key_4" type="Sprite" parent="color_frame/hbox_keys/Container3"]
 
 texture = ExtResource( 3 )
 centered = false
 region = true
-region_rect = Rect2( 208, 32, 16, 16 )
+region_rect = Rect2( 240, 16, 16, 16 )
 
 [node name="hbox_level" type="HBoxContainer" parent="color_frame"]
 
@@ -222,10 +224,11 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 28.0
 margin/top = 3.0
-margin/right = 28.0
+margin/right = 52.0
 margin/bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
+text = "370"
 valign = 2
 percent_visible = 1.0
 lines_skipped = 0
@@ -233,6 +236,7 @@ max_lines_visible = -1
 
 [node name="intro" type="Control" parent="."]
 
+editor/display_folded = true
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -273,7 +277,7 @@ margin/right = 0.0
 margin/bottom = 0.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
-text = "Level "
+text = "Level: 370"
 align = 1
 valign = 1
 percent_visible = 1.0
@@ -282,6 +286,7 @@ max_lines_visible = -1
 
 [node name="pause" type="Control" parent="."]
 
+editor/display_folded = true
 visibility/visible = false
 anchor/right = 1
 anchor/bottom = 1
@@ -379,3 +384,5 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+

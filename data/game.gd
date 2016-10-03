@@ -4,8 +4,15 @@ onready var MAIN_MENU = preload("res://data/main_menu/main_menu.tscn")
 onready var WORLD = preload("res://data/world/world.tscn")
 onready var ui_node = get_node("ui")
 
+var width = 160
+var height = 144
+
 # Everything begins here
 func _ready():
+	# Resize window bigger
+	OS.set_window_size(Vector2(width*3, height*3))
+	
+	
 	# TODO: Display splash screen/cutscene first?
 	# ...
 	
@@ -15,6 +22,9 @@ func _ready():
 
 # Creates the main menu
 func main_menu():
+	if(get_node("world")):
+		get_node("world").queue_free()
+	
 	# Create main menu scene
 	var scene = MAIN_MENU.instance()
 	

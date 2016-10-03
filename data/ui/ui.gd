@@ -17,6 +17,9 @@ onready var intro_label = get_node("intro/label")
 # Intro Overlay (Level name and possibly extra information later)
 onready var intro_node = get_node("intro")
 
+# Pause node
+onready var pause_node = get_node("pause")
+
 # Time out Overlay
 onready var time_out_node = get_node("time_out")
 
@@ -45,10 +48,20 @@ func _countdown():
 		time = 0 # Time to 0
 		timer.stop()
 		time_out_node.show()
-		print("TICK_COUNTDOWN_GAME OVER")
+		print("Emit signal from UI: Game Over")
 		emit_signal("game_over")
 		# Game over
 	time_label.set_text(str(time).pad_zeros(3))
+
+# Given an number and boolean, enables/disables key (UI)
+func set_key(num, boolean):
+	# If number is 1, 2, 3 or 4
+	if(num > 0 && num < 5):
+		var key = get_node("color_frame/hbox_keys/Container/key_" + str(num))
+		if(boolean):
+			key.show()
+		else:
+			key.hide()
 
 func set_time(t):
 	time = t
@@ -66,14 +79,20 @@ func set_level(l):
 	if(get_node("color_frame/hbox_level/label_level_value") != null):
 		get_node("color_frame/hbox_level/label_level_value").set_text(str(level).pad_zeros(3))
 
-func set_intro(is_enabled):
-	if(is_enabled):
+func set_intro(boolean):
+	if(boolean):
 		intro_node.show()
 	else:
 		intro_node.hide()
 
-func set_time_out(is_enabled):
-	if(is_enabled):
+func set_pause(boolean):
+	if(boolean):
+		pause_node.show()
+	else:
+		pause_node.hide()
+
+func set_time_out(boolean):
+	if(boolean):
 		time_out_node.show()
 	else:
 		time_out_node.hide()

@@ -52,7 +52,7 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -65528, 7, 4, 4, 65538, 1, 65542, 2, 196607, 8, 131073, 2, 131079, 1, 131081, 8, 196610, 7, 196614, 8, 327682, 7, 327686, 8, 393217, 1, 393223, 2, 458755, 2, 458757, 1, 655365, 7 )
+tile_data = IntArray( -65528, 7, 1, 9, 4, 4, 7, 9, 65538, 0, 65542, 0, 196607, 6, 131073, 2, 131079, 1, 131081, 6, 262143, 9, 196610, 7, 196614, 8, 196617, 9, 262146, 9, 262150, 9, 393215, 9, 327682, 7, 327686, 8, 327689, 9, 393217, 1, 393220, 9, 393223, 2, 458755, 3, 458757, 3, 589827, 9, 589829, 9, 655365, 5 )
 
 [node name="extra" type="TileMap" parent="."]
 
@@ -70,11 +70,11 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( 1, 0, 7, 0, 262143, 0, 196617, 0, 262146, 0, 262148, 1, 262150, 0, 393215, 0, 327689, 0, 393220, 0, 589827, 0, 589829, 0 )
+tile_data = IntArray( 262148, 0 )
 
 [node name="ui" parent="." instance=ExtResource( 4 )]
 
-time = 200
+time = 60
 level = 1
 
 

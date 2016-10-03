@@ -38,7 +38,7 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 
-[node name="Sprite" type="Sprite" parent="container"]
+[node name="logo" type="Sprite" parent="container"]
 
 transform/pos = Vector2( 0, 10 )
 texture = ExtResource( 3 )
@@ -53,7 +53,7 @@ focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 50.0
+margin/top = 69.0
 margin/right = 0.0
 margin/bottom = 0.0
 alignment = 1
@@ -61,25 +61,28 @@ alignment = 1
 [node name="hbox_container" parent="container/vbox_container" instance=ExtResource( 4 )]
 
 anchor/right = 0
-margin/top = 19.0
+margin/top = 11.0
 margin/right = 160.0
-margin/bottom = 35.0
+margin/bottom = 26.0
+color = 2
 text = "Start"
 
 [node name="hbox_container1" parent="container/vbox_container" instance=ExtResource( 4 )]
 
 anchor/right = 0
-margin/top = 39.0
+margin/top = 30.0
 margin/right = 160.0
-margin/bottom = 55.0
+margin/bottom = 45.0
+color = 2
 text = "Level: "
 
 [node name="hbox_container2" parent="container/vbox_container" instance=ExtResource( 4 )]
 
 anchor/right = 0
-margin/top = 59.0
+margin/top = 49.0
 margin/right = 160.0
-margin/bottom = 75.0
+margin/bottom = 64.0
+color = 2
 text = "Music: "
 
 
