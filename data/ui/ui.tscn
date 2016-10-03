@@ -1,9 +1,17 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://data/ui/ui.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Early GameBoy.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://data/levels/spritesheet.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
+
+font/size = 8
+font/use_mipmaps = false
+font/use_filter = false
+font/font = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
 
 font/size = 16
 font/use_mipmaps = false
@@ -25,8 +33,6 @@ margin/bottom = 0.0
 script/script = ExtResource( 1 )
 time = 33
 
-<<<<<<< HEAD
-=======
 [node name="color_frame" type="ColorFrame" parent="."]
 
 focus/ignore_mouse = false
@@ -225,7 +231,6 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
->>>>>>> refs/remotes/origin/master
 [node name="intro" type="Control" parent="."]
 
 anchor/right = 1
@@ -239,9 +244,6 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 
-<<<<<<< HEAD
-[node name="label_time_out" type="Label" parent="intro"]
-=======
 [node name="ColorFrame" type="ColorFrame" parent="intro"]
 
 visibility/opacity = 0.35
@@ -258,7 +260,6 @@ margin/bottom = 0.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="label" type="Label" parent="intro"]
->>>>>>> refs/remotes/origin/master
 
 anchor/right = 1
 anchor/bottom = 1
@@ -270,7 +271,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
 text = "Level "
 align = 1
@@ -343,9 +344,6 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 
-<<<<<<< HEAD
-[node name="label_time_out" type="Label" parent="time_out"]
-=======
 [node name="ColorFrame" type="ColorFrame" parent="time_out"]
 
 visibility/opacity = 0.5
@@ -362,7 +360,6 @@ margin/bottom = 0.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="label" type="Label" parent="time_out"]
->>>>>>> refs/remotes/origin/master
 
 anchor/right = 1
 anchor/bottom = 1
@@ -374,7 +371,7 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
 text = "TIME OUT!"
 align = 1
@@ -382,5 +379,3 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-
-
