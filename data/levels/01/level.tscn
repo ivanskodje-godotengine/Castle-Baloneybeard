@@ -56,6 +56,7 @@ tile_data = IntArray( -65528, 7, 1, 9, 4, 4, 7, 9, 65538, 0, 65542, 0, 196607, 6
 
 [node name="extra" type="TileMap" parent="."]
 
+visibility/visible = false
 mode = 0
 tile_set = ExtResource( 3 )
 cell/size = Vector2( 16, 16 )
@@ -74,7 +75,7 @@ tile_data = IntArray( 262148, 0 )
 
 [node name="ui" parent="." instance=ExtResource( 4 )]
 
-time = 60
+time = 2
 level = 1
 
 
