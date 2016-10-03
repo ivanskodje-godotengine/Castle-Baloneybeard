@@ -5,7 +5,7 @@
 [ext_resource path="res://data/tileset/exported/tileset_extra.xml" type="TileSet" id=3]
 [ext_resource path="res://data/ui/ui.tscn" type="PackedScene" id=4]
 
-[node name="level_01" type="Control"]
+[node name="level" type="Control"]
 
 anchor/right = 1
 anchor/bottom = 1
@@ -78,7 +78,12 @@ tile_data = IntArray( 1, 0, 7, 0, 262143, 0, 196617, 0, 262146, 0, 262148, 1, 26
 
 [node name="ui" parent="." instance=ExtResource( 4 )]
 
+<<<<<<< HEAD
 visibility/visible = false
 time = 3
+=======
+time = 200
+level = 1
+>>>>>>> refs/remotes/origin/master
 
 
