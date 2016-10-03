@@ -7,6 +7,7 @@
 
 [node name="level" type="Control"]
 
+process/pause_mode = 1
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -74,5 +75,8 @@ occluder/light_mask = 1
 tile_data = IntArray( 262148, 0 )
 
 [node name="ui" parent="." instance=ExtResource( 4 )]
+
+time = 999
+level = 1
 
 

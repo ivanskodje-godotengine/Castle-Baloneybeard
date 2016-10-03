@@ -41,7 +41,6 @@ color = Color( 0.137255, 0.164706, 0.0588235, 1 )
 
 [node name="hbox_time" type="HBoxContainer" parent="color_frame"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -78,11 +77,10 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 20.0
 margin/top = 3.0
-margin/right = 44.0
+margin/right = 20.0
 margin/bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
-text = "013"
 valign = 2
 percent_visible = 1.0
 lines_skipped = 0
@@ -90,6 +88,7 @@ max_lines_visible = -1
 
 [node name="hbox_keys" type="HBoxContainer" parent="color_frame"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -216,11 +215,10 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 28.0
 margin/top = 3.0
-margin/right = 52.0
+margin/right = 28.0
 margin/bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
-text = "370"
 valign = 2
 percent_visible = 1.0
 lines_skipped = 0
@@ -228,7 +226,6 @@ max_lines_visible = -1
 
 [node name="intro" type="Control" parent="."]
 
-editor/display_folded = true
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -269,7 +266,6 @@ margin/right = 0.0
 margin/bottom = 0.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
-text = "Level: 370"
 align = 1
 valign = 1
 percent_visible = 1.0
