@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://data/levels/extra.png" type="Texture" id=1]
+[ext_resource path="res://data/levels/spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://data/levels/extra.png" type="Texture" id=2]
 
 [node name="tileset" type="Node2D"]
 
@@ -9,12 +10,12 @@
 texture = ExtResource( 1 )
 centered = false
 region = true
-region_rect = Rect2( 0, 0, 16, 16 )
+region_rect = Rect2( 224, 32, 16, 16 )
 
 [node name="2" type="Sprite" parent="."]
 
 transform/pos = Vector2( 21, 0 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 centered = false
 region = true
 region_rect = Rect2( 16, 0, 16, 16 )
