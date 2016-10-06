@@ -113,6 +113,7 @@ var ENTITIES = {
 var stored_cells = [] # Vec2, tileset and tile_id
 
 var goal = preload("res://data/goal/goal.tscn")
+var pushable_block = preload("res://data/items/pushable_block/pushable_block.tscn")
 
 # Replace all special tiles with instances that may be interacted with
 func update_tiles(level_scene):
@@ -121,6 +122,12 @@ func update_tiles(level_scene):
 	
 	var entities_tilemap = level_scene.get_node("entities")
 	var entities_used_cells = entities_tilemap.get_used_cells()
+	
+	# If we dont have an items node, create it
+	if(level_scene.get_node("items") == null):
+		var items_node = Node2D.new()
+		items_node.set_name("items")
+		level_scene.add_child(items_node)
 	
 	# Iterate through all used entities in the map
 	for cell_pos in entities_used_cells:
@@ -131,17 +138,19 @@ func update_tiles(level_scene):
 			var sandwich = goal.instance()
 			sandwich.set_pos(tile_pos)
 			
-			# If we dont have an items node, create it
-			if(level_scene.get_node("items") == null):
-				var items_node = Node2D.new()
-				items_node.set_name("items")
-				level_scene.add_child(items_node)
-			
 			# Add sandwich goal
 			level_scene.get_node("items").add_child(sandwich)
 			
 			# Remove original cell
 			entities_tilemap.set_cellv(cell_pos, -1)
+		elif(cell_id == ENTITIES["PUSHABLE_BLOCK"]):
+			# var block = pushable_block.instance()
+			# block.set_pos(tile_pos)
+			
+			# level_scene.get_node("items").add_child(block)
+			
+			# entities_tilemap.set_cellv(cell_pos, -1)
+			pass
 	
 	
 	pass
