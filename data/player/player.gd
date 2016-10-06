@@ -5,6 +5,7 @@ var tween = null # Moves the player from current to next tile smoothly
 var is_moving = false # Prevents moving outside of tile positions
 var tile_size = 16
 var speed = 0.25 # Time between movement
+var previous_pos # Vec2 Previous Cell Position 
 
 onready var ui_node = get_parent().get_node("ui")
 
@@ -71,6 +72,9 @@ func move(direction):
 		# Get current position
 		var pos = get_pos()
 		
+		# Store current pos as previous
+		previous_pos = pos
+		
 		# Add directional change to position
 		if(direction == DIRECTION.LEFT):
 			pos.x -= tile_size
@@ -125,6 +129,7 @@ func can_move(direction):
 	var tile_pos = null
 	var tilemap_world = get_parent().get_node("world")
 	var tilemap_entity = get_parent().get_node("entities")
+	
 	if(tilemap_world != null):
 		# Get tile coordinate of where you currently are
 		tile_pos = tilemap_world.world_to_map(pos)
@@ -176,25 +181,39 @@ func can_move(direction):
 					update_ui()
 				else:
 					return false
-			# Moving Block
+			# We have a pushable block
 			elif(t == 10):
-				# Push block one step in same direction (if possible)
-				print("Move block one step in direction")
-				# Remove block
+				# Check if we can move block
+				var move_to_pos = tile_pos
+				# Check if we have a solid block in the next block
+				if(direction == DIRECTION.LEFT):
+					# Check tile to your immediate left
+					move_to_pos.x -= 1
+				elif(direction == DIRECTION.RIGHT):
+					move_to_pos.x += 1
+				elif(direction == DIRECTION.UP):
+					move_to_pos.y -= 1
+				elif(direction == DIRECTION.DOWN):
+					move_to_pos.y += 1
 				
-				# Spawn temporary block for tween to the new location
-				
-				# Spawn block
-				
-				
-				# Prevent movement on player
-				return false
+				# Making sure there is nothing else in the position where we want to move the block
+				if(tilemap_entity.get_cellv(move_to_pos) == -1):
+					for c in SOLID_TILES["WORLD"]:
+						if(tilemap_world.get_cellv(move_to_pos) == c):
+							return false # Something is in the way, we cannot move
+					
+					# All clear! Moving block
+					tilemap_entity.set_cellv(tile_pos, -1)
+					tilemap_entity.set_cellv(move_to_pos, 10)
+				else:
+					# TODO: Play sound to indicate failure to push
+					# ..
+					return false
 			else:
 				return false
 	
 	# Check if there are any items we can pickup
 	var tile_id = tilemap_entity.get_cellv(tile_pos)
-	print("TILE ID: " + str(tile_id))
 	
 	# Diamond
 	if(tile_id == ITEM.DIAMOND):
@@ -239,14 +258,17 @@ func can_move(direction):
 # Triggered by walking on a goal
 func walked_on_goal():
 	# If we have all baloneys
-	# TODO: Make it == 
-	if(inventory["BALONEY"]["CURRENT"] != inventory["BALONEY"]["TOTAL"]):
+	if(inventory["BALONEY"]["CURRENT"] == inventory["BALONEY"]["TOTAL"]):
 		# Victory!
 		# .. Do something here before going to next level
 		
 		# Go to next level
 		get_parent().get_parent().load_next_level()
 
+func move_back():
+	set_pos(previous_pos)
+	pass
+	# move(direction)
 
 func update_ui():
 	# var ui = get_parent().get_node("ui")

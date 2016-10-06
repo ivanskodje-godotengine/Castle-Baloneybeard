@@ -31,7 +31,6 @@ level = 999
 
 [node name="color_frame" type="ColorFrame" parent="."]
 
-visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -40,18 +39,19 @@ margin/left = 0.0
 margin/top = 134.0
 margin/right = 160.0
 margin/bottom = 144.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0.0156863, 0.243137, 0, 1 )
 
 [node name="hbox_time" type="HBoxContainer" parent="color_frame"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
+margin/left = 2.0
 margin/top = 0.0
-margin/right = 54.0
-margin/bottom = 17.0
+margin/right = 148.0
+margin/bottom = 16.0
 custom_constants/separation = 0
 alignment = 0
 
@@ -66,7 +66,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 16.0
-margin/bottom = 17.0
+margin/bottom = 16.0
 
 [node name="clock" type="Sprite" parent="color_frame/hbox_time/Container1"]
 
@@ -101,10 +101,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 58.0
+margin/left = 61.0
 margin/top = -3.0
-margin/right = 109.0
-margin/bottom = 14.0
+margin/right = 105.0
+margin/bottom = 13.0
 alignment = 0
 
 [node name="Container" type="Container" parent="color_frame/hbox_keys"]
@@ -117,7 +117,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 8.0
-margin/bottom = 17.0
+margin/bottom = 16.0
 
 [node name="key_1" type="Sprite" parent="color_frame/hbox_keys/Container"]
 
@@ -137,7 +137,7 @@ size_flags/vertical = 2
 margin/left = 12.0
 margin/top = 0.0
 margin/right = 20.0
-margin/bottom = 17.0
+margin/bottom = 16.0
 
 [node name="key_2" type="Sprite" parent="color_frame/hbox_keys/Container1"]
 
@@ -157,7 +157,7 @@ size_flags/vertical = 2
 margin/left = 24.0
 margin/top = 0.0
 margin/right = 32.0
-margin/bottom = 17.0
+margin/bottom = 16.0
 
 [node name="key_3" type="Sprite" parent="color_frame/hbox_keys/Container2"]
 
@@ -178,7 +178,7 @@ size_flags/vertical = 2
 margin/left = 36.0
 margin/top = 0.0
 margin/right = 44.0
-margin/bottom = 17.0
+margin/bottom = 16.0
 
 [node name="key_4" type="Sprite" parent="color_frame/hbox_keys/Container3"]
 
@@ -245,10 +245,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 120.0
+margin/left = 116.0
 margin/top = -1.0
-margin/right = 179.0
-margin/bottom = 16.0
+margin/right = 153.0
+margin/bottom = 15.0
 custom_constants/separation = 0
 alignment = 0
 
@@ -262,7 +262,7 @@ size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
 margin/right = 16.0
-margin/bottom = 17.0
+margin/bottom = 16.0
 
 [node name="baloney" type="Sprite" parent="color_frame/hbox_baloney/Container"]
 
