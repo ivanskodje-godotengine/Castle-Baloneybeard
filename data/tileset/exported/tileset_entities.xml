@@ -95,7 +95,7 @@
 		<string name="10/name"> "Pushable Block" </string>
 		<resource name="10/texture" external="0">  </resource>
 		<vector2 name="10/tex_offset"> 0, 0 </vector2>
-		<resource name="10/material"></resource>		<rect2 name="10/region"> 16, 32, 16, 16 </rect2>
+		<resource name="10/material"></resource>		<rect2 name="10/region"> 144, 16, 16, 16 </rect2>
 		<vector2 name="10/occluder_offset"> -0, -0 </vector2>
 		<resource name="10/occluder"></resource>		<vector2 name="10/navigation_offset"> -0, -0 </vector2>
 		<resource name="10/navigation"></resource>		<vector2 name="10/shape_offset"> 0, 0 </vector2>

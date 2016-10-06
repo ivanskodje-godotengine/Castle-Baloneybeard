@@ -6,6 +6,7 @@ var is_moving = false # Prevents moving outside of tile positions
 var tile_size = 16
 var speed = 0.25 # Time between movement
 
+onready var ui_node = get_parent().get_node("ui")
 
 # Player Inventory
 var inventory = {
@@ -175,6 +176,7 @@ func can_move(direction):
 					update_ui()
 				else:
 					return false
+			# Moving Block
 			elif(t == 10):
 				# Push block one step in same direction (if possible)
 				print("Move block one step in direction")
@@ -221,21 +223,34 @@ func can_move(direction):
 	# Baloney
 	elif(tile_id == ITEM.BALONEY):
 		inventory["BALONEY"]["CURRENT"] += 1
+		ui_node.update_baloney(inventory["BALONEY"]["TOTAL"] - inventory["BALONEY"]["CURRENT"])
+		
+		get_parent().get_node("items/goal").add_baloney()
+		
+		# If we have collected all baloneys, add bread on top to finish it all off
+		if(inventory["BALONEY"]["CURRENT"] == inventory["BALONEY"]["TOTAL"]):
+			get_parent().get_node("items/goal").finish()
+		
+		# Remove baloney
 		tilemap_entity.set_cellv(tile_pos, -1)
-	
-	elif(tile_id == ITEM.SANDWICH):
-		if(inventory["BALONEY"]["CURRENT"] != inventory["BALONEY"]["TOTAL"]):
-			# Victory!
-			# Do something here before going to next level
-			
-			# Go to next level
-			get_parent().get_parent().load_next_level()
 	
 	return true
 
+# Triggered by walking on a goal
+func walked_on_goal():
+	# If we have all baloneys
+	# TODO: Make it == 
+	if(inventory["BALONEY"]["CURRENT"] != inventory["BALONEY"]["TOTAL"]):
+		# Victory!
+		# .. Do something here before going to next level
+		
+		# Go to next level
+		get_parent().get_parent().load_next_level()
+
+
 func update_ui():
-	var ui = get_parent().get_node("ui")
-	ui.update_keys(inventory["KEYS"])
+	# var ui = get_parent().get_node("ui")
+	ui_node.update_keys(inventory["KEYS"])
 	pass
 
 # Counts and sets the total number of baloneys there is on the map
@@ -247,3 +262,4 @@ func update_total_baloneys():
 	for c in used_cells:
 		if(tilemap_entities.get_cellv(c) == 9):
 			inventory["BALONEY"]["TOTAL"] += 1
+	ui_node.update_baloney(inventory["BALONEY"]["TOTAL"])

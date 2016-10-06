@@ -1,22 +1,22 @@
 [gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://data/ui/ui.gd" type="Script" id=1]
-[ext_resource path="res://fonts/Early GameBoy.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://data/world/spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://data/world/spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://fonts/Early GameBoy.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 
 font/size = 8
 font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 2 )
+font/font = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
 
 font/size = 16
 font/use_mipmaps = false
 font/use_filter = false
-font/font = ExtResource( 2 )
+font/font = ExtResource( 3 )
 
 [node name="ui" type="CanvasLayer"]
 
@@ -31,6 +31,8 @@ level = 999
 
 [node name="color_frame" type="ColorFrame" parent="."]
 
+editor/display_folded = true
+visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -39,38 +41,42 @@ margin/left = 0.0
 margin/top = 134.0
 margin/right = 160.0
 margin/bottom = 144.0
-color = Color( 0.137255, 0.164706, 0.0588235, 1 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="hbox_time" type="HBoxContainer" parent="color_frame"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 3.0
+margin/left = 0.0
 margin/top = 0.0
 margin/right = 54.0
 margin/bottom = 17.0
+custom_constants/separation = 0
 alignment = 0
 
-[node name="label_time" type="Label" parent="color_frame/hbox_time"]
+[node name="Container1" type="Container" parent="color_frame/hbox_time"]
 
-focus/ignore_mouse = true
+editor/display_folded = true
+rect/min_size = Vector2( 16, 16 )
+focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
-size_flags/vertical = 0
+size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 3.0
+margin/top = 0.0
 margin/right = 16.0
-margin/bottom = 13.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
-text = "T:"
-valign = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+margin/bottom = 17.0
+
+[node name="clock" type="Sprite" parent="color_frame/hbox_time/Container1"]
+
+transform/pos = Vector2( 0.855793, -0.87505 )
+transform/scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 2 )
+centered = false
+region = true
+region_rect = Rect2( 0, 112, 16, 16 )
 
 [node name="label_time_value" type="Label" parent="color_frame/hbox_time"]
 
@@ -78,12 +84,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 20.0
+margin/left = 16.0
 margin/top = 3.0
-margin/right = 20.0
+margin/right = 16.0
 margin/bottom = 13.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
+custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
 text = "999"
 valign = 2
 percent_visible = 1.0
@@ -97,14 +103,15 @@ focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 52.0
+margin/left = 58.0
 margin/top = -3.0
-margin/right = 103.0
+margin/right = 109.0
 margin/bottom = 14.0
 alignment = 0
 
 [node name="Container" type="Container" parent="color_frame/hbox_keys"]
 
+visibility/visible = false
 rect/min_size = Vector2( 8, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -117,69 +124,68 @@ margin/bottom = 17.0
 
 [node name="key_1" type="Sprite" parent="color_frame/hbox_keys/Container"]
 
-visibility/visible = false
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 centered = false
 region = true
 region_rect = Rect2( 192, 16, 16, 16 )
 
 [node name="Container1" type="Container" parent="color_frame/hbox_keys"]
 
+visibility/visible = false
 rect/min_size = Vector2( 8, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 12.0
+margin/left = 0.0
 margin/top = 0.0
-margin/right = 20.0
+margin/right = 8.0
 margin/bottom = 17.0
 
 [node name="key_2" type="Sprite" parent="color_frame/hbox_keys/Container1"]
 
-visibility/visible = false
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 centered = false
 region = true
 region_rect = Rect2( 208, 16, 16, 16 )
 
 [node name="Container2" type="Container" parent="color_frame/hbox_keys"]
 
+visibility/visible = false
 rect/min_size = Vector2( 8, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 24.0
+margin/left = 0.0
 margin/top = 0.0
-margin/right = 32.0
+margin/right = 8.0
 margin/bottom = 17.0
 
 [node name="key_3" type="Sprite" parent="color_frame/hbox_keys/Container2"]
 
-visibility/visible = false
 transform/pos = Vector2( 0, 1 )
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 centered = false
 region = true
 region_rect = Rect2( 224, 16, 16, 16 )
 
 [node name="Container3" type="Container" parent="color_frame/hbox_keys"]
 
+visibility/visible = false
 rect/min_size = Vector2( 8, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 36.0
+margin/left = 0.0
 margin/top = 0.0
-margin/right = 44.0
+margin/right = 8.0
 margin/bottom = 17.0
 
 [node name="key_4" type="Sprite" parent="color_frame/hbox_keys/Container3"]
 
-visibility/visible = false
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 centered = false
 region = true
 region_rect = Rect2( 240, 16, 16, 16 )
@@ -187,6 +193,7 @@ region_rect = Rect2( 240, 16, 16, 16 )
 [node name="hbox_level" type="HBoxContainer" parent="color_frame"]
 
 editor/display_folded = true
+visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -223,11 +230,80 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 28.0
 margin/top = 3.0
-margin/right = 28.0
+margin/right = 52.0
 margin/bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
 text = "999"
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="hbox_baloney" type="HBoxContainer" parent="color_frame"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 120.0
+margin/top = -1.0
+margin/right = 179.0
+margin/bottom = 16.0
+custom_constants/separation = 0
+alignment = 0
+
+[node name="Container" type="Container" parent="color_frame/hbox_baloney"]
+
+rect/min_size = Vector2( 16, 16 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 16.0
+margin/bottom = 17.0
+
+[node name="baloney" type="Sprite" parent="color_frame/hbox_baloney/Container"]
+
+transform/scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 2 )
+centered = false
+region = true
+region_rect = Rect2( 224, 32, 16, 16 )
+
+[node name="label_baloney_x" type="Label" parent="color_frame/hbox_baloney"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 16.0
+margin/top = 3.0
+margin/right = 24.0
+margin/bottom = 13.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
+text = "*"
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="label_baloney_value" type="Label" parent="color_frame/hbox_baloney"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 24.0
+margin/top = 3.0
+margin/right = 24.0
+margin/bottom = 13.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
 valign = 2
 percent_visible = 1.0
 lines_skipped = 0
@@ -274,7 +350,7 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
+custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
 text = "Level: 999"
 align = 1
 valign = 1
@@ -324,7 +400,7 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
+custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
 text = "PAUSED"
 align = 1
 valign = 1
@@ -374,7 +450,7 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.705882, 0.792157, 0.45098, 1 )
+custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
 text = "TIME OUT!"
 align = 1
 valign = 1

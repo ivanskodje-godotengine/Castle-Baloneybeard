@@ -54,7 +54,7 @@ func _countdown():
 	time_label.set_text(str(time).pad_zeros(3))
 
 
-# Given an number and boolean, enables/disables key (UI)
+# Updates the keys based on a keys dictionary
 func update_keys(dict):
 	if(dict["SPADE"] > 0):
 		get_node("color_frame/hbox_keys/Container1/key_2").show()
@@ -76,12 +76,16 @@ func update_keys(dict):
 	else:
 		get_node("color_frame/hbox_keys/Container3/key_4").hide()
 
+# Updates baloney counter (There are x baloneys remaining)
+func update_baloney(num):
+	get_node("color_frame/hbox_baloney/label_baloney_value").set_text(str(num))
+
 func set_time(t):
 	time = t
 	
-	# Due to tool being a bit weird; we have to use get_node in order to see "time" changes in the editor
-	if(get_node("color_frame/hbox_time/label_time_value") != null):
+	if(get_node("color_frame/hbox_time/label_time_value") != null): # Due to tool being a bit weird; we have to use get_node in order to see "time" changes in the editor
 		get_node("color_frame/hbox_time/label_time_value").set_text(str(time).pad_zeros(3))
+
 
 func set_level(l):
 	level = l
@@ -92,21 +96,30 @@ func set_level(l):
 	if(get_node("color_frame/hbox_level/label_level_value") != null):
 		get_node("color_frame/hbox_level/label_level_value").set_text(str(level).pad_zeros(3))
 
+
 func set_intro(boolean):
 	if(boolean):
 		intro_node.show()
+		get_node("color_frame").hide()
 	else:
 		intro_node.hide()
+		get_node("color_frame").show()
+
 
 func set_pause(boolean):
 	if(boolean):
 		pause_node.show()
+		get_node("color_frame").hide()
 	else:
 		pause_node.hide()
+		get_node("color_frame").show()
+
 
 func set_time_out(boolean):
 	if(boolean):
 		time_out_node.show()
+		get_node("color_frame").hide()
 	else:
 		time_out_node.hide()
+		get_node("color_frame").show()
 	

@@ -89,6 +89,6 @@ transform/pos = Vector2( 0, 39 )
 texture = ExtResource( 1 )
 centered = false
 region = true
-region_rect = Rect2( 16, 32, 16, 16 )
+region_rect = Rect2( 144, 16, 16, 16 )
 
 
