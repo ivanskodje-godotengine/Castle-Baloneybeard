@@ -20,7 +20,11 @@ var inventory = {
 	BALONEY = {
 		CURRENT = 0,
 		TOTAL = 0
-	}
+	},
+	TOOL = {
+		WATER = 0,
+		FIRE = 0
+	},
 }
 
 
@@ -257,18 +261,23 @@ func can_move(direction):
 
 # Triggered by walking on a goal
 func walked_on_goal():
-	# If we have all baloneys
-	if(inventory["BALONEY"]["CURRENT"] == inventory["BALONEY"]["TOTAL"]):
+	# If we have all baloneys # -----------------------------------------------------<_<-<-<-<--<_<->_-><_ REMEMBER TO FIX WHEN DONE DEBUGGING
+	if(inventory["BALONEY"]["CURRENT"] != inventory["BALONEY"]["TOTAL"]):
 		# Victory!
 		# .. Do something here before going to next level
 		
 		# Go to next level
 		get_parent().get_parent().load_next_level()
 
-func move_back():
-	set_pos(previous_pos)
-	pass
-	# move(direction)
+func in_water():
+	# Player is in water! Check if he has the item needed
+	if(inventory["TOOL"]["WATER"] > 0):
+		# Safe!
+		pass
+	else:
+		# Death awaits us!
+		get_parent().get_parent().game_over()
+		pass
 
 func update_ui():
 	# var ui = get_parent().get_node("ui")

@@ -13,14 +13,11 @@ onready var time_label = get_node("color_frame/hbox_time/label_time_value")
 onready var level_label = get_node("color_frame/hbox_level/label_level_value")
 onready var intro_label = get_node("intro/label")
 
-# Intro Overlay (Level name and possibly extra information later)
+# Overlays
 onready var intro_node = get_node("intro")
-
-# Pause node
 onready var pause_node = get_node("pause")
-
-# Time out Overlay
 onready var time_out_node = get_node("time_out")
+onready var game_over_node = get_node("game_over")
 
 # Signal for game over
 signal game_over()
@@ -47,7 +44,6 @@ func _countdown():
 		time = 0 # Time to 0
 		timer.stop()
 		time_out_node.show()
-		print("Emit signal from UI: Game Over")
 		emit_signal("game_over")
 	
 	# Update label
@@ -101,6 +97,9 @@ func set_intro(boolean):
 	if(boolean):
 		intro_node.show()
 		get_node("color_frame").hide()
+		pause_node.hide()
+		time_out_node.hide()
+		game_over_node.hide()
 	else:
 		intro_node.hide()
 		get_node("color_frame").show()
@@ -110,6 +109,9 @@ func set_pause(boolean):
 	if(boolean):
 		pause_node.show()
 		get_node("color_frame").hide()
+		intro_node.hide()
+		time_out_node.hide()
+		game_over_node.hide()
 	else:
 		pause_node.hide()
 		get_node("color_frame").show()
@@ -119,7 +121,21 @@ func set_time_out(boolean):
 	if(boolean):
 		time_out_node.show()
 		get_node("color_frame").hide()
+		pause_node.hide()
+		intro_node.hide()
+		game_over_node.hide()
 	else:
 		time_out_node.hide()
+		get_node("color_frame").show()
+
+func set_you_died(boolean):
+	if(boolean):
+		game_over_node.show()
+		get_node("color_frame").hide()
+		time_out_node.hide()
+		pause_node.hide()
+		intro_node.hide()
+	else:
+		game_over_node.hide()
 		get_node("color_frame").show()
 	

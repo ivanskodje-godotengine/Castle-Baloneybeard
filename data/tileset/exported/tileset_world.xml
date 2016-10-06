@@ -72,7 +72,7 @@
 		<string name="6/name"> "Water" </string>
 		<resource name="6/texture" external="0">  </resource>
 		<vector2 name="6/tex_offset"> 0, 0 </vector2>
-		<resource name="6/material"></resource>		<rect2 name="6/region"> 64, 0, 16, 16 </rect2>
+		<resource name="6/material"></resource>		<rect2 name="6/region"> 32, 0, 16, 16 </rect2>
 		<vector2 name="6/occluder_offset"> -0, -0 </vector2>
 		<resource name="6/occluder"></resource>		<vector2 name="6/navigation_offset"> -0, -0 </vector2>
 		<resource name="6/navigation"></resource>		<vector2 name="6/shape_offset"> 0, 0 </vector2>

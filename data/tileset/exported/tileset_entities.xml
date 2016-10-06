@@ -101,6 +101,15 @@
 		<resource name="10/navigation"></resource>		<vector2 name="10/shape_offset"> 0, 0 </vector2>
 		<array name="10/shapes" len="0" shared="false">
 		</array>
+		<string name="11/name"> "Submerged Block" </string>
+		<resource name="11/texture" external="0">  </resource>
+		<vector2 name="11/tex_offset"> 0, 0 </vector2>
+		<resource name="11/material"></resource>		<rect2 name="11/region"> 144, 48, 16, 16 </rect2>
+		<vector2 name="11/occluder_offset"> -0, -0 </vector2>
+		<resource name="11/occluder"></resource>		<vector2 name="11/navigation_offset"> -0, -0 </vector2>
+		<resource name="11/navigation"></resource>		<vector2 name="11/shape_offset"> 0, 0 </vector2>
+		<array name="11/shapes" len="0" shared="false">
+		</array>
 
 	</main_resource>
 </resource_file>

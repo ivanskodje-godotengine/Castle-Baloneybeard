@@ -31,6 +31,8 @@ level = 999
 
 [node name="color_frame" type="ColorFrame" parent="."]
 
+editor/display_folded = true
+visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -309,6 +311,7 @@ max_lines_visible = -1
 
 [node name="intro" type="Control" parent="."]
 
+editor/display_folded = true
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -358,6 +361,7 @@ max_lines_visible = -1
 
 [node name="pause" type="Control" parent="."]
 
+editor/display_folded = true
 visibility/visible = false
 anchor/right = 1
 anchor/bottom = 1
@@ -408,6 +412,7 @@ max_lines_visible = -1
 
 [node name="time_out" type="Control" parent="."]
 
+editor/display_folded = true
 visibility/visible = false
 anchor/right = 1
 anchor/bottom = 1
@@ -450,6 +455,56 @@ margin/bottom = 0.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
 text = "TIME OUT!"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="game_over" type="Control" parent="."]
+
+visibility/visible = false
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+
+[node name="ColorFrame" type="ColorFrame" parent="game_over"]
+
+visibility/opacity = 0.5
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="label" type="Label" parent="game_over"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
+text = "You died"
 align = 1
 valign = 1
 percent_visible = 1.0

@@ -5,7 +5,7 @@ var game_over = false
 var paused = false
 var current_level = 1
 var tile_size = 16 # Tile size used for tilemaps - used to move player
-
+var reset = false
 func _ready():
 	# Enable input
 	set_process_input(true)
@@ -13,14 +13,21 @@ func _ready():
 func _input(event):
 	# Pressed UI_UP
 	if(event.is_action_pressed("ui_accept")):
-		if(!paused):
+		if(reset):
+			current_level -= 1
+			load_next_level()
+			reset = false
+		elif(!paused):
 			# Close Intro overlay and start coutndown
 			if(!game_running && !game_over):
+				
+				
 				# Spawn player
 				spawn_player()
 
 				# Start game
 				get_child(0).get_node("ui").set_intro(false)
+				get_child(0).get_node("ui").set_you_died(false)
 				get_child(0).get_node("ui").start_countdown() # Start timer
 				game_running = true
 		else:
@@ -115,9 +122,13 @@ var stored_cells = [] # Vec2, tileset and tile_id
 var goal = preload("res://data/goal/goal.tscn")
 var pushable_block = preload("res://data/items/pushable_block/pushable_block.tscn")
 
+var water_tile = preload("res://data/world/animated_tiles/water.tscn")
+
 # Replace all special tiles with instances that may be interacted with
 func update_tiles(level_scene):
 	var world_tilemap = level_scene.get_node("world")
+	var world_used_cells = world_tilemap.get_used_cells()
+	
 	var extra_tilemap = level_scene.get_node("extra")
 	
 	var entities_tilemap = level_scene.get_node("entities")
@@ -144,15 +155,20 @@ func update_tiles(level_scene):
 			# Remove original cell
 			entities_tilemap.set_cellv(cell_pos, -1)
 		elif(cell_id == ENTITIES["PUSHABLE_BLOCK"]):
-			# var block = pushable_block.instance()
-			# block.set_pos(tile_pos)
-			
-			# level_scene.get_node("items").add_child(block)
-			
-			# entities_tilemap.set_cellv(cell_pos, -1)
+			# Do nothing
 			pass
 	
-	
+	# Iterate through all used world tiles in the map
+	for cell_pos in world_used_cells:
+		var cell_id = world_tilemap.get_cellv(cell_pos)
+		var tile_pos = world_tilemap.map_to_world(cell_pos)
+		
+		if(cell_id == 6): # Water
+			# Add animated water tiles
+			var water = water_tile.instance()
+			water.set_pos(tile_pos)
+			level_scene.get_node("world").add_child(water)
+		pass
 	pass
 
 
@@ -168,6 +184,11 @@ func load_next_level():
 
 # Set game over
 func game_over():
+	get_child(0).get_node("ui").set_you_died(true)
+
 	get_child(0).get_node("player").queue_free()
-	game_over = true
 	game_running = false
+	game_over = false
+	paused = false
+	reset = true
+	# load_level(2)
