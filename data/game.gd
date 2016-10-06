@@ -22,6 +22,7 @@ func _ready():
 
 # Creates the main menu
 func main_menu():
+	# If world exists, remove it
 	if(get_node("world")):
 		get_node("world").queue_free()
 	

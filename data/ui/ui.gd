@@ -49,7 +49,8 @@ func _countdown():
 		time_out_node.show()
 		print("Emit signal from UI: Game Over")
 		emit_signal("game_over")
-		# Game over
+	
+	# Update label
 	time_label.set_text(str(time).pad_zeros(3))
 
 
