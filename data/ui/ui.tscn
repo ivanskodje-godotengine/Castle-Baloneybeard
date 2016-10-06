@@ -31,7 +31,6 @@ level = 999
 
 [node name="color_frame" type="ColorFrame" parent="."]
 
-editor/display_folded = true
 visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -86,7 +85,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 16.0
 margin/top = 3.0
-margin/right = 16.0
+margin/right = 40.0
 margin/bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
@@ -98,7 +97,6 @@ max_lines_visible = -1
 
 [node name="hbox_keys" type="HBoxContainer" parent="color_frame"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -111,7 +109,6 @@ alignment = 0
 
 [node name="Container" type="Container" parent="color_frame/hbox_keys"]
 
-visibility/visible = false
 rect/min_size = Vector2( 8, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -124,6 +121,7 @@ margin/bottom = 17.0
 
 [node name="key_1" type="Sprite" parent="color_frame/hbox_keys/Container"]
 
+visibility/visible = false
 texture = ExtResource( 2 )
 centered = false
 region = true
@@ -131,19 +129,19 @@ region_rect = Rect2( 192, 16, 16, 16 )
 
 [node name="Container1" type="Container" parent="color_frame/hbox_keys"]
 
-visibility/visible = false
 rect/min_size = Vector2( 8, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
+margin/left = 12.0
 margin/top = 0.0
-margin/right = 8.0
+margin/right = 20.0
 margin/bottom = 17.0
 
 [node name="key_2" type="Sprite" parent="color_frame/hbox_keys/Container1"]
 
+visibility/visible = false
 texture = ExtResource( 2 )
 centered = false
 region = true
@@ -151,19 +149,19 @@ region_rect = Rect2( 208, 16, 16, 16 )
 
 [node name="Container2" type="Container" parent="color_frame/hbox_keys"]
 
-visibility/visible = false
 rect/min_size = Vector2( 8, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
+margin/left = 24.0
 margin/top = 0.0
-margin/right = 8.0
+margin/right = 32.0
 margin/bottom = 17.0
 
 [node name="key_3" type="Sprite" parent="color_frame/hbox_keys/Container2"]
 
+visibility/visible = false
 transform/pos = Vector2( 0, 1 )
 texture = ExtResource( 2 )
 centered = false
@@ -172,19 +170,19 @@ region_rect = Rect2( 224, 16, 16, 16 )
 
 [node name="Container3" type="Container" parent="color_frame/hbox_keys"]
 
-visibility/visible = false
 rect/min_size = Vector2( 8, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
+margin/left = 36.0
 margin/top = 0.0
-margin/right = 8.0
+margin/right = 44.0
 margin/bottom = 17.0
 
 [node name="key_4" type="Sprite" parent="color_frame/hbox_keys/Container3"]
 
+visibility/visible = false
 texture = ExtResource( 2 )
 centered = false
 region = true
