@@ -27,6 +27,7 @@ centered = false
 
 [node name="container" type="Container" parent="."]
 
+editor/display_folded = true
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
@@ -46,6 +47,7 @@ centered = false
 
 [node name="vbox_container" type="VBoxContainer" parent="container"]
 
+editor/display_folded = true
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false

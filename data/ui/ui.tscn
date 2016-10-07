@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://data/ui/ui.gd" type="Script" id=1]
-[ext_resource path="res://data/world/spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://data/level_manager/spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://fonts/Early GameBoy.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
@@ -26,8 +26,6 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 script/script = ExtResource( 1 )
-time = 999
-level = 999
 
 [node name="color_frame" type="ColorFrame" parent="."]
 

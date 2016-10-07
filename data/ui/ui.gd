@@ -1,9 +1,8 @@
-tool
 extends CanvasLayer
 
-# Time limit for the map
-export(int) var time = 999 setget set_time
-export(int) var level = 999 setget set_level
+# Time and Level
+var time
+var level
 
 # Timer
 var timer = null
@@ -19,13 +18,18 @@ onready var pause_node = get_node("pause")
 onready var time_out_node = get_node("time_out")
 onready var game_over_node = get_node("game_over")
 
-# Signal for game over
-signal game_over()
+
+# Data from level.gd
+func init(new_level, new_time):
+	level = new_level
+	time = new_time
+
 
 func _ready():
 	# Make sure to have updated the labels to display correct time and level
 	time_label.set_text(str(time).pad_zeros(3))
 	level_label.set_text(str(level).pad_zeros(3))
+	intro_label.set_text("Level: " + str(level).pad_zeros(2))
 	
 	# Create timer and start it
 	timer = Timer.new()
