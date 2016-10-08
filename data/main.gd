@@ -3,6 +3,8 @@ extends Control
 # Load Scenes
 var MAIN_MENU = preload("res://data/main_menu/main_menu.tscn")
 var LEVEL_MANAGER = preload("res://data/level_manager/level_manager.tscn")
+var SPLASH_SCREEN = preload("res://data/splash/splash.tscn")
+var CREDITS_SCREEN = preload("res://data/credits/credits.tscn")
 
 # 0: Ready
 func _ready():
@@ -25,16 +27,20 @@ func _ready():
 func _input(event):
 	# Awaiting input from player ('Use' or 'Start' buttons)
 	if(event.is_action_pressed("ui_accept") || event.is_action_pressed("ui_start")):
-		set_process_input(false) # We are no longer awaiting input from main.gd
-		main_menu()
+		# If we are in the credits
+		if(global.current_state == global.STATE.CREDITS):
+			# Change to splash screen
+			splash_screen()
+		else:
+			# Change to main menu and disable input from 'main.gd'
+			set_process_input(false)
+			main_menu()
 
 
 # 1: Splash Screen
 func splash_screen():
-	# Do stuff
-	# ..
-	
-	print("Press ENTER or USE to continue to main menu.. ") # Debug
+	global.current_state = global.STATE.INTRO # Default gamestate when we are out of menus
+	add_child(SPLASH_SCREEN.instance())
 
 
 # 2: Creates the main menu
@@ -64,18 +70,23 @@ func level_manager():
 	# Clear nodes
 	clear_nodes()
 	
+	# Set initial state to INTRO
+	global.current_state = global.STATE.INTRO
+	
 	# Create world node and add to scene
 	var level_manager_scene = LEVEL_MANAGER.instance()
 	add_child(level_manager_scene)
-	# move_child(level_manager, 0) # Set world behind ui
 
 
 # Plays credits
 func credits():
-	# TODO
-	pass
+	global.current_state = global.STATE.CREDITS
+	clear_nodes()
+	add_child(CREDITS_SCREEN.instance())
+	set_process_input(true)
 
 
+# Clears all children - Used when changing between "main" scenes
 func clear_nodes():
 	for c in get_children():
 		c.queue_free()

@@ -35,14 +35,6 @@ centered = false
 region = true
 region_rect = Rect2( 192, 0, 16, 16 )
 
-[node name="Sandwich Goal" type="Sprite" parent="."]
-
-transform/pos = Vector2( 84, 0 )
-texture = ExtResource( 1 )
-centered = false
-region = true
-region_rect = Rect2( 240, 32, 16, 16 )
-
 [node name="Heart Item" type="Sprite" parent="."]
 
 transform/pos = Vector2( 84, 21 )
@@ -50,22 +42,6 @@ texture = ExtResource( 1 )
 centered = false
 region = true
 region_rect = Rect2( 240, 16, 16, 16 )
-
-[node name="Diamond Item" type="Sprite" parent="."]
-
-transform/pos = Vector2( 63, 21 )
-texture = ExtResource( 1 )
-centered = false
-region = true
-region_rect = Rect2( 192, 16, 16, 16 )
-
-[node name="Spade Item" type="Sprite" parent="."]
-
-transform/pos = Vector2( 42, 21 )
-texture = ExtResource( 1 )
-centered = false
-region = true
-region_rect = Rect2( 208, 16, 16, 16 )
 
 [node name="Club Item" type="Sprite" parent="."]
 
@@ -75,6 +51,22 @@ centered = false
 region = true
 region_rect = Rect2( 224, 16, 16, 16 )
 
+[node name="Spade Item" type="Sprite" parent="."]
+
+transform/pos = Vector2( 42, 21 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 208, 16, 16, 16 )
+
+[node name="Diamond Item" type="Sprite" parent="."]
+
+transform/pos = Vector2( 63, 21 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 192, 16, 16, 16 )
+
 [node name="Baloney" type="Sprite" parent="."]
 
 transform/pos = Vector2( 0, 21 )
@@ -82,6 +74,14 @@ texture = ExtResource( 1 )
 centered = false
 region = true
 region_rect = Rect2( 224, 32, 16, 16 )
+
+[node name="Sandwich Goal" type="Sprite" parent="."]
+
+transform/pos = Vector2( 84, 0 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 240, 32, 16, 16 )
 
 [node name="Pushable Block" type="Sprite" parent="."]
 

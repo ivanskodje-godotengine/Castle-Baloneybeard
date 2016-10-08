@@ -1,168 +1,222 @@
 extends Control
 
+# Timer
+var timer = null
+var current_time = null
+var level = null
 
-var is_death = false
-var is_victory = false
-var is_time_out = false
-var is_pause = false
-var is_intro = false
+# Sandwich
+var sandwich_scene = null
 
-# Game States
-enum STATE {
-	DEATH,
-	VICTORY,
-	TIME_OUT,
-	PAUSE,
-	INTRO
-}
+func start_countdown():
+	timer.start()
 
-var current_state = STATE.INTRO
-
-var game_running = false
-var game_over = false
-var paused = false
-var current_level = 1
-var reset = false
+func _countdown():
+	current_time -= 1 # decrease by one
+	
+	# If time is up, stop the timer and display time out
+	if(current_time < 0):
+		current_time = 0 # Time to 0
+		global.total_time = 0 # Set global max time to 0
+		timer.stop()
+		global.current_state = global.STATE.TIME_OUT
+		get_child(0).get_node("ui").update_state()
+		get_tree().set_pause(true) # pause
+	
+	# Update UI label
+	get_child(0).get_node("ui").time_label.set_text(str(current_time).pad_zeros(3))
 
 
 # Ready
 func _ready():
-	# Enable input
+	# Enable input events
 	set_process_input(true)
+	
+	# Create timer
+	timer = Timer.new()
+	timer.set_one_shot(false)
+	timer.set_wait_time(1)
+	timer.connect("timeout", self, "_countdown")
+	timer.set_name("timer")
+	get_parent().add_child(timer)
 	
 	# Load level
 	load_level(global.config["level"]["current"])
 
-
 # Input Events
 func _input(event):
-	# Pressed UI_UP
+	# Pressed ACCEPT/USE
 	if(event.is_action_pressed("ui_accept")):
+		# If we are at INTRO state
+		if(global.current_state == global.STATE.INTRO):
+			# Enable player processing
+			toggle_player_processing()
+			
+			# NB: Set state before we update UI
+			global.current_state = global.STATE.PLAYING 
+			
+			# Update UI
+			get_child(0).get_node("ui").update_state()
+			
+			# Start timer
+			start_countdown() 
 		
-		
-		
-		
-		if(reset):
-			global.config["level"]["current"] -= 1
-			load_next_level()
-			reset = false
-		elif(!paused):
-			# Close Intro overlay and start coutndown
-			if(!game_running && !game_over):
-				# Spawn player
-				spawn_player()
-
-				# Start game
-				get_child(0).get_node("ui").set_intro(false)
-				get_child(0).get_node("ui").set_you_died(false)
-				get_child(0).get_node("ui").start_countdown() # Start timer
-				game_running = true
-		else:
-			# Return to main menu
+		# If we are in the PAUSE menu, return to main menu
+		elif(global.current_state == global.STATE.PAUSE):
+			# Unpause
 			get_tree().set_pause(false)
+			
+			# Go to main menu
 			get_parent().main_menu()
 		
-		if(game_over && !game_running):
-			# Restart level
-			game_over = false
-			get_child(0).queue_free()
-			load_level(current_level)
-	
-	# PAUSE
-	elif(event.is_action_pressed("ui_start")):
-		# Return to main menu
-		if(game_running):
-			if(!paused):
-				# Pause
-				paused = true
-				get_child(0).get_node("ui").set_pause(true)
-				get_tree().set_pause(true)
-				get_child(0).get_node("player").hide()
-			else:
-				# Resume
-				paused = false
-				get_child(0).get_node("ui").set_pause(false)
+		# If the game has ended in one way or another, and we press accept
+		elif(global.current_state == global.STATE.TIME_OUT || global.current_state == global.STATE.DEATH):
+			# Set state
+			global.current_state = global.STATE.INTRO
+			
+			# Reload level
+			load_level(global.config["level"]["current"])
+		
+		# If victory conditions (per level) has meet
+		elif(global.current_state == global.STATE.VICTORY):
+			# Set state
+			global.current_state = global.STATE.INTRO
+			
+			# Increment level by one
+			var level = global.config["level"]["current"] + 1
+			
+			# If current level is higher than total levels, it means the game is complete! Final victory!
+			if(level > global.config["level"]["total"]):
 				get_tree().set_pause(false)
-				get_child(0).get_node("player").show()
-		else:
-			# Return directly to main menu
-			get_tree().set_pause(false)
-			get_tree().get_root().get_node("game").main_menu()
-
-
-func spawn_player():
-	# Get player spawn from level
-	var tilemap = get_child(0).get_node("extra")
-	var tiles = tilemap.get_used_cells()
-	var spawn_vec2 = null
+				get_parent().credits()
+			else:
+				# Load next level
+				load_level(level)
 	
-	for t in tiles:
-		# If it is a spawn tile
-		if(tilemap.get_cell(t.x, t.y) == 0):
-			# Save vec2 pos for tile
-			spawn_vec2 = t
+	
+	# Pressed START
+	elif(event.is_action_pressed("ui_start")):
+		# If we are playing and press START: Pause
+		if(global.current_state == global.STATE.PLAYING):
+			# Pause
+			get_tree().set_pause(true)
+			
+			# Set state
+			global.current_state = global.STATE.PAUSE
+			
+			# Update UI
+			get_child(0).get_node("ui").update_state()
+		
+		# If we are in pause and press START: Resume
+		elif(global.current_state == global.STATE.PAUSE):
+			# Unpause
+			get_tree().set_pause(false)
+			
+			# Set state
+			global.current_state = global.STATE.PLAYING
+			
+			# Update UI
+			get_child(0).get_node("ui").update_state()
+
+
+# Spawn player
+func spawn_player():
+	# Get the cell position of the player SPAWN tile; found in the 'Extra' tileset
+	var tilemap = get_child(0).get_node("extra")
+	var used_cells = tilemap.get_used_cells()
+	var cell_pos = null
+	
+	# Check all used cells inside the tilemap for 'extra'
+	for c in used_cells:
+		# If it is an spawn tile
+		if(tilemap.get_cell(c.x, c.y) == 0):
+			cell_pos = c # Store cell position (Vec2)
 			break
 	
-	# Create player on spawn position
-	if(spawn_vec2 != null):
-		# Create player instance
+	# If we have a spawn position, create a player and spawn it
+	if(cell_pos != null):
+		var spawn_pos = tilemap.map_to_world(cell_pos)
 		var player = load("res://data/player/player.tscn").instance()
 		get_child(0).add_child(player)
-		player.spawn_at(spawn_vec2) # Must spawn AFTER being added to child
+		player.set_pos(spawn_pos)
+		player.set_fixed_process(false)
+	 
+	# No spawn tile found
 	else:
 		print("LEVEL ERROR: Level is missing a spawn position!")
 
 
+# Toggles player processing (on / off) and returns the current activity result
+func toggle_player_processing():
+	var player = get_child(0).get_node("player")
+	var fixed_processing = !player.is_fixed_processing() # Toggle
+	player.set_fixed_process(fixed_processing)
+	return fixed_processing
+
+
+# Load level
 func load_level(level):
 	# If the level is invalid, return
-	if(level > global.config["level"]["total"] && level < 0):
+	if(level > global.config.level.total && level < 0):
 		print("ERROR: Level inserted into load_level is invalid")
 		return false
 	
-	# Store selected level as current
-	global.config["level"]["current"] = level
+	# Stop timer
+	timer.stop()
 	
+	# Remove level if it already exist
+	if(get_child(0)):
+		remove_child(get_child(0))
+	
+	# Store selected level as current
+	global.config.level.current = level
+
 	# Create level scene
 	var level_scene = load("res://data/level_manager/levels/" + str(level).pad_zeros(2) + "/level.tscn")
 	if(level_scene != null):
 		var scene = level_scene.instance()
-		# scene.connect("game_over", self, "game_over")
 		add_child(scene)
 		update_tiles(scene)
+		
+		# Get total time from level
+		current_time = scene.get_time()
+		global.total_time = current_time
+		
+		# Set initial time to the total time
+		get_child(0).get_node("ui").time_label.set_text(str(global.total_time).pad_zeros(3))
 	else:
 		print("Something went wrong, level does not exist: " + str(level).pad_zeros(2))
 		# Go back to menu
 		get_tree().set_pause(false)
 		get_parent().main_menu()
-		
+	
+	# Spawn player
+	spawn_player()
+	
+	# Update UI
+	get_child(0).get_node("ui").update_state()
 
 
-var ENTITIES = {
-	SANDWICH = 4, # Goal
-	HEART = 5, # Key for Heart Door
-	DIAMOND = 6, # Key for Diamond Door
-	SPADE = 7, # Key for Spade Door
-	CLUB = 8, # Key for Club Door
-	BALONEY = 9, # Baloney
-	PUSHABLE_BLOCK = 10, # Pushable Block
-}
-
-
+# BLOCKS
 var sandwich = preload("res://data/level_manager/entities/sandwich/sandwich.tscn")
-var pushable_block = preload("res://data/level_manager/entities/pushable_block/pushable_block.tscn")
-
 var water_tile = preload("res://data/level_manager/entities/tiles/water/water.tscn")
 
 # Replace all special tiles with instances that may be interacted with
 func update_tiles(level_scene):
+	# World tilemap
 	var world_tilemap = level_scene.get_node("world")
 	var world_used_cells = world_tilemap.get_used_cells()
 	
+	# Extra tilemap
 	var extra_tilemap = level_scene.get_node("extra")
 	
+	# Entities tilemap
 	var entities_tilemap = level_scene.get_node("entities")
 	var entities_used_cells = entities_tilemap.get_used_cells()
 	
+	# Reset key data data
+	global.reset_inventory()
+
 	# If we dont have an items node, create it
 	if(level_scene.get_node("items") == null):
 		var items_node = Node2D.new()
@@ -170,22 +224,29 @@ func update_tiles(level_scene):
 		level_scene.add_child(items_node)
 	
 	# Iterate through all used entities in the map
+	# This makes it easier for the level creator. Only have to place blocks and it will do as expected. 
+	# No need to script or manually positioning of tiles.
 	for cell_pos in entities_used_cells:
 		var cell_id = entities_tilemap.get_cellv(cell_pos)
 		var tile_pos = entities_tilemap.map_to_world(cell_pos)
-		if(cell_id == ENTITIES["SANDWICH"]):
-			# Spawn entity
-			var sandwich_scene = sandwich.instance()
+		
+		# Replace all SANDWICH blocks with an instance 
+		if(cell_id == global.ENTITIES.BLOCK.SANDWICH):
+			# Create sandwich
+			sandwich_scene = sandwich.instance()
+			
+			# Set sandwich position on tile
 			sandwich_scene.set_pos(tile_pos)
 			
-			# Add sandwich goal
+			# Add sandwich to scene
 			level_scene.get_node("items").add_child(sandwich_scene)
 			
-			# Remove original cell
+			# Remove the original cellww
 			entities_tilemap.set_cellv(cell_pos, -1)
-		elif(cell_id == ENTITIES["PUSHABLE_BLOCK"]):
-			# Do nothing
-			pass
+		
+		# Count number of baloney tiles and add to total
+		if(cell_id == global.ENTITIES.BALONEY):
+			global.inventory.BALONEY.TOTAL += 1
 	
 	# Iterate through all used world tiles in the map
 	for cell_pos in world_used_cells:
@@ -201,23 +262,103 @@ func update_tiles(level_scene):
 	pass
 
 
-# Go to next level (while we are already playing)
-func load_next_level():
-	get_child(0).queue_free() # Remove current level 
-	game_running = false
-	game_over = false
-	paused = false
-	current_level += 1
-	load_level(current_level)
+# Adds baloney on the sandwich - The sandwich which you will eat after collecting all the baloney.
+func add_baloney():
+	# If we have collected all baloneys, add bread on top to finish it all off
+	if(sandwich_scene != null):
+		sandwich_scene.add_baloney()
+		
+		if(global.inventory.BALONEY.CURRENT == global.inventory.BALONEY.TOTAL):
+			sandwich_scene.finish()
+
+
+# Victory
+func victory():
+	# Set state
+	global.current_state = global.STATE.VICTORY
+	
+	# Stop timer
+	timer.stop()
+	
+	# Update UI
+	get_child(0).get_node("ui").update_state()
 
 
 # Set game over
-func game_over():
-	get_child(0).get_node("ui").set_you_died(true)
+func death():
+	# Set state
+	global.current_state = global.STATE.DEATH
+	
+	# Update UI
+	get_child(0).get_node("ui").update_state()
 
-	get_child(0).get_node("player").queue_free()
-	game_running = false
-	game_over = false
-	paused = false
-	reset = true
-	# load_level(2)
+
+# This is the lady of judgement. 
+# She judges the quality of your code.
+# Don't disappoint lady of judgement.
+#. ... ... ... ... ... ... ... ... ,,----~~”'¯¯¯¯¯¯”'~~----,,
+#... ... ... ... ... ...,,-~”¯::::::::::::::::::::::::::::::::::¯”'~,,
+#... ... ... ... ..,,~”::::::::::::::::::::::::::::::::::::::::::::::::::::”~,,
+#... ... ... ..,,-“:::::::::::::::/::::::/::::::::::::::::\::::::::::::\:::::::::\
+#... ... ...,-“:::::,-“:::/:::::/::::::/:|::::::::::::::::\::::::::::::\:::::::::\
+#... ... .,-“:::::::/:::::|:::::|:::::::|:|:::::::|:::::::\\:::::::::::|:|:::::\::\
+#... ... /::::::/:::|::::::|:::::|::|::::\:\:::::/\::::/:::||:::::::::|:/::::::|:::|
+#... .../::::::|:::::\::::::\::::\::\::::/\:\,::/::\::/::::|:|:::::::/\/::::::/::::|
+#... ../::::::/::::::'\::::::\-,:::\/\::/: :\-,”/ : :\/:\:::/: |:::::/::/::::::|::::/
+#... ./::::::|:::::::::\::::::\|::/: \/: : : \/: : : : : \,/: \/::_/\//:\:::::/:::/
+#... /::::::/::/:::::::|::/,__/:/: :__/ . .: : : : : : :\__. \/: \:::::/::/:::/
+#... |:::|::::::::::::/::/::::/;/ ;/ ,. .,\: : : : : : : / ,._., \ /::::::|::/:|
+#...|:::/:::/::::::::/::/|:::|.\: |.|❤||; : : : : : :|.|.❤||;|::|:::\/:/
+#...|::|:::|::::::::/:::\|:::'\,|: \."'" /: : : : : : : :'\." '"/ : \: |:::|::\
+#...|::|:::|:::::::/:::::|::::|/: : “¯': : : : : : : : : :"¯'' : : :\ : :/::::'\
+#...|::|:::|::::::/:::::/:::::'\: : : : : : : : : : : : : : :': : : : :| :/::::::|
+#... \:|:::|:::::|::::::|::::::|,: : : : : : :~,___,~: : : : : :,-“:::::::|::|
+#... .'\|::|:::::|::::::||::::::\'~,: : : : : : '~--~': : : : ,,~”\:::::::::|:/
+#... ...'\:|:::::|::::::/.|::::::|: : “~,: : : : : : : : ,,-~,”::::::'\::::::::/
+#... ... .\\:::::|”~,/-,|:::::::|: : : : ¯”~,-,,,-~”:::,,-'\::::::::\-,,_::|/
+#... ... ..',\,::|~--'-~\:::::::|: : : : : : |::|,,-~”¯..__\::::::::\... .'|
+#... ..,~”': : \|: : : : : \::::::|: : : : : : |¯”'~~”~,”,: : \:::::::|.. /
+#..,-“: : : : : :|: : : : : :\::::::|: : : : : : \: : : : : : “~'-,:\::::::|\,
+#..|: : : : : : : |: : : : : : |::::|,\,: : : : : : : : : : : : : :”-,-\::::|: \
+#..| : : : : : : : : : : : : : |::::|:'-,\: : : : : : : : : : : : : : :”-'\,|: :|
+#...\ : : : : : : : : : :'\: : :\:::|: : '\'\: : : : :~,,: : : : : : : : : “~-',_
+#... \: : : : : : : : : : :\: /:|:/: : : :',-'-,_,: : : “-,: : : : : : : : :,/”'-,
+#... .\: : : : : : : : : : :\|: |/: : : ,-“....”-,:\: : : : '\: : : : : : :,/.......”-,
+#... ...\: : : : : : : : : : \: |: : :/...........\*/ : : : :|: : : : : :,-“...........'|
+#... ... .\ : : : : : : : : : '\': : /..............\/ : : : : /: : : : : :,-“............./
+#... ... ...\ : : : : : : : : : '\:/.................\: : :,/: : : : : /................./
+#... ... .....\ : : : : : : : : : \........................\:,-“: : : : :,/............/
+#... ... ... ...\ : : : : : : : : : \,_.............._,”======',_.................,-“\ 
+#... ... ... ... \,: : : : : : : : : \: ¯”'~---~”¯: : : : : : : : : :¯”~~,': : : : \
+#... ... ... ... ..'\,: : : : : : : : : \: : : : : : : : : : : : : : : : : : : '|: : \
+#... ... ... ... ... .\, : : : : : : : : '\: : : : : : : : : : : : : : : : : : :|: : \
+#... ... ... ... ... ...\,: : : : : : : : :\ : : : : : : : : : : : : : : : : : |: : :\
+#... ... ... ... ... ... ..\ : : : : : : : : \: : : : : : : : : : : : : : : : :|: : : :\
+#... ... ... ... ... ... ...\\,: : : : : : : :\, : : : : : : : : : : : : : : :/: : : : :\
+#... ... ... ... ... ... ... .\\ : : : : : : : :'\ : : : : : : : : : : : : : :|: : : : : '|
+#... ... ... ... ... ... ... ./:\: : : : : : : : :'\, : :;: : : : : :;: : : : |: : : : : :|
+#... ... ... ... ... ... ... /: : \: : : : : : : : : '\,:;: : : : : :;: : : : |: : : : : :|
+#... ... ... ... ... ... .../: : : '\: : : : : : : : : :'\,: : : : : :; : : : :|: : : : : : |
+#... ... ... ... ... ... ../: : : : :\: : : : : : : : : : :\, : : : ;: : : : : |: : : : : /: |
+#... ... ... ... ... ... ,/: : : : : : :\: : : : : : : : : : '\,:.. :: : : : : : |: : : :;:: |
+#... ... ... ... ... ..,-“: : : : : : : :“-,: : : : : : : : : : \*, : : : : : :| : : : :\: |
+#... ... ... ... ... ,/ : : : : : : : : : :”-, : : : : : : : : : :\: : : : : /: : : : : : /
+#... ... ... ... ..,/ : : : : : : : : : : : : :”-, : : : : : : : : :'\: : : :| : : : : : ,/
+#... ... ... ... ,/ : : : : : : : : : : : : : : : ;-,: : : : : : : : :'\: : |: : : : : : /
+#... ... ... .../: : : : : : : : : : : : : : : : :;: “-,: : : : : : : : '\: |: : : : : /
+#... ... ... ../: : : : : : : : : : : : : : : : : : : : :“-,: : : : : : : \,|: : : : :/
+#... ... ... ,/: : : : : : : : : : : : : : : : : : : : : : :“-,: : : : : : :\: : : : /
+#... ... .../-,-,”,,-,~-,,_: : : : : : : : : : : : : : : : : “-,: : : : : :'\: : :'|
+#... ... ...|',/,/:||:\,\: : : “'~,,~~---,,,_: : : : : : : : '\: : : : : : : \,: :|
+#... ... ..|: :”: ||: :”: : : : : : :”-,........ ¯¯”''~~~-~.|\: : : : : : : :  \:|
+#... ... ..|: : : ||: : : : : : : : : : :”-,.......................|: : : : : : : \|
+#... ... ..| : : : : : : : : : : : : : : : :”-,.....................\: : : : : : : :\,
+#... ... ..| : : : : : : : : : : : : : : : :”-,\....................“\: : : : : : : : '\
+#... ... ..| : : : : : : : : : : : : : : : : : :”-\...............,/: : :\: : : : : : :\ 
+#... ... ..| : : : : : : : : : : : : : : : : : : : \,...........,/: : : : '\: : : : : : ||
+#... ... ..| : : : : : : : : : : : : : : : : : : : : \.......,/: : : : ,-~/: : ,: |: /:|
+#... ... ..'|: : : : : : : : : : : : : : : : : : : : : \~”¯: : : : : :|: ::|: :/::/:,/
+#... ... ...|: : : : : : : : : : : : : : : : : : : : : |: : : : : : : :”-,,_/_,/-~”:|
+#... ... ...|: : : : : : : : : : : : : : : : : : : : : |: : : : : : : : : : : : : : : :|
+#... ... ... |: : : : : : : : : : : : : : : : : : : : : |: : : : : : : : : : : : : : : |
+#... ... ... | : : : : : : : : : : : : : : : : : : : : :|: : : : : : : : : : : : : : :/

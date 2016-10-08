@@ -5,10 +5,20 @@ export(int) var time = 999
 export(int) var level = 999
 
 var ui = preload("res://data/ui/ui.tscn")
+var screen_overlay = preload("res://data/screen/screen.tscn") # Adds a "old school"ish effect on the screen
+
 signal game_over()
 
 func _ready():
-	# Create UI
+	# Add UI to screen
 	var ui_scene = ui.instance()
-	ui_scene.init(level, time)
 	add_child(ui_scene)
+	
+	var screen_scene = screen_overlay.instance()
+	add_child(screen_scene)
+
+func get_level():
+	return level
+
+func get_time():
+	return time

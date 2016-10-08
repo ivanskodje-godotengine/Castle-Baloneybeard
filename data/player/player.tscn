@@ -33,6 +33,7 @@ region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+process/pause_mode = 2
 offset = Vector2( 8, 8 )
 anchor_mode = 1
 rotating = false
