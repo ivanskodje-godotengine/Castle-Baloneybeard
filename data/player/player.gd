@@ -61,18 +61,16 @@ func _move_complete(tween, key):
 
 # Returns true if player can move in the requested direction
 func pre_move(direction):
-	var pos = get_pos()
 	var tile_pos = null
 	var tilemap_world = get_parent().get_node("world")
 	var tilemap_entity = get_parent().get_node("entities")
 	
 	if(tilemap_world != null):
 		# Get tile coordinate of where you currently are
-		tile_pos = tilemap_world.world_to_map(pos)
+		tile_pos = tilemap_world.world_to_map(get_pos())
 	
 	# Check if we have a solid block in the next block
 	if(direction == global.DIRECTION.LEFT):
-		# Check tile to your immediate left
 		tile_pos.x -= 1
 	elif(direction == global.DIRECTION.RIGHT):
 		tile_pos.x += 1
@@ -120,7 +118,6 @@ func pre_move(direction):
 			
 			# We have a pushable block
 			elif(t == global.ENTITIES.BLOCK.PUSHABLE_BLOCK):
-				
 				# Check if we have a solid block in the next block
 				var move_to_pos = tile_pos
 				if(direction == global.DIRECTION.LEFT):
@@ -192,19 +189,64 @@ func pre_move(direction):
 	
 	# Baloney
 	elif(tile_id == global.ENTITIES.BALONEY):
-		global.inventory["BALONEY"]["CURRENT"] += 1
+		# Add to inventory
+		global.inventory.BALONEY.CURRENT += 1
+		
 		# Update baloney in UI
 		ui_node.update_baloney()
 		
 		# Add baloney on the sandwich!
 		get_parent().get_parent().add_baloney()
-
+		
 		# Remove baloney
 		tilemap_entity.set_cellv(tile_pos, -1)
 	
+	# Anti Water Item
+	elif(tile_id == global.ENTITIES.ITEM.ANTI_WATER):
+		# Add to inventory
+		global.inventory.ITEMS.ANTI_WATER += 1
+		
+		# Update UI
+		ui_node.update_items()
+		
+		# Remove item
+		tilemap_entity.set_cellv(tile_pos, -1)
+	
+	# Anti Fire Item
+	elif(tile_id == global.ENTITIES.ITEM.ANTI_FIRE):
+		# Add to inventory
+		global.inventory.ITEMS.ANTI_FIRE += 1
+		
+		# Update UI
+		ui_node.update_items()
+		
+		# Remove item
+		tilemap_entity.set_cellv(tile_pos, -1)
+	
+	# Anti Ice Item
+	elif(tile_id == global.ENTITIES.ITEM.ANTI_ICE):
+		# Add to inventory
+		global.inventory.ITEMS.ANTI_ICE += 1
+		
+		# Update UI
+		ui_node.update_items()
+		
+		# Remove item
+		tilemap_entity.set_cellv(tile_pos, -1)
+	
+	# Anti Slide item
+	elif(tile_id == global.ENTITIES.ITEM.ANTI_SLIDE):
+		# Add to inventory
+		global.inventory.ITEMS.ANTI_SLIDE += 1
+		
+		# Update UI
+		ui_node.update_items()
+		
+		# Remove item
+		tilemap_entity.set_cellv(tile_pos, -1)
 	return true
 
-# Triggered by walking on a goal
+# Triggered by walking on a sandwich
 func walked_on_goal():
 	print("Walked on goal")
 	# If we have all baloneys # -----------------------------------------------------<_<-<-<-<--<_<->_-><_ REMEMBER TO FIX WHEN DONE DEBUGGING
@@ -212,11 +254,11 @@ func walked_on_goal():
 		# Inform level manager of victory
 		get_parent().get_parent().victory()
 
+# Triggered by walking on water
 func in_water():
-	print("Walked in water")
 	# Player is in water! Check if he has the item needed
-	if(global.inventory.TOOL.WATER > 0):
-		# Safe!
+	if(global.inventory.ITEMS.ANTI_WATER > 0):
+		# TODO: Change to swimming animations
 		pass
 	else:
 		# Death awaits us!

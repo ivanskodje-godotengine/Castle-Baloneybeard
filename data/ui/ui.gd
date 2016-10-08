@@ -60,6 +60,27 @@ func update_keys():
 	else:
 		get_node("background/hbox_keys/Container3/key_4").hide()
 
+func update_items():
+	var dict = global.inventory.ITEMS
+	if(dict.ANTI_WATER > 0):
+		get_node("background/hbox_items/Container/anti_water" ).show()
+	else:
+		get_node("background/hbox_items/Container/anti_water").hide()
+	
+	if(dict.ANTI_FIRE > 0):
+		get_node("background/hbox_items/Container1/anti_fire").show()
+	else:
+		get_node("background/hbox_items/Container1/anti_fire").hide()
+	
+	if(dict.ANTI_ICE > 0):
+		get_node("background/hbox_items/Container2/anti_ice").show()
+	else:
+		get_node("background/hbox_items/Container2/anti_ice").hide()
+	
+	if(dict.ANTI_SLIDE > 0):
+		get_node("background/hbox_items/Container3/anti_slide").show()
+	else:
+		get_node("background/hbox_items/Container3/anti_slide").hide()
 
 # Updates baloney counter (There are x baloneys remaining)
 func update_baloney():

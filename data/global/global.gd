@@ -12,7 +12,7 @@ var config = {
 	},
 	level = {
 		current = 1,
-		total = 2, # TODO: Load this in
+		total = 3, # TODO: Load this in
 	}
 }
 
@@ -61,15 +61,21 @@ const INVENTORY = {
 		DIAMOND = 0,
 		SPADE = 0,
 		CLUB = 0,
-		HEART = 0
+		HEART = 0,
+	},
+	ITEMS = {
+		ANTI_WATER = 0,
+		ANTI_FIRE = 0,
+		ANTI_ICE = 0,
+		ANTI_SLIDE = 0,
 	},
 	BALONEY = {
 		CURRENT = 0,
-		TOTAL = 0
+		TOTAL = 0,
 	},
 	TOOL = {
 		WATER = 0,
-		FIRE = 0
+		FIRE = 0,
 	},
 }
 
@@ -97,7 +103,14 @@ var ENTITIES = {
 	BALONEY = 8,
 	BLOCK = {
 		SANDWICH = 9,
-		PUSHABLE_BLOCK = 10
+		PUSHABLE_BLOCK = 10,
+		FIRE = 11,
+	},
+	ITEM = {
+		ANTI_FIRE = 12,
+		ANTI_ICE = 13,
+		ANTI_WATER = 14,
+		ANTI_SLIDE = 15,
 	}
 }
 

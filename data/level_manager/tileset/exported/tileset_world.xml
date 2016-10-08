@@ -74,6 +74,15 @@
 		<resource name="7/navigation"></resource>		<vector2 name="7/shape_offset"> 0, 0 </vector2>
 		<array name="7/shapes" len="0" shared="false">
 		</array>
+		<string name="8/name"> "Ice" </string>
+		<resource name="8/texture" external="0">  </resource>
+		<vector2 name="8/tex_offset"> 0, 0 </vector2>
+		<resource name="8/material"></resource>		<rect2 name="8/region"> 48, 0, 16, 16 </rect2>
+		<vector2 name="8/occluder_offset"> -0, -0 </vector2>
+		<resource name="8/occluder"></resource>		<vector2 name="8/navigation_offset"> -0, -0 </vector2>
+		<resource name="8/navigation"></resource>		<vector2 name="8/shape_offset"> 0, 0 </vector2>
+		<array name="8/shapes" len="0" shared="false">
+		</array>
 
 	</main_resource>
 </resource_file>
