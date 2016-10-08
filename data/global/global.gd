@@ -116,6 +116,16 @@ var WORLD = {
 	SUBMERGED_BLOCK = 7
 }
 
+var ENEMIES = {
+	PATROL = 0,
+}
+
+var EXTRA = {
+	SPAWN = 0,
+	PATROL = 1,
+}
+
+
 # Fill in tile IDs for solid tiles
 var SOLID_TILES = {
 	WORLD = [1,3,5],

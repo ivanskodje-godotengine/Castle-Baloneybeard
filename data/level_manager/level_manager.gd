@@ -201,6 +201,9 @@ func load_level(level):
 var sandwich = preload("res://data/level_manager/entities/sandwich/sandwich.tscn")
 var water_tile = preload("res://data/level_manager/entities/tiles/water/water.tscn")
 
+# ENEMIES
+var enemy_patrol = preload("res://data/level_manager/entities/enemy_patrol/enemy_patrol.tscn")
+
 # Replace all special tiles with instances that may be interacted with
 func update_tiles(level_scene):
 	# World tilemap
@@ -213,6 +216,12 @@ func update_tiles(level_scene):
 	# Entities tilemap
 	var entities_tilemap = level_scene.get_node("entities")
 	var entities_used_cells = entities_tilemap.get_used_cells()
+	
+	# Enemies tilemap
+	var enemies_tilemap = level_scene.get_node("enemies")
+	var enemies_used_cells = null
+	if(enemies_tilemap != null):
+		enemies_used_cells = enemies_tilemap.get_used_cells()
 	
 	# Reset key data data
 	global.reset_inventory()
@@ -253,13 +262,26 @@ func update_tiles(level_scene):
 		var cell_id = world_tilemap.get_cellv(cell_pos)
 		var tile_pos = world_tilemap.map_to_world(cell_pos)
 		
-		if(cell_id == 6): # Water
+		if(cell_id == global.WORLD.WATER): # Water
 			# Add animated water tiles
 			var water = water_tile.instance()
 			water.set_pos(tile_pos)
 			level_scene.get_node("world").add_child(water)
-		pass
-	pass
+	
+	# Replace enemy cells with instances
+	if(enemies_tilemap != null):
+		for cell_pos in enemies_used_cells:
+			var cell_id = enemies_tilemap.get_cellv(cell_pos)
+			var tile_pos = enemies_tilemap.map_to_world(cell_pos)
+			print("CELL_POS " + str(enemies_used_cells))
+			if(cell_id == global.ENEMIES.PATROL):
+				# Add enemy instances
+				var enemy = enemy_patrol.instance()
+				enemy.set_pos(tile_pos)
+				enemies_tilemap.add_child(enemy)
+				
+				# Remove the original cellww
+				enemies_tilemap.set_cellv(cell_pos, -1)
 
 
 # Adds baloney on the sandwich - The sandwich which you will eat after collecting all the baloney.

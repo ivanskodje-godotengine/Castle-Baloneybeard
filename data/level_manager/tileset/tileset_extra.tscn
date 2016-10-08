@@ -4,11 +4,19 @@
 
 [node name="tileset" type="Node2D"]
 
-[node name="1" type="Sprite" parent="."]
+[node name="Spawn" type="Sprite" parent="."]
 
 texture = ExtResource( 1 )
 centered = false
 region = true
 region_rect = Rect2( 16, 0, 16, 16 )
+
+[node name="Patrol Route" type="Sprite" parent="."]
+
+transform/pos = Vector2( 20, 0 )
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 32, 0, 16, 16 )
 
 
