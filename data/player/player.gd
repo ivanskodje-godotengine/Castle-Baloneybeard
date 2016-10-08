@@ -324,6 +324,8 @@ func in_water():
 func out_of_water():
 	in_water = false
 
+func death():
+	get_parent().get_parent().death()
 
 # Player steps on fire
 func in_fire(fire_node):
@@ -365,14 +367,7 @@ func on_ice():
 	if(global.inventory.ITEMS.ANTI_ICE > 0):
 		on_ice = false
 		is_moving = false
-		pass
 	else:
-		# Play slide animation
-		if(facing == global.DIRECTION.LEFT || facing == global.DIRECTION.UP):
-			anim_node.play("on_ice_left")
-		elif(facing == global.DIRECTION.RIGHT || facing == global.DIRECTION.DOWN):
-			anim_node.play("on_ice_right")
-		
 		var next_pos = get_pos()
 		on_ice = true
 		# NORTH

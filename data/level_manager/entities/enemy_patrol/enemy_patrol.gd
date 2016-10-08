@@ -113,12 +113,6 @@ func move(direction):
 	set_pos(pos)
 
 
-func _on_enemy_area_enter( area ):
-	print("On Enemy area entering... --> " + str(area.get_name()))
-
-
 func _on_enemy_body_enter( body ):
 	if(body.get_name() == "player"):
-		print("Kill player")
-	else:
-		print("----> " + str(body.get_name()))
+		body.death()

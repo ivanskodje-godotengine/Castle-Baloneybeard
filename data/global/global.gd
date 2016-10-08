@@ -163,11 +163,16 @@ enum MUSIC {
 }
 
 # Play sound
+var sfx = null
 func play_sound(sound):
-	if(sound == SOUND.ITEM_CHANGED):
-		print("play_sound: SOUND.ITEM_CHANGE")
-	elif(sound == SOUND.ITEM_SELECTED):
-		print("play_sound: SOUND.ITEM_SELECTED")
+	if(sfx == null):
+		sfx = load("res://data/SFX/SFX.tscn").instance()
+	
+	if(sfx != null):
+		if(sound == SOUND.ITEM_CHANGED):
+			sfx.play("menu_move")
+		elif(sound == SOUND.ITEM_SELECTED):
+			sfx.play("menu_select")
 
 # Play Music
 func play_music(music):
