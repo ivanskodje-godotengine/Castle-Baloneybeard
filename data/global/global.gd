@@ -97,9 +97,23 @@ var ENTITIES = {
 	BALONEY = 8,
 	BLOCK = {
 		SANDWICH = 9,
-		PUSHABLE_BLOCK = 10,
-		SUBMERGED_BLOCK = 11,
+		PUSHABLE_BLOCK = 10
 	}
+}
+
+var WORLD = {
+	FLOOR = {
+		FLOOR_A = 0,
+		FLOOR_B = 2,
+		FLOOR_C = 4
+	},
+	WALL = {
+		WALL_A = 1,
+		WALL_B = 3,
+		WALL_C = 5,
+	},
+	WATER = 6,
+	SUBMERGED_BLOCK = 7
 }
 
 # Fill in tile IDs for solid tiles

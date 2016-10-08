@@ -117,13 +117,13 @@ func pre_move(direction):
 					ui_node.update_keys()
 				else:
 					return false
+			
 			# We have a pushable block
-			elif(t == 10):
-				# Check if we can move block
-				var move_to_pos = tile_pos
+			elif(t == global.ENTITIES.BLOCK.PUSHABLE_BLOCK):
+				
 				# Check if we have a solid block in the next block
+				var move_to_pos = tile_pos
 				if(direction == global.DIRECTION.LEFT):
-					# Check tile to your immediate left
 					move_to_pos.x -= 1
 				elif(direction == global.DIRECTION.RIGHT):
 					move_to_pos.x += 1
@@ -134,13 +134,28 @@ func pre_move(direction):
 				
 				# Making sure there is nothing else in the position where we want to move the block
 				if(tilemap_entity.get_cellv(move_to_pos) == -1):
+					# If there is something solid, we dont move
 					for c in global.SOLID_TILES["WORLD"]:
 						if(tilemap_world.get_cellv(move_to_pos) == c):
 							return false # Something is in the way, we cannot move
 					
-					# All clear! Moving block
-					tilemap_entity.set_cellv(tile_pos, -1)
-					tilemap_entity.set_cellv(move_to_pos, 10)
+					# Check for water
+					if(tilemap_world.get_cellv(move_to_pos) == global.WORLD.WATER):
+						# Remove pushing block
+						tilemap_entity.set_cellv(tile_pos, -1)
+		
+						# Remove water instance
+						for c in get_parent().get_node("world").get_children():
+							# Remove water scene with same pos as the new tile pos
+							if(c.get_pos() == tilemap_world.map_to_world(move_to_pos)):
+								c.queue_free()
+						
+						# Add submerged block
+						tilemap_world.set_cellv(move_to_pos, global.WORLD.SUBMERGED_BLOCK)
+					else:
+						# All clear! Moving block
+						tilemap_entity.set_cellv(tile_pos, -1)
+						tilemap_entity.set_cellv(move_to_pos, 10)
 				else:
 					# TODO: Play sound to indicate failure to push
 					# ..

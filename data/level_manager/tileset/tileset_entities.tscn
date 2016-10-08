@@ -91,12 +91,4 @@ centered = false
 region = true
 region_rect = Rect2( 144, 16, 16, 16 )
 
-[node name="Submerged Block" type="Sprite" parent="."]
-
-transform/pos = Vector2( 21, 39 )
-texture = ExtResource( 1 )
-centered = false
-region = true
-region_rect = Rect2( 144, 48, 16, 16 )
-
 
