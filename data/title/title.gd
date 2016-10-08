@@ -15,8 +15,9 @@ onready var animation_container = get_node("animation")
 var timer = null
 var delay = 0.75
 
+
 func _ready():
-	# Create timer
+	# Create and start timer
 	timer = Timer.new()
 	timer.set_one_shot(false)
 	timer.set_wait_time(delay)
@@ -25,10 +26,12 @@ func _ready():
 	add_child(timer)
 	timer.start()
 
+
+# Reset animation
 func reset():
-	# Remove all animation nodes
 	for c in animation_container.get_children():
 		c.queue_free()
+
 
 # Adds bread or baloney to form a sandwich
 func add_to_sandwich():
@@ -49,6 +52,7 @@ func add_to_sandwich():
 	# Increment stack size by one
 	stack_size += 1
 
+
 # Runs each tick
 func _tick():
 	if(stack_size < total + 2):
@@ -56,6 +60,7 @@ func _tick():
 	else:
 		stack_size += 1
 	
+	# Reset and start over after 10 ticks
 	if(stack_size > 10):
 		reset()
 		stack_size = 0

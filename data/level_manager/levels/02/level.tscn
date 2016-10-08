@@ -57,7 +57,7 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( 65532, 8, 196615, 8, 327672, 9, 262147, 10, 262148, 10, 589820, 8 )
+tile_data = IntArray( 65532, 8, 196615, 8, 327672, 9, 262147, 10, 262148, 10, 327687, 8, 589820, 8 )
 
 [node name="enemies" type="TileMap" parent="."]
 

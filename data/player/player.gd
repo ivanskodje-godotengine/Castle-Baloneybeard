@@ -4,9 +4,11 @@ extends KinematicBody2D
 var tween = null # Moves the player from current to next tile smoothly
 var is_moving = false # Prevents moving outside of tile positions
 
+# Nodes
 onready var ui_node = get_parent().get_node("ui")
+onready var anim_node = get_node("animation_player")
 
-
+# Ready
 func _ready():
 	update_total_baloneys()
 	pass
@@ -24,6 +26,7 @@ func _fixed_process(delta):
 		elif(Input.is_action_pressed("ui_down")):
 			move(global.DIRECTION.DOWN)
 
+var facing = global.DIRECTION.RIGHT
 
 # Move player with tween
 func move(direction):
@@ -32,17 +35,39 @@ func move(direction):
 		# Toggle to prevent unfinished movement before new movement
 		is_moving = true 
 		
+		# Store facing direction
+		facing = direction
+		
 		# Get current position
 		var pos = get_pos()
 		
 		# Add directional change to position
 		if(direction == global.DIRECTION.LEFT):
+			if(in_water):
+				anim_node.play("walk_left_in_water")
+			else:
+				anim_node.play("walk_left")
 			pos.x -= global.config["tile_size"]
+		
 		elif(direction == global.DIRECTION.RIGHT):
+			if(in_water):
+				anim_node.play("walk_right_in_water")
+			else:
+				anim_node.play("walk_right")
 			pos.x += global.config["tile_size"]
+		
 		elif(direction == global.DIRECTION.UP):
+			if(in_water):
+				anim_node.play("walk_up_in_water")
+			else:
+				anim_node.play("walk_up")
 			pos.y -= global.config["tile_size"]
+		
 		elif(direction == global.DIRECTION.DOWN):
+			if(in_water):
+				anim_node.play("walk_right_in_water")
+			else:
+				anim_node.play("walk_right")
 			pos.y += global.config["tile_size"]
 		
 		# Tween from original position to new position
@@ -58,6 +83,32 @@ func move(direction):
 func _move_complete(tween, key):
 	if(!on_ice):
 		is_moving = false
+	
+	# Stop animation
+	anim_node.stop_all()
+	
+	if(!on_ice):
+		if(facing == global.DIRECTION.UP):
+			if(in_water):
+				anim_node.play("idle_up_in_water")
+			else:
+				anim_node.play("idle_up")
+		if(facing == global.DIRECTION.DOWN):
+			if(in_water):
+				anim_node.play("idle_right_in_water")
+			else:
+				anim_node.play("idle_right") # TODO: Replace with idle down
+		if(facing == global.DIRECTION.LEFT):
+			if(in_water):
+				anim_node.play("idle_left_in_water")
+			else:
+				anim_node.play("idle_left")
+		if(facing == global.DIRECTION.RIGHT):
+			if(in_water):
+				anim_node.play("idle_right_in_water")
+			else:
+				anim_node.play("idle_right")
+
 
 
 # Returns true if player can move in the requested direction
@@ -258,15 +309,20 @@ func walked_on_goal():
 		get_parent().get_parent().victory()
 
 # Triggered by walking on water
+var in_water = false
 func in_water():
 	# Player is in water! Check if he has the item needed
 	if(global.inventory.ITEMS.ANTI_WATER > 0):
 		# TODO: Change to swimming animations
+		in_water = true
 		pass
 	else:
 		# Death awaits us!
 		get_parent().get_parent().death()
 		pass
+
+func out_of_water():
+	in_water = false
 
 
 # Player steps on fire
@@ -311,6 +367,12 @@ func on_ice():
 		is_moving = false
 		pass
 	else:
+		# Play slide animation
+		if(facing == global.DIRECTION.LEFT || facing == global.DIRECTION.UP):
+			anim_node.play("on_ice_left")
+		elif(facing == global.DIRECTION.RIGHT || facing == global.DIRECTION.DOWN):
+			anim_node.play("on_ice_right")
+		
 		var next_pos = get_pos()
 		on_ice = true
 		# NORTH
@@ -435,3 +497,4 @@ func _move_on_ice_complete(var1, var2):
 	last_tween.queue_free()
 	is_moving = false
 	on_ice = false
+	anim_node.play("idle_right")

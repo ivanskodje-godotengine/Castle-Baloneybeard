@@ -18,7 +18,7 @@ tracks/0/keys = { "times":FloatArray( 0, 0.3, 0.6, 0.9 ), "transitions":FloatArr
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 5.33864, 5.11146 )
+extents = Vector2( 4.18022, 4.02335 )
 
 [node name="water" type="Sprite"]
 
@@ -59,5 +59,7 @@ trigger = false
 _update_shape_index = 0
 
 [connection signal="body_enter" from="Area2D" to="." method="_on_water_body_enter"]
+
+[connection signal="body_exit" from="Area2D" to="." method="_on_water_body_exit"]
 
 
