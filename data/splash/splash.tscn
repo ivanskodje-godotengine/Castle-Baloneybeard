@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://data/splash/background.png" type="Texture" id=1]
 [ext_resource path="res://fonts/coolvetica rg.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://data/screen/screen.tscn" type="PackedScene" id=3]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 
 font/size = 32
 font/use_mipmaps = false
@@ -46,7 +47,7 @@ margin/left = 0.0
 margin/top = 39.0
 margin/right = 0.0
 margin/bottom = 78.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
 text = "#GBJAM5"
 align = 1
@@ -74,5 +75,7 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="CanvasLayer" parent="." instance=ExtResource( 3 )]
 
 

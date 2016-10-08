@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://data/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://data/main_menu/background.png" type="Texture" id=2]
-[ext_resource path="res://data/main_menu/logo.png" type="Texture" id=3]
-[ext_resource path="res://data/main_menu/instances/menu_item/menu_item.tscn" type="PackedScene" id=4]
-[ext_resource path="res://data/screen/screen.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/main_menu/instances/menu_item/menu_item.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/screen/screen.tscn" type="PackedScene" id=4]
 
 [node name="main_menu" type="Control"]
 
@@ -38,12 +37,6 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 
-[node name="logo" type="Sprite" parent="container"]
-
-transform/pos = Vector2( 0, 10 )
-texture = ExtResource( 3 )
-centered = false
-
 [node name="vbox_container" type="VBoxContainer" parent="container"]
 
 anchor/right = 1
@@ -58,33 +51,30 @@ margin/right = 0.0
 margin/bottom = 0.0
 alignment = 1
 
-[node name="hbox_container" parent="container/vbox_container" instance=ExtResource( 4 )]
+[node name="hbox_container" parent="container/vbox_container" instance=ExtResource( 3 )]
 
 anchor/right = 0
 margin/top = 11.0
 margin/right = 160.0
 margin/bottom = 26.0
-color = 2
 text = "Start"
 
-[node name="hbox_container1" parent="container/vbox_container" instance=ExtResource( 4 )]
+[node name="hbox_container1" parent="container/vbox_container" instance=ExtResource( 3 )]
 
 anchor/right = 0
 margin/top = 30.0
 margin/right = 160.0
 margin/bottom = 45.0
-color = 2
 text = "Level: "
 
-[node name="hbox_container2" parent="container/vbox_container" instance=ExtResource( 4 )]
+[node name="hbox_container2" parent="container/vbox_container" instance=ExtResource( 3 )]
 
 anchor/right = 0
 margin/top = 49.0
 margin/right = 160.0
 margin/bottom = 64.0
-color = 2
 text = "Music: "
 
-[node name="CanvasLayer" parent="." instance=ExtResource( 5 )]
+[node name="CanvasLayer" parent="." instance=ExtResource( 4 )]
 
 

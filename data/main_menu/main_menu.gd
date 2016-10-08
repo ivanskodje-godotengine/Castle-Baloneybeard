@@ -134,11 +134,11 @@ func change_selection(id = null):
 		
 		# Level
 		if(count == 1):
-			extra = str(global.config["level"]["current"]).pad_zeros(2)
+			extra = str(global.config.level.current).pad_zeros(2)
 			
 		# Music
 		elif(count == 2):
-			extra = str(global.config["music"]["current"]).pad_zeros(2)
+			extra = str(global.config.music.current).pad_zeros(2)
 		
 		# If the iterating c is equal to selected id
 		if(count == id):
@@ -148,6 +148,6 @@ func change_selection(id = null):
 		else:
 			# Set name and color for everything other than selection
 			c.set_text(item_names[count] + extra)
-			c.set_color(1)
+			c.set_color(2)
 		count += 1
 

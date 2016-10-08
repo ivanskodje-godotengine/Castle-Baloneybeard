@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://data/YeOldeTitle/Tester.gd" type="Script" id=1]
-[ext_resource path="res://data/YeOldeTitle/Title.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/title/Tester.gd" type="Script" id=1]
+[ext_resource path="res://data/title/title.tscn" type="PackedScene" id=2]
 
 [node name="Tester" type="Node2D"]
 

@@ -4,6 +4,7 @@ extends Control
 var MAIN_MENU = preload("res://data/main_menu/main_menu.tscn")
 var LEVEL_MANAGER = preload("res://data/level_manager/level_manager.tscn")
 var SPLASH_SCREEN = preload("res://data/splash/splash.tscn")
+var TITLE_SCREEN = preload("res://data/title/title.tscn")
 var CREDITS_SCREEN = preload("res://data/credits/credits.tscn")
 
 # 0: Ready
@@ -29,19 +30,22 @@ func _input(event):
 	if(event.is_action_pressed("ui_accept") || event.is_action_pressed("ui_start")):
 		# If we are in the credits
 		if(global.current_state == global.STATE.CREDITS):
-			# Change to splash screen
 			splash_screen()
+		elif(global.current_state == global.STATE.SPLASH):
+			title_screen()
 		else:
-			# Change to main menu and disable input from 'main.gd'
 			set_process_input(false)
 			main_menu()
 
 
 # 1: Splash Screen
 func splash_screen():
-	global.current_state = global.STATE.INTRO # Default gamestate when we are out of menus
+	global.current_state = global.STATE.SPLASH # Default gamestate when we are out of menus
 	add_child(SPLASH_SCREEN.instance())
 
+func title_screen():
+	global.current_state = global.STATE.TITLE
+	add_child(TITLE_SCREEN.instance())
 
 # 2: Creates the main menu
 func main_menu():

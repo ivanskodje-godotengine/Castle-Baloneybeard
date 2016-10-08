@@ -35,6 +35,8 @@ DOWN,
 # ----- GAME STATES -----
 # Game States
 enum STATE {
+	SPLASH,
+	TITLE,
 	INTRO,
 	PLAYING,
 	PAUSE,
