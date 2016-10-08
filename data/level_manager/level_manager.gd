@@ -17,7 +17,7 @@ func _countdown():
 	# If time is up, stop the timer and display time out
 	if(current_time < 0):
 		current_time = 0 # Time to 0
-		global.total_time = 0 # Set global max time to 0
+		global.total_time = 0 # Set total time to 0
 		timer.stop()
 		global.current_state = global.STATE.TIME_OUT
 		get_child(0).get_node("ui").update_state()
@@ -200,6 +200,8 @@ func load_level(level):
 # BLOCKS
 var sandwich = preload("res://data/level_manager/entities/sandwich/sandwich.tscn")
 var water_tile = preload("res://data/level_manager/entities/tiles/water/water.tscn")
+var ice_tile = preload("res://data/level_manager/entities/tiles/ice/ice.tscn")
+var fire_tile = preload("res://data/level_manager/entities/tiles/fire/fire.tscn")
 
 # ENEMIES
 var enemy_patrol = preload("res://data/level_manager/entities/enemy_patrol/enemy_patrol.tscn")
@@ -250,12 +252,21 @@ func update_tiles(level_scene):
 			# Add sandwich to scene
 			level_scene.get_node("items").add_child(sandwich_scene)
 			
-			# Remove the original cellww
+			# Remove the original cell
 			entities_tilemap.set_cellv(cell_pos, -1)
 		
 		# Count number of baloney tiles and add to total
-		if(cell_id == global.ENTITIES.BALONEY):
+		elif(cell_id == global.ENTITIES.BALONEY):
 			global.inventory.BALONEY.TOTAL += 1
+		
+		# Fire
+		elif(cell_id == global.ENTITIES.BLOCK.FIRE):
+			var fire = fire_tile.instance()
+			fire.set_pos(tile_pos)
+			level_scene.get_node("items").add_child(fire)
+			
+			# Remove the original cell
+			entities_tilemap.set_cellv(cell_pos, -1)
 	
 	# Iterate through all used world tiles in the map
 	for cell_pos in world_used_cells:
@@ -266,7 +277,11 @@ func update_tiles(level_scene):
 			# Add animated water tiles
 			var water = water_tile.instance()
 			water.set_pos(tile_pos)
-			level_scene.get_node("world").add_child(water)
+			world_tilemap.add_child(water)
+		elif(cell_id == global.WORLD.ICE): # Ice
+			var ice = ice_tile.instance()
+			ice.set_pos(tile_pos)
+			world_tilemap.add_child(ice)
 	
 	# Replace enemy cells with instances
 	if(enemies_tilemap != null):

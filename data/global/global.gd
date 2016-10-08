@@ -126,7 +126,8 @@ var WORLD = {
 		WALL_C = 5,
 	},
 	WATER = 6,
-	SUBMERGED_BLOCK = 7
+	SUBMERGED_BLOCK = 7,
+	ICE = 8,
 }
 
 var ENEMIES = {
