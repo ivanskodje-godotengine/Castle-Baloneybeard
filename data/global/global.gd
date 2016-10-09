@@ -130,6 +130,7 @@ var WORLD = {
 	WATER = 6,
 	SUBMERGED_BLOCK = 7,
 	ICE = 8,
+	SLIDER = 9,
 }
 
 var ENEMIES = {
@@ -213,9 +214,9 @@ func play_sound(sound):
 
 # Play Music
 var music = null
-func play_music(song):
+func play_music(song, new = false):
 	if(music != null):
-		if(music.get_name() == "game_music" && song == 1):
+		if(music.get_name() == "game_music" && song == 1 && !new):
 			return
 		music.queue_free()
 	

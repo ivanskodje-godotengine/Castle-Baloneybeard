@@ -83,6 +83,15 @@
 		<resource name="8/navigation"></resource>		<vector2 name="8/shape_offset"> 0, 0 </vector2>
 		<array name="8/shapes" len="0" shared="false">
 		</array>
+		<string name="9/name"> "Slider" </string>
+		<resource name="9/texture" external="0">  </resource>
+		<vector2 name="9/tex_offset"> 0, 0 </vector2>
+		<resource name="9/material"></resource>		<rect2 name="9/region"> 64, 0, 16, 16 </rect2>
+		<vector2 name="9/occluder_offset"> -0, -0 </vector2>
+		<resource name="9/occluder"></resource>		<vector2 name="9/navigation_offset"> -0, -0 </vector2>
+		<resource name="9/navigation"></resource>		<vector2 name="9/shape_offset"> 0, 0 </vector2>
+		<array name="9/shapes" len="0" shared="false">
+		</array>
 
 	</main_resource>
 </resource_file>

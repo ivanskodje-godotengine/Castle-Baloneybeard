@@ -25,7 +25,7 @@ func _ready():
 	change_selection()
 	
 	# Play menu music
-	wait_then_music(1)
+	wait_then_music(0.5)
 
 var delay_timer = null
 func wait_then_music(wait):
@@ -35,7 +35,7 @@ func wait_then_music(wait):
 	# Create timer
 	delay_timer = Timer.new()
 	delay_timer.set_one_shot(true)
-	delay_timer.set_wait_time(1)
+	delay_timer.set_wait_time(wait)
 	delay_timer.connect("timeout", self, "_play_music")
 	delay_timer.set_name("delay_timer")
 	get_parent().add_child(delay_timer)

@@ -42,6 +42,9 @@ func _ready():
 	
 	# Load level
 	load_level(global.config["level"]["current"])
+	
+	# Start music
+	global.play_music(1, true)
 
 # Input Events
 func _input(event):
@@ -205,6 +208,8 @@ var sandwich = preload("res://data/level_manager/entities/sandwich/sandwich.tscn
 var water_tile = preload("res://data/level_manager/entities/tiles/water/water.tscn")
 var ice_tile = preload("res://data/level_manager/entities/tiles/ice/ice.tscn")
 var fire_tile = preload("res://data/level_manager/entities/tiles/fire/fire.tscn")
+var slider_v_tile = preload("res://data/level_manager/entities/tiles/slider/slider_v.tscn")
+var slider_h_tile = preload("res://data/level_manager/entities/tiles/slider/slider_h.tscn")
 
 # ENEMIES
 var enemy_patrol = preload("res://data/level_manager/entities/enemy_patrol/enemy_patrol.tscn")
@@ -285,6 +290,23 @@ func update_tiles(level_scene):
 			var ice = ice_tile.instance()
 			ice.set_pos(tile_pos)
 			world_tilemap.add_child(ice)
+		elif(cell_id == global.WORLD.SLIDER): # Slider
+			var slider = null
+			
+			# Get orientation
+			var flipped_y = world_tilemap.is_cell_y_flipped(cell_pos.x, cell_pos.y)
+			var flipped_x = world_tilemap.is_cell_x_flipped(cell_pos.x, cell_pos.y)
+			var transpose = world_tilemap.is_cell_transposed(cell_pos.x, cell_pos.y)
+			
+			if(transpose):
+				slider = slider_h_tile.instance()
+			else:
+				slider = slider_v_tile.instance()
+			
+			slider.set_flip_h(flipped_x)
+			slider.set_flip_v(flipped_y)
+			slider.set_pos(tile_pos)
+			world_tilemap.add_child(slider)
 	
 	# Replace enemy cells with instances
 	if(enemies_tilemap != null):

@@ -113,7 +113,7 @@ transform/pos = Vector2( 60, 40 )
 texture = ExtResource( 1 )
 centered = false
 region = true
-region_rect = Rect2( 176, 48, 16, 16 )
+region_rect = Rect2( 224, 48, 16, 16 )
 
 [node name="Anti Water" type="Sprite" parent="."]
 
@@ -121,15 +121,14 @@ transform/pos = Vector2( 80, 40 )
 texture = ExtResource( 1 )
 centered = false
 region = true
-region_rect = Rect2( 208, 48, 16, 16 )
+region_rect = Rect2( 192, 48, 16, 16 )
 
 [node name="Anti Slide" type="Sprite" parent="."]
 
 transform/pos = Vector2( 100, 40 )
 texture = ExtResource( 1 )
 centered = false
-flip_v = true
 region = true
-region_rect = Rect2( 208, 48, 16, 16 )
+region_rect = Rect2( 176, 48, 16, 16 )
 
 

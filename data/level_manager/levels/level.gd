@@ -16,8 +16,6 @@ func _ready():
 	
 	var screen_scene = screen_overlay.instance()
 	add_child(screen_scene)
-	
-	global.play_music(1)
 
 func get_level():
 	return level

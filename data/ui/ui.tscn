@@ -83,6 +83,7 @@ max_lines_visible = -1
 
 [node name="hbox_keys" type="HBoxContainer" parent="background"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -176,6 +177,7 @@ region_rect = Rect2( 240, 16, 16, 16 )
 
 [node name="hbox_baloney" type="HBoxContainer" parent="background"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -245,27 +247,28 @@ max_lines_visible = -1
 
 [node name="hbox_items" type="HBoxContainer" parent="background"]
 
+editor/display_folded = true
 rect/scale = Vector2( 0.75, 0.75 )
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 120.0
+margin/left = 114.0
 margin/top = -13.0
-margin/right = 164.0
+margin/right = 166.0
 margin/bottom = 3.0
 alignment = 0
 
 [node name="Container" type="Container" parent="background/hbox_items"]
 
-rect/min_size = Vector2( 8, 16 )
+rect/min_size = Vector2( 10, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 8.0
+margin/right = 10.0
 margin/bottom = 16.0
 
 [node name="anti_water" type="Sprite" parent="background/hbox_items/Container"]
@@ -274,18 +277,18 @@ visibility/visible = false
 texture = ExtResource( 3 )
 centered = false
 region = true
-region_rect = Rect2( 208, 48, 16, 16 )
+region_rect = Rect2( 192, 48, 16, 16 )
 
 [node name="Container1" type="Container" parent="background/hbox_items"]
 
-rect/min_size = Vector2( 8, 16 )
+rect/min_size = Vector2( 12, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 12.0
+margin/left = 14.0
 margin/top = 0.0
-margin/right = 20.0
+margin/right = 26.0
 margin/bottom = 16.0
 
 [node name="anti_fire" type="Sprite" parent="background/hbox_items/Container1"]
@@ -298,14 +301,14 @@ region_rect = Rect2( 160, 48, 16, 16 )
 
 [node name="Container2" type="Container" parent="background/hbox_items"]
 
-rect/min_size = Vector2( 8, 16 )
+rect/min_size = Vector2( 10, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 24.0
+margin/left = 30.0
 margin/top = 0.0
-margin/right = 32.0
+margin/right = 40.0
 margin/bottom = 16.0
 
 [node name="anti_ice" type="Sprite" parent="background/hbox_items/Container2"]
@@ -315,18 +318,18 @@ transform/pos = Vector2( 0, 1 )
 texture = ExtResource( 3 )
 centered = false
 region = true
-region_rect = Rect2( 176, 48, 16, 16 )
+region_rect = Rect2( 224, 48, 16, 16 )
 
 [node name="Container3" type="Container" parent="background/hbox_items"]
 
-rect/min_size = Vector2( 8, 16 )
+rect/min_size = Vector2( 10, 16 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 36.0
+margin/left = 44.0
 margin/top = 0.0
-margin/right = 44.0
+margin/right = 54.0
 margin/bottom = 16.0
 
 [node name="anti_slide" type="Sprite" parent="background/hbox_items/Container3"]
@@ -334,9 +337,8 @@ margin/bottom = 16.0
 visibility/visible = false
 texture = ExtResource( 3 )
 centered = false
-flip_v = true
 region = true
-region_rect = Rect2( 208, 48, 16, 16 )
+region_rect = Rect2( 176, 48, 16, 16 )
 
 [node name="background1" type="Sprite" parent="."]
 
