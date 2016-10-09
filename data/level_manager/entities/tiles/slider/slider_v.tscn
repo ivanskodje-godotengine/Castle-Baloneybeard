@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://data/level_manager/spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://data/level_manager/entities/tiles/slider/slider.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 
@@ -25,6 +26,8 @@ texture = ExtResource( 1 )
 centered = false
 region = true
 region_rect = Rect2( 64, 0, 16, 16 )
+script/script = ExtResource( 2 )
+orientation = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

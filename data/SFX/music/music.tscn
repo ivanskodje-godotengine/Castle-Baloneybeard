@@ -7,7 +7,7 @@
 stream/stream = ExtResource( 1 )
 stream/play = false
 stream/loop = true
-stream/volume_db = 0.0
+stream/volume_db = -4.0
 stream/autoplay = true
 stream/paused = false
 stream/loop_restart_time = 0.0

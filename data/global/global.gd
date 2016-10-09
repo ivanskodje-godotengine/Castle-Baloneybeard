@@ -234,6 +234,7 @@ func play_music(song, new = false):
 func stop_music():
 	if(music != null):
 		music.stop()
+		music = null
 
 func update_music_volume():
 	if(music != null):
