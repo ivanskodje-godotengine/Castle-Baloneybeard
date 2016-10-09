@@ -303,8 +303,8 @@ func pre_move(direction):
 # Triggered by walking on a sandwich
 func walked_on_goal():
 	print("Walked on goal")
-	# If we have all baloneys # -----------------------------------------------------<_<-<-<-<--<_<->_-><_ REMEMBER TO FIX WHEN DONE DEBUGGING
-	if(global.inventory.BALONEY.CURRENT != global.inventory.BALONEY.TOTAL):
+	# If we have all baloneys
+	if(global.inventory.BALONEY.CURRENT == global.inventory.BALONEY.TOTAL):
 		# Inform level manager of victory
 		get_parent().get_parent().victory()
 
@@ -313,7 +313,6 @@ var in_water = false
 func in_water():
 	# Player is in water! Check if he has the item needed
 	if(global.inventory.ITEMS.ANTI_WATER > 0):
-		# TODO: Change to swimming animations
 		in_water = true
 		pass
 	else:

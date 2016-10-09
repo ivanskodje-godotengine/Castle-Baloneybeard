@@ -21,7 +21,7 @@ func update_state():
 	# Add new scene
 	if(global.current_state == global.STATE.INTRO):
 		scene = intro_screen.instance()
-		scene.get_node("label").set_text("Level: " + str(global.config.level.current))
+		scene.get_node("control/label").set_text("Level: " + str(global.config.level.current))
 	elif(global.current_state == global.STATE.PLAYING):
 		get_tree().set_pause(false)
 	elif(global.current_state == global.STATE.PAUSE):

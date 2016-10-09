@@ -20,7 +20,7 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 script/script = ExtResource( 1 )
-time = 333
+time = 42
 level = 2
 
 [node name="world" type="TileMap" parent="."]
