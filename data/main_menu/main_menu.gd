@@ -23,7 +23,27 @@ func _ready():
 	
 	# Set initial selection
 	change_selection()
+	
+	# Play menu music
+	wait_then_music(1)
 
+var delay_timer = null
+func wait_then_music(wait):
+	# Stop existing music (if any)
+	global.stop_music()
+	
+	# Create timer
+	delay_timer = Timer.new()
+	delay_timer.set_one_shot(true)
+	delay_timer.set_wait_time(1)
+	delay_timer.connect("timeout", self, "_play_music")
+	delay_timer.set_name("delay_timer")
+	get_parent().add_child(delay_timer)
+	delay_timer.start()
+
+func _play_music():
+	global.play_music(0)
+	delay_timer.queue_free()
 
 # Input events
 func _input(event):
@@ -104,6 +124,8 @@ func increase_music():
 	else:
 		global.play_sound(global.SOUND.ITEM_CHANGED)
 	items[2].set_text("*Music: " + str(global.config["music"]["current"]).pad_zeros(2) + "*")
+	
+	global.update_music_volume()
 
 
 # Decrease music volume by 10
@@ -115,7 +137,8 @@ func decrease_music():
 	else:
 		global.play_sound(global.SOUND.ITEM_CHANGED)
 	items[2].set_text("*Music: " + str(global.config["music"]["current"]).pad_zeros(2) + "*")
-
+	
+	global.update_music_volume()
 
 # Change menu item selection
 func change_selection(id = null):

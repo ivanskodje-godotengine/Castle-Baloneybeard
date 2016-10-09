@@ -13,7 +13,7 @@ func _ready():
 	var width = global.config["screen_width"]
 	var height = global.config["screen_height"]
 	var scale = global.config["screen_scale"]
-
+	
 	# Set window size
 	OS.set_window_size(Vector2(width*scale, height*scale))
 	
@@ -34,6 +34,7 @@ func _input(event):
 		elif(global.current_state == global.STATE.SPLASH):
 			title_screen()
 		else:
+			global.play_sound(global.SOUND.MENU_TITLE_START)
 			set_process_input(false)
 			main_menu()
 

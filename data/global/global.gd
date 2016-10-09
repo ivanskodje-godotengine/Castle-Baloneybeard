@@ -155,11 +155,24 @@ var SOLID_TILES = {
 enum SOUND {
 	ITEM_CHANGED,
 	ITEM_SELECTED,
+	PLAYER_MOVE,
+	PLAYER_SWIM,
+	PLAYER_HIT_WALL,
+	PLAYER_PICKUP_ITEM,
+	PLAYER_PICKUP_BALONEY,
+	PLAYER_PICKUP_SPECIAL,
+	PLAYER_PUSH_BLOCK,
+	PLAYER_PUSH_BLOCK_IN_WATER,
+	PLAYER_OPEN_DOOR,
+	PLAYER_VICTORY,
+	PLAYER_DEATH,
+	MENU_TITLE_START,
 }
 
 # Music
 enum MUSIC { 
-	MENU, 
+	MENU,
+	LEVEL1,
 }
 
 # Play sound
@@ -173,9 +186,55 @@ func play_sound(sound):
 			sfx.play("menu_move")
 		elif(sound == SOUND.ITEM_SELECTED):
 			sfx.play("menu_select")
+		elif(sound == SOUND.MENU_TITLE_START):
+			sfx.get_node("secondary_sfx").play("menu_start_from_title_screen")
+		elif(sound == SOUND.PLAYER_MOVE):
+			sfx.get_node("movement").play("player_movement")
+		elif(sound == SOUND.PLAYER_SWIM):
+			sfx.get_node("movement").play("player_swimming")
+		elif(sound == SOUND.PLAYER_HIT_WALL):
+			sfx.play("player_hit_solid_wall")
+		elif(sound == SOUND.PLAYER_PICKUP_ITEM):
+			sfx.play("player_pickup_item")
+		elif(sound == SOUND.PLAYER_PICKUP_BALONEY):
+			sfx.play("player_pickup_baloney")
+		elif(sound == SOUND.PLAYER_PICKUP_SPECIAL):
+			sfx.play("player_pickup_special_item")
+		elif(sound == SOUND.PLAYER_PUSH_BLOCK):
+			sfx.play("player_push_block")
+		elif(sound == SOUND.PLAYER_PUSH_BLOCK_IN_WATER):
+			sfx.play("player_push_block_in_water")
+		elif(sound == SOUND.PLAYER_OPEN_DOOR):
+			sfx.play("door_open")
+		elif(sound == SOUND.PLAYER_VICTORY):
+			sfx.play("player_victory")
+		elif(sound == SOUND.PLAYER_DEATH):
+			sfx.play("player_death")
 
 # Play Music
-func play_music(music):
-	if(music == MUSIC.MENU):
-		print("play_music: MUSIC.MENU")
-# ---------------
+var music = null
+func play_music(song):
+	if(music != null):
+		if(music.get_name() == "game_music" && song == 1):
+			return
+		music.queue_free()
+	
+	if(song == 0):
+		music = load("res://data/SFX/music/music_menu.tscn").instance()
+		music.set_name("menu_music")
+	elif(song == 1):
+		music = load("res://data/SFX/music/music.tscn").instance()
+		music.set_name("game_music")
+	
+	get_parent().add_child(music)
+	update_music_volume()
+	music.play()
+
+func stop_music():
+	if(music != null):
+		music.stop()
+
+func update_music_volume():
+	if(music != null):
+		var volume_in_percent = float(config.music.current) / config.music.total
+		music.set_volume(volume_in_percent)

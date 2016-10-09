@@ -164,6 +164,9 @@ func load_level(level):
 	# Stop timer
 	timer.stop()
 	
+	# Play music
+	# global.play_music(global.MUSIC.LEVEL1)
+	
 	# Remove level if it already exist
 	if(get_child(0)):
 		remove_child(get_child(0))
@@ -319,6 +322,9 @@ func victory():
 	
 	# Update UI
 	get_child(0).get_node("ui").update_state()
+	
+	# Sound
+	global.play_sound(global.SOUND.PLAYER_VICTORY)
 
 
 # Set game over
@@ -328,6 +334,9 @@ func death():
 	
 	# Update UI
 	get_child(0).get_node("ui").update_state()
+	
+	# Sound
+	global.play_sound(global.SOUND.PLAYER_DEATH)
 
 
 # This is the lady of judgement. 

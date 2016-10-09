@@ -26,7 +26,6 @@ func _ready():
 	add_child(timer)
 	timer.start()
 
-
 # Reset animation
 func reset():
 	for c in animation_container.get_children():

@@ -33,7 +33,13 @@ func move(direction):
 	# Do pre_move calculations
 	if(pre_move(direction)):
 		# Toggle to prevent unfinished movement before new movement
-		is_moving = true 
+		is_moving = true
+		
+		# Play sound
+		if(in_water):
+			global.play_sound(global.SOUND.PLAYER_SWIM)
+		else:
+			global.play_sound(global.SOUND.PLAYER_MOVE)
 		
 		# Store facing direction
 		facing = direction
@@ -146,6 +152,7 @@ func pre_move(direction):
 						global.inventory["KEYS"]["SPADE"] -= 1 # reduce by one
 						tilemap_entity.set_cellv(tile_pos, -1)
 						ui_node.update_keys()
+						global.play_sound(global.SOUND.PLAYER_OPEN_DOOR)
 					else:
 						return false
 				elif(t == global.ENTITIES.DOOR.DIAMOND):
@@ -153,6 +160,7 @@ func pre_move(direction):
 						global.inventory["KEYS"]["DIAMOND"] -= 1 # reduce by one
 						tilemap_entity.set_cellv(tile_pos, -1)
 						ui_node.update_keys()
+						global.play_sound(global.SOUND.PLAYER_OPEN_DOOR)
 					else:
 						return false
 				elif(t == global.ENTITIES.DOOR.CLUB):
@@ -160,6 +168,7 @@ func pre_move(direction):
 						global.inventory["KEYS"]["CLUB"] -= 1 # reduce by one
 						tilemap_entity.set_cellv(tile_pos, -1)
 						ui_node.update_keys()
+						global.play_sound(global.SOUND.PLAYER_OPEN_DOOR)
 					else:
 						return false
 				elif(t == global.ENTITIES.DOOR.HEART):
@@ -167,6 +176,7 @@ func pre_move(direction):
 						global.inventory["KEYS"]["HEART"] -= 1 # reduce by one
 						tilemap_entity.set_cellv(tile_pos, -1)
 						ui_node.update_keys()
+						global.play_sound(global.SOUND.PLAYER_OPEN_DOOR)
 					else:
 						return false
 				
@@ -203,10 +213,16 @@ func pre_move(direction):
 							
 							# Add submerged block
 							tilemap_world.set_cellv(move_to_pos, global.WORLD.SUBMERGED_BLOCK)
+							
+							# Play push sound in water
+							global.play_sound(global.SOUND.PLAYER_PUSH_BLOCK_IN_WATER)
 						else:
 							# All clear! Moving block
 							tilemap_entity.set_cellv(tile_pos, -1)
 							tilemap_entity.set_cellv(move_to_pos, 10)
+							
+							# Play push sound
+							global.play_sound(global.SOUND.PLAYER_PUSH_BLOCK)
 					else:
 						# TODO: Play sound to indicate failure to push
 						# ..
@@ -222,24 +238,28 @@ func pre_move(direction):
 			global.inventory["KEYS"]["DIAMOND"] += 1
 			tilemap_entity.set_cellv(tile_pos, -1)
 			ui_node.update_keys()
+			global.play_sound(global.SOUND.PLAYER_PICKUP_ITEM)
 			
 		# Spade
 		elif(tile_id == global.ENTITIES.KEY.SPADE):
 			global.inventory["KEYS"]["SPADE"] += 1
 			tilemap_entity.set_cellv(tile_pos, -1)
 			ui_node.update_keys()
+			global.play_sound(global.SOUND.PLAYER_PICKUP_ITEM)
 		
 		# Club
 		elif(tile_id == global.ENTITIES.KEY.CLUB):
 			global.inventory["KEYS"]["CLUB"] += 1
 			tilemap_entity.set_cellv(tile_pos, -1)
 			ui_node.update_keys()
+			global.play_sound(global.SOUND.PLAYER_PICKUP_ITEM)
 		
 		# Heart
 		elif(tile_id == global.ENTITIES.KEY.HEART):
 			global.inventory["KEYS"]["HEART"] += 1
 			tilemap_entity.set_cellv(tile_pos, -1)
 			ui_node.update_keys()
+			global.play_sound(global.SOUND.PLAYER_PICKUP_ITEM)
 		
 		# Baloney
 		elif(tile_id == global.ENTITIES.BALONEY):
@@ -254,6 +274,9 @@ func pre_move(direction):
 			
 			# Remove baloney
 			tilemap_entity.set_cellv(tile_pos, -1)
+			
+			# Play pickup baloney
+			global.play_sound(global.SOUND.PLAYER_PICKUP_BALONEY)
 		
 		# Anti Water Item
 		elif(tile_id == global.ENTITIES.ITEM.ANTI_WATER):
@@ -265,6 +288,9 @@ func pre_move(direction):
 			
 			# Remove item
 			tilemap_entity.set_cellv(tile_pos, -1)
+			
+			# Sound
+			global.play_sound(global.SOUND.PLAYER_PICKUP_SPECIAL)
 		
 		# Anti Fire Item
 		elif(tile_id == global.ENTITIES.ITEM.ANTI_FIRE):
@@ -276,6 +302,9 @@ func pre_move(direction):
 			
 			# Remove item
 			tilemap_entity.set_cellv(tile_pos, -1)
+			
+			# Sound
+			global.play_sound(global.SOUND.PLAYER_PICKUP_SPECIAL)
 		
 		# Anti Ice Item
 		elif(tile_id == global.ENTITIES.ITEM.ANTI_ICE):
@@ -287,6 +316,9 @@ func pre_move(direction):
 			
 			# Remove item
 			tilemap_entity.set_cellv(tile_pos, -1)
+			
+			# Sound
+			global.play_sound(global.SOUND.PLAYER_PICKUP_SPECIAL)
 		
 		# Anti Slide item
 		elif(tile_id == global.ENTITIES.ITEM.ANTI_SLIDE):
@@ -298,11 +330,13 @@ func pre_move(direction):
 			
 			# Remove item
 			tilemap_entity.set_cellv(tile_pos, -1)
+			
+			# Sound
+			global.play_sound(global.SOUND.PLAYER_PICKUP_SPECIAL)
 		return true
 
 # Triggered by walking on a sandwich
 func walked_on_goal():
-	print("Walked on goal")
 	# If we have all baloneys
 	if(global.inventory.BALONEY.CURRENT == global.inventory.BALONEY.TOTAL):
 		# Inform level manager of victory
