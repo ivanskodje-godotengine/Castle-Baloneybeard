@@ -16,7 +16,7 @@ func _ready():
 
 # Using fixed process so player can hold down buttons for movement
 func _fixed_process(delta):
-	if(!is_moving):
+	if(!is_moving && !is_sliding):
 		if(Input.is_action_pressed("ui_left")):
 			move(global.DIRECTION.LEFT)
 		elif(Input.is_action_pressed("ui_right")):
@@ -89,6 +89,11 @@ func move(direction):
 func _move_complete(tween, key):
 	if(!on_ice):
 		is_moving = false
+	
+	# If we are sliding, and we are done moving, keep sliding
+	if(is_sliding):
+		slide()
+		return
 	
 	# Stop animation
 	anim_node.stop_all()
@@ -500,24 +505,21 @@ func on_ice():
 			return
 		
 		
-		# If we got here, it means there are no more ice tiles, which means we have to slide one more
-		# time in order to get out of the ice
-		var distance_to_move = get_pos() - previous_pos
-		# set_pos(distance_to_move + get_pos())
-		
-		# Tween from original position to new position
-		
-		last_tween = Tween.new()
-		last_tween.set_name("Ice tween")
-		get_parent().add_child(last_tween)
-		last_tween.connect("tween_complete", self, "_move_on_ice_complete")
-		
-		last_tween.interpolate_property(self, "transform/pos", get_pos(), distance_to_move + get_pos(), global.player_speed / 1.2, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-		print("last tween: " + str(last_tween))
-		last_tween.start()
-		
-		previous_pos = null
+		if(previous_pos != null):
+			# If we got here, it means there are no more ice tiles, which means we have to slide one more
+			# time in order to get out of the ice
+			var distance_to_move = get_pos() - previous_pos
 
+			last_tween = Tween.new()
+			last_tween.set_name("Ice tween")
+			get_parent().add_child(last_tween)
+			last_tween.connect("tween_complete", self, "_move_on_ice_complete")
+			
+			last_tween.interpolate_property(self, "transform/pos", get_pos(), distance_to_move + get_pos(), global.player_speed / 1.2, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+			print("last tween: " + str(last_tween))
+			last_tween.start()
+			
+			previous_pos = null
 
 var last_tween = null
 
@@ -526,3 +528,51 @@ func _move_on_ice_complete(var1, var2):
 	is_moving = false
 	on_ice = false
 	anim_node.play("idle_right")
+
+
+# Slides to next tile
+var is_sliding = false
+var slide_to_pos = null
+var slide_last = false
+
+func slide_to_next(to_pos, has_next = true):
+	
+	if(global.inventory.ITEMS.ANTI_SLIDE > 0):
+		pass
+	else:
+		# Store pos we are going to slide to
+		slide_to_pos = to_pos
+		
+		# If we have another slide after this, it is NOT our last slide
+		if(has_next):
+			slide_last = false
+		else:
+			slide_last = true
+			# slide_count = 0
+		
+		# Slide mode on
+		is_sliding = true
+		slide_count = 0
+		
+
+# TODO: Clean this mess up! Last minute code implementation. 
+# This works. I dont know how or why, but it works. For now.
+var slide_tween = null
+var slide_count = 0
+func slide():
+	if(slide_count == 0):
+		# Slide to new pos
+		if(slide_tween == null):
+			slide_tween = Tween.new()
+			slide_tween.set_name("Slide tween")
+			get_parent().add_child(slide_tween)
+			slide_tween.connect("tween_complete", self, "_slide_complete")
+		
+		slide_tween.interpolate_property(self, "transform/pos", get_pos(), slide_to_pos, global.player_speed / 1.0, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+		slide_tween.start()
+		slide_count += 1
+	else:
+		is_sliding = false
+
+func _slide_complete(var1, var2):
+	slide()

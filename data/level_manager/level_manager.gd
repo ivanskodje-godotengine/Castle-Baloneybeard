@@ -140,8 +140,8 @@ func spawn_player():
 	if(cell_pos != null):
 		var spawn_pos = tilemap.map_to_world(cell_pos)
 		var player = load("res://data/player/player.tscn").instance()
-		get_child(0).add_child(player)
 		player.set_pos(spawn_pos)
+		get_child(0).add_child(player)
 		player.set_fixed_process(false)
 	 
 	# No spawn tile found
