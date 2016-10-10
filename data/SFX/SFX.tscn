@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=1]
+[gd_scene load_steps=18 format=1]
 
 [ext_resource path="res://data/SFX/door_open.wav" type="Sample" id=1]
 [ext_resource path="res://data/SFX/menu_move.wav" type="Sample" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://data/SFX/player_victory.wav" type="Sample" id=11]
 [ext_resource path="res://data/SFX/player_movement.wav" type="Sample" id=12]
 [ext_resource path="res://data/SFX/player_swimming.wav" type="Sample" id=13]
+[ext_resource path="res://data/SFX/player_special.wav" type="Sample" id=14]
 
 [sub_resource type="SampleLibrary" id=1]
 
@@ -36,6 +37,7 @@ samples/player_swimming = { "db":-20.0, "pitch":1.0, "sample":ExtResource( 13 ) 
 [sub_resource type="SampleLibrary" id=3]
 
 samples/menu_start_from_title_screen = { "db":-5.0, "pitch":1.0, "sample":ExtResource( 4 ) }
+samples/player_special = { "db":-10.0, "pitch":1.0, "sample":ExtResource( 14 ) }
 
 [node name="SFX" type="SamplePlayer"]
 

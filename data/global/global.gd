@@ -12,7 +12,8 @@ var config = {
 	},
 	level = {
 		current = 1,
-		total = 3, # TODO: Load this in
+		total = 1,
+		total_max = 6,
 	}
 }
 
@@ -168,6 +169,7 @@ enum SOUND {
 	PLAYER_VICTORY,
 	PLAYER_DEATH,
 	MENU_TITLE_START,
+	SPECIAL,
 }
 
 # Music
@@ -211,6 +213,8 @@ func play_sound(sound):
 			sfx.play("player_victory")
 		elif(sound == SOUND.PLAYER_DEATH):
 			sfx.play("player_death")
+		elif(sound == SOUND.SPECIAL):
+			sfx.get_node("secondary_sfx").play("player_special")
 
 # Play Music
 var music = null
@@ -240,3 +244,20 @@ func update_music_volume():
 	if(music != null):
 		var volume_in_percent = float(config.music.current) / config.music.total
 		music.set_volume(volume_in_percent)
+
+
+# File Manager
+const FILE_MANAGER = preload("res://data/file_manager.gd")
+
+func load_data():
+	var total_levels = FILE_MANAGER.new().get_total_levels()
+	
+	# If we get false, it means no previous levels stored
+	if(!total_levels):
+		FILE_MANAGER.new().set_total_levels(1) # Set access to level 1
+		config.level.total = 1
+	else:
+		config.level.total = total_levels
+
+func save_data():
+	FILE_MANAGER.new().set_total_levels(config.level.total)

@@ -20,7 +20,7 @@ margin/top = 0.0
 margin/right = 0.0
 margin/bottom = 0.0
 script/script = ExtResource( 1 )
-time = 100
+time = 90
 level = 3
 song = 0
 

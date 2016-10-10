@@ -201,7 +201,8 @@ func pre_move(direction):
 					# Making sure there is nothing else in the position where we want to move the block
 					if(tilemap_entity.get_cellv(move_to_pos) == -1):
 						# If there is something solid, we dont move
-						for c in global.SOLID_TILES["WORLD"]:
+						var solid_tiles_with_misc = global.SOLID_TILES["WORLD"]
+						for c in solid_tiles_with_misc:
 							if(tilemap_world.get_cellv(move_to_pos) == c):
 								return false # Something is in the way, we cannot move
 						

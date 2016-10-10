@@ -86,13 +86,19 @@ func _input(event):
 			global.current_state = global.STATE.INTRO
 			
 			# Increment level by one
-			var level = global.config["level"]["current"] + 1
+			var level = global.config.level.current + 1
+			
 			
 			# If current level is higher than total levels, it means the game is complete! Final victory!
-			if(level > global.config["level"]["total"]):
+			if(level > global.config.level.total_max):
 				get_tree().set_pause(false)
 				get_parent().credits()
 			else:
+				# Save progress if we have gotten past our previous stored total
+				if(level > global.config.level.total):
+					global.config.level.total = level
+					global.save_data()
+				
 				# Load next level
 				load_level(level)
 	
@@ -120,6 +126,10 @@ func _input(event):
 			
 			# Update UI
 			get_child(0).get_node("ui").update_state()
+	
+	elif(event.is_action_pressed("ui_select")):
+		# Serves no purpose
+		global.play_sound(global.SOUND.SPECIAL)
 
 
 # Spawn player

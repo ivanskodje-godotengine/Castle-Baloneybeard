@@ -22,6 +22,9 @@ func _ready():
 	
 	# Show splash screen
 	splash_screen()
+	
+	# Load data
+	global.load_data()
 
 
 # User Input
