@@ -537,6 +537,15 @@ var slide_to_pos = null
 var slide_last = false
 
 func slide_to_next(to_pos, has_next = true):
+	# Keeps the player facing the same direction he had when he entered
+	if(facing == global.DIRECTION.LEFT):
+		anim_node.play("idle_left")
+	elif(facing == global.DIRECTION.RIGHT):
+		anim_node.play("idle_right")
+	elif(facing == global.DIRECTION.UP):
+		anim_node.play("idle_up")
+	elif(facing == global.DIRECTION.DOWN):
+		anim_node.play("idle_right")
 	
 	if(global.inventory.ITEMS.ANTI_SLIDE > 0):
 		pass
