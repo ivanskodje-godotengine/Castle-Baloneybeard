@@ -80,6 +80,7 @@ tile_data = IntArray(  )
 
 [node name="extra" type="TileMap" parent="."]
 
+visibility/visible = false
 mode = 0
 tile_set = ExtResource( 5 )
 cell/size = Vector2( 16, 16 )
