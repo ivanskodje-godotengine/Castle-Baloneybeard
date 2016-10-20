@@ -87,38 +87,43 @@ func move(direction):
 
 # Activated by Tween after movement is complete
 func _move_complete(tween, key):
-	if(!on_ice):
-		is_moving = false
-	
 	# If we are sliding, and we are done moving, keep sliding
 	if(is_sliding):
+		is_moving = false
 		slide()
 		return
 	
+	if(on_ice):
+		if(global.inventory.ITEMS.ANTI_ICE == 0):
+			slide_ice()
+			return
+	
+	last_move = false
+	is_moving = false
+	
 	# Stop animation
 	anim_node.stop_all()
-	
-	if(!on_ice):
-		if(facing == global.DIRECTION.UP):
-			if(in_water):
-				anim_node.play("idle_up_in_water")
-			else:
-				anim_node.play("idle_up")
-		if(facing == global.DIRECTION.DOWN):
-			if(in_water):
-				anim_node.play("idle_right_in_water")
-			else:
-				anim_node.play("idle_right") # TODO: Replace with idle down
-		if(facing == global.DIRECTION.LEFT):
-			if(in_water):
-				anim_node.play("idle_left_in_water")
-			else:
-				anim_node.play("idle_left")
-		if(facing == global.DIRECTION.RIGHT):
-			if(in_water):
-				anim_node.play("idle_right_in_water")
-			else:
-				anim_node.play("idle_right")
+
+	if(facing == global.DIRECTION.UP):
+		if(in_water):
+			anim_node.play("idle_up_in_water")
+		else:
+			anim_node.play("idle_up")
+	if(facing == global.DIRECTION.DOWN):
+		if(in_water):
+			anim_node.play("idle_right_in_water")
+		else:
+			anim_node.play("idle_right") # TODO: Replace with idle down
+	if(facing == global.DIRECTION.LEFT):
+		if(in_water):
+			anim_node.play("idle_left_in_water")
+		else:
+			anim_node.play("idle_left")
+	if(facing == global.DIRECTION.RIGHT):
+		if(in_water):
+			anim_node.play("idle_right_in_water")
+		else:
+			anim_node.play("idle_right")
 
 
 
@@ -392,145 +397,6 @@ func update_total_baloneys():
 	ui_node.update_baloney()
 
 
-# Handling ON ICE
-var previous_pos = null
-var on_ice = false
-
-func set_ice(boolean):
-	on_ice = boolean
-	
-	if(boolean):
-		is_moving = true
-
-func on_ice():
-	if(global.inventory.ITEMS.ANTI_ICE > 0):
-		on_ice = false
-		is_moving = false
-	else:
-		var next_pos = get_pos()
-		on_ice = true
-		# NORTH
-		var north_pos = next_pos
-		north_pos.y -= global.config.tile_size
-		
-		# Is there an ICE tile?
-		var cell_pos = get_parent().get_node("world").world_to_map(north_pos)
-		var cell_id = get_parent().get_node("world").get_cellv(cell_pos)
-		
-		if(cell_id == global.WORLD.ICE && previous_pos != north_pos):
-			# Move north
-			previous_pos = get_pos()
-			#set_pos(north_pos)
-			
-			# Tween from original position to new position
-			if(tween == null): # Create once
-				tween = Tween.new()
-				get_parent().add_child(tween)
-				# tween.connect("tween_complete", self, "_move_complete")
-			tween.interpolate_property(self, "transform/pos", get_pos(), north_pos, global.player_speed / 1.2, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-			tween.start()
-			
-			
-			return
-		
-		# ------------
-		
-		# EAST
-		var east_pos = next_pos
-		east_pos.x += global.config.tile_size
-		
-		# Is there an ICE tile there?
-		var cell_pos = get_parent().get_node("world").world_to_map(east_pos)
-		var cell_id = get_parent().get_node("world").get_cellv(cell_pos)
-		
-		if(cell_id == global.WORLD.ICE && previous_pos != east_pos):
-			# Move north
-			previous_pos = get_pos()
-			
-			# set_pos(east_pos)
-			# Tween from original position to new position
-			if(tween == null): # Create once
-				tween = Tween.new()
-				get_parent().add_child(tween)
-				# tween.connect("tween_complete", self, "_move_complete")
-			tween.interpolate_property(self, "transform/pos", get_pos(), east_pos, global.player_speed / 1.2, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-			tween.start()
-			return
-	
-		# ------------
-		
-		# SOUTH
-		var south_pos = next_pos
-		south_pos.y += global.config.tile_size
-		
-		# Is there an ICE tile there?
-		var cell_pos = get_parent().get_node("world").world_to_map(south_pos)
-		var cell_id = get_parent().get_node("world").get_cellv(cell_pos)
-		
-		if(cell_id == global.WORLD.ICE && previous_pos != south_pos):
-			# Move north
-			previous_pos = get_pos()
-			# set_pos(south_pos)
-			
-			# Tween from original position to new position
-			if(tween == null): # Create once
-				tween = Tween.new()
-				get_parent().add_child(tween)
-				# tween.connect("tween_complete", self, "_move_complete")
-			tween.interpolate_property(self, "transform/pos", get_pos(), south_pos, global.player_speed / 1.2, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-			tween.start()
-			return
-	
-		# ------------
-		
-		# WEST
-		var west_pos = next_pos
-		west_pos.x -= global.config.tile_size
-		
-		# Is there an ICE tile there?
-		var cell_pos = get_parent().get_node("world").world_to_map(west_pos)
-		var cell_id = get_parent().get_node("world").get_cellv(cell_pos)
-		
-		if(cell_id == global.WORLD.ICE && previous_pos != west_pos):
-			# Move north
-			previous_pos = get_pos()
-			# set_pos(west_pos)
-			
-			# Tween from original position to new position
-			if(tween == null): # Create once
-				tween = Tween.new()
-				get_parent().add_child(tween)
-				# tween.connect("tween_complete", self, "_move_complete")
-			tween.interpolate_property(self, "transform/pos", get_pos(), west_pos, global.player_speed / 1.2, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-			tween.start()
-			return
-		
-		
-		if(previous_pos != null):
-			# If we got here, it means there are no more ice tiles, which means we have to slide one more
-			# time in order to get out of the ice
-			var distance_to_move = get_pos() - previous_pos
-
-			last_tween = Tween.new()
-			last_tween.set_name("Ice tween")
-			get_parent().add_child(last_tween)
-			last_tween.connect("tween_complete", self, "_move_on_ice_complete")
-			
-			last_tween.interpolate_property(self, "transform/pos", get_pos(), distance_to_move + get_pos(), global.player_speed / 1.2, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
-			print("last tween: " + str(last_tween))
-			last_tween.start()
-			
-			previous_pos = null
-
-var last_tween = null
-
-func _move_on_ice_complete(var1, var2):
-	last_tween.queue_free()
-	is_moving = false
-	on_ice = false
-	anim_node.play("idle_right")
-
-
 # Slides to next tile
 var is_sliding = false
 var slide_to_pos = null
@@ -538,14 +404,7 @@ var slide_last = false
 
 func slide_to_next(to_pos, has_next = true):
 	# Keeps the player facing the same direction he had when he entered
-	if(facing == global.DIRECTION.LEFT):
-		anim_node.play("idle_left")
-	elif(facing == global.DIRECTION.RIGHT):
-		anim_node.play("idle_right")
-	elif(facing == global.DIRECTION.UP):
-		anim_node.play("idle_up")
-	elif(facing == global.DIRECTION.DOWN):
-		anim_node.play("idle_right")
+	update_player_facing()
 	
 	if(global.inventory.ITEMS.ANTI_SLIDE > 0):
 		pass
@@ -558,7 +417,6 @@ func slide_to_next(to_pos, has_next = true):
 			slide_last = false
 		else:
 			slide_last = true
-			# slide_count = 0
 		
 		# Slide mode on
 		is_sliding = true
@@ -586,3 +444,137 @@ func slide():
 
 func _slide_complete(var1, var2):
 	slide()
+
+# -- ICE --
+
+var on_ice = false
+var slide_ice_last = false
+var slide_ice_to_pos = null
+
+# 1:
+func slide_on_ice():
+	# On ice
+	on_ice = true
+
+
+var slide_ice_tween = null
+var last_move = false
+# after initial move is complete - 2:
+func slide_ice():
+	# Keeps the player facing the same direction he had when he entered
+	update_player_facing()
+	
+	# Try to move
+	var continue_sliding = try_to_move()
+	
+	if(continue_sliding):
+		# Slide to new pos
+		if(slide_ice_tween == null):
+			slide_ice_tween = Tween.new()
+			slide_ice_tween.set_name("Slide ice tween")
+			get_parent().add_child(slide_ice_tween)
+			slide_ice_tween.connect("tween_complete", self, "_slide_ice_complete")
+		
+		print("Current pos: " + str(get_pos()) + ", Next pos: " + str(slide_ice_to_pos))
+		slide_ice_tween.interpolate_property(self, "transform/pos", get_pos(), slide_ice_to_pos, global.player_speed / 1.0, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+		slide_ice_tween.start()
+
+func _slide_ice_complete(var1, var2):
+	if(!last_move):
+		slide_ice()
+	else:
+		is_moving = false
+		on_ice = false
+	pass
+	
+
+func try_to_move():
+	# Check if there is an ice tile there
+	var tilemap_world = get_parent().get_node("world")
+	var tile_pos = tilemap_world.world_to_map(get_pos())
+	
+	# Check if we have a solid block in the next block
+	if(facing == global.DIRECTION.LEFT):
+		# Solid ahead
+		if(has_solid(tilemap_world, tile_pos + Vector2(-1, 0))):
+			# Stop moving
+			is_moving = false
+			on_ice = false
+			return false
+		else:
+			if(!has_ice(tilemap_world, tile_pos + Vector2(-1, 0))):
+				last_move = true
+			else:
+				last_move = false
+			tile_pos.x -= 1
+	elif(facing == global.DIRECTION.RIGHT):
+		# Solid ahead
+		if(has_solid(tilemap_world, tile_pos + Vector2(1, 0))):
+			# Stop moving
+			is_moving = false
+			on_ice = false
+			return false
+		else:
+			if(!has_ice(tilemap_world, tile_pos + Vector2(1, 0))):
+				last_move = true
+			else:
+				last_move = false
+			tile_pos.x += 1
+	
+	elif(facing == global.DIRECTION.UP):
+		# Solid ahead
+		if(has_solid(tilemap_world, tile_pos + Vector2(0, -1))):
+			# Stop moving
+			is_moving = false
+			on_ice = false
+			return false
+		else:
+			if(!has_ice(tilemap_world, tile_pos + Vector2(0, -1))):
+				last_move = true
+			else:
+				last_move = false
+			tile_pos.y -= 1
+			pass
+	
+	elif(facing == global.DIRECTION.DOWN):
+		# Solid ahead
+		if(has_solid(tilemap_world, tile_pos + Vector2(0, 1))):
+			# Stop moving
+			is_moving = false
+			on_ice = false
+			return false
+		else:
+			if(!has_ice(tilemap_world, tile_pos + Vector2(0, 1))):
+				last_move = true
+			else:
+				last_move = false
+			tile_pos.y += 1
+
+	# Set the position we are moving to
+	slide_ice_to_pos = tilemap_world.map_to_world(tile_pos)
+	return true
+
+
+func has_solid(tilemap, cell_pos):
+	# Check if tile is solid
+	for t in global.SOLID_TILES["WORLD"]:
+		if(t == tilemap.get_cellv(cell_pos)):
+			return true
+	return false
+
+func has_ice(tilemap, cell_pos):
+	# Check if tile is solid
+	if(global.WORLD.ICE == tilemap.get_cellv(cell_pos)):
+		return true
+	return false
+
+func update_player_facing():
+	# Keeps the player facing the same direction he had when he entered
+	if(facing == global.DIRECTION.LEFT):
+		anim_node.play("idle_left")
+	elif(facing == global.DIRECTION.RIGHT):
+		anim_node.play("idle_right")
+	elif(facing == global.DIRECTION.UP):
+		anim_node.play("idle_up")
+	elif(facing == global.DIRECTION.DOWN):
+		anim_node.play("idle_right")

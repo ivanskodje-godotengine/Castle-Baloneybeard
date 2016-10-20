@@ -7,7 +7,7 @@ var config = {
 	screen_scale = 3,
 	tile_size = 16,
 	music = {
-		current = 100,
+		current = 0,
 		total = 100
 	},
 	level = {

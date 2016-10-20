@@ -15,20 +15,16 @@ func _ready():
 	
 	# Check if we have
 	check_for_next()
-	
-	pass
 
 
 # Set our direction
 func update_direction():
 	if(orientation == 0): # Horizontal
-		print("HORI")
 		if(!is_flipped_h()):
 			direction = global.DIRECTION.LEFT
 		else:
 			direction = global.DIRECTION.RIGHT
 	elif(orientation == 1): # Vertical
-		print("VERT")
 		if(!is_flipped_v()):
 			direction = global.DIRECTION.UP
 		else:
