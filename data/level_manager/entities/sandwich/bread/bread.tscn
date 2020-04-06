@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=1 format=2]
 
 [ext_resource path="res://data/level_manager/spritesheet.png" type="Texture" id=1]
 
@@ -6,7 +6,5 @@
 
 texture = ExtResource( 1 )
 centered = false
-region = true
+region_enabled = true
 region_rect = Rect2( 240, 32, 16, 16 )
-
-

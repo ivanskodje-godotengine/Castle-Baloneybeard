@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://data/title/title.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Early GameBoy.ttf" type="DynamicFontData" id=2]
@@ -6,48 +6,54 @@
 
 [sub_resource type="DynamicFont" id=1]
 
-font/size = 8
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 2 )
+size = 8
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=2]
 
-resource/name = "blinking_text"
+resource_name = "blinking_text"
 length = 1.0
 loop = true
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:visibility/visible")
+tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.2, 0.3 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ true, false, true ] }
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
 
 [node name="title" type="Control"]
 
-anchor/right = 1
-anchor/bottom = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 0.0
-margin/bottom = 0.0
-script/script = ExtResource( 1 )
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+script = ExtResource( 1 )
+mouse_filter = 0
 
 [node name="label_press_start" type="Label" parent="."]
 
 editor/display_folded = true
 focus/ignore_mouse = true
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 6.0
-margin/right = 160.0
-margin/bottom = 84.0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 6.0
+margin_right = 160.0
+margin_bottom = 84.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
 custom_colors/font_color_shadow = Color( 0, 0.215686, 0, 1 )
@@ -58,43 +64,44 @@ valign = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+mouse_filter = 1
 
 [node name="animation_player" type="AnimationPlayer" parent="label_press_start"]
 
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
 anims/blinking_text = SubResource( 2 )
-playback/active = true
-playback/speed = 1.0
+playback_active = true
+playback_speed = 1.0
 blend_times = [  ]
 autoplay = "blinking_text"
 
-[node name="background" type="TextureFrame" parent="."]
+[node name="background" type="TextureRect" parent="."]
 
-visibility/behind_parent = true
+show_behind_parent = true
 focus/ignore_mouse = true
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
 texture = ExtResource( 3 )
 stretch_mode = 0
+mouse_filter = 1
 
 [node name="animation" type="Control" parent="."]
 
-anchor/right = 1
-anchor/bottom = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 0.0
-margin/bottom = 0.0
-
-
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+mouse_filter = 0

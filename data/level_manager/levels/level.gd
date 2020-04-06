@@ -27,10 +27,10 @@ var music = null
 func set_music(new_song):
 	song = new_song
 
-func play_music():
-	if(music == null):
-		music = load("res://data/SFX/music/music.tscn").instance()
-		add_child(music)
-	
-	if(song == 0):
-		music.play()
+#func play_music():
+#	if(music == null):
+#		music = load("res://data/SFX/music/music.tscn").instance()
+#		add_child(music)
+#
+#	if(song == 0):
+#		music.play()

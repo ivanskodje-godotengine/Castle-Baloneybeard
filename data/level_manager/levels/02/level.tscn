@@ -1,99 +1,44 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/level_manager/levels/level.gd" type="Script" id=1]
-[ext_resource path="res://data/level_manager/tileset/exported/tileset_world.xml" type="TileSet" id=2]
-[ext_resource path="res://data/level_manager/tileset/exported/tileset_entities.xml" type="TileSet" id=3]
-[ext_resource path="res://data/level_manager/tileset/exported/tileset_enemies.xml" type="TileSet" id=4]
-[ext_resource path="res://data/level_manager/tileset/exported/tileset_extra.xml" type="TileSet" id=5]
+[ext_resource path="res://data/level_manager/tileset/exported/tileset_world.tres" type="TileSet" id=2]
+[ext_resource path="res://data/level_manager/tileset/exported/tileset_entities.tres" type="TileSet" id=3]
+[ext_resource path="res://data/level_manager/tileset/exported/tileset_enemies.tres" type="TileSet" id=4]
+[ext_resource path="res://data/level_manager/tileset/exported/tileset_extra.tres" type="TileSet" id=5]
 
 [node name="level" type="Control"]
-
-process/pause_mode = 1
-anchor/right = 1
-anchor/bottom = 1
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 0.0
-margin/bottom = 0.0
-script/script = ExtResource( 1 )
+pause_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
 time = 42
 level = 2
 
 [node name="world" type="TileMap" parent="."]
-
-mode = 0
 tile_set = ExtResource( 2 )
-cell/size = Vector2( 16, 16 )
-cell/quadrant_size = 16
-cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-cell/half_offset = 2
-cell/tile_origin = 0
-cell/y_sort = false
-collision/use_kinematic = false
-collision/friction = 1.0
-collision/bounce = 0.0
-collision/layers = 1
-collision/mask = 1
-occluder/light_mask = 1
-tile_data = IntArray( -7, 3, -6, 3, -5, 3, -4, 3, -3, 3, -2, 3, -1, 3, 65529, 3, 65530, 2, 65531, 2, 65532, 2, 65533, 2, 65534, 2, 65535, 3, 131065, 3, 131066, 2, 131067, 2, 131068, 2, 131069, 2, 131070, 2, 131071, 3, 196601, 3, 196602, 2, 196603, 2, 196604, 3, 196605, 2, 196606, 2, 196607, 3, 131072, 3, 131073, 3, 131074, 3, 131075, 3, 131076, 3, 131077, 3, 131078, 3, 131079, 3, 131080, 3, 262135, 3, 262136, 3, 262137, 3, 262138, 2, 262139, 2, 262140, 3, 262141, 2, 262142, 2, 262143, 2, 196608, 6, 196609, 6, 196610, 2, 196611, 2, 196612, 2, 196613, 2, 196614, 2, 196615, 2, 196616, 3, 327671, 3, 327672, 2, 327673, 2, 327674, 2, 327675, 2, 327676, 3, 327677, 3, 327678, 2, 327679, 2, 262144, 6, 262145, 6, 262146, 2, 262147, 2, 262148, 2, 262149, 2, 262150, 2, 262151, 2, 262152, 3, 393207, 3, 393208, 3, 393209, 3, 393210, 2, 393211, 2, 393212, 3, 393213, 2, 393214, 2, 393215, 2, 327680, 6, 327681, 6, 327682, 2, 327683, 2, 327684, 2, 327685, 2, 327686, 2, 327687, 2, 327688, 3, 458745, 3, 458746, 2, 458747, 2, 458748, 3, 458749, 2, 458750, 2, 458751, 3, 393216, 3, 393217, 3, 393218, 3, 393219, 3, 393220, 3, 393221, 3, 393222, 3, 393223, 3, 393224, 3, 524281, 3, 524282, 2, 524283, 2, 524284, 2, 524285, 2, 524286, 2, 524287, 3, 589817, 3, 589818, 2, 589819, 2, 589820, 2, 589821, 2, 589822, 2, 589823, 3, 655353, 3, 655354, 3, 655355, 3, 655356, 3, 655357, 3, 655358, 3, 655359, 3 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+tile_data = PoolIntArray( -7, 3, 0, -6, 3, 0, -5, 3, 0, -4, 3, 0, -3, 3, 0, -2, 3, 0, -1, 3, 0, 65529, 3, 0, 65530, 2, 0, 65531, 2, 0, 65532, 2, 0, 65533, 2, 0, 65534, 2, 0, 65535, 3, 0, 131065, 3, 0, 131066, 2, 0, 131067, 2, 0, 131068, 2, 0, 131069, 2, 0, 131070, 2, 0, 131071, 3, 0, 196601, 3, 0, 196602, 2, 0, 196603, 2, 0, 196604, 3, 0, 196605, 2, 0, 196606, 2, 0, 196607, 3, 0, 131072, 3, 0, 131073, 3, 0, 131074, 3, 0, 131075, 3, 0, 131076, 3, 0, 131077, 3, 0, 131078, 3, 0, 131079, 3, 0, 131080, 3, 0, 262135, 3, 0, 262136, 3, 0, 262137, 3, 0, 262138, 2, 0, 262139, 2, 0, 262140, 3, 0, 262141, 2, 0, 262142, 2, 0, 262143, 2, 0, 196608, 6, 0, 196609, 6, 0, 196610, 2, 0, 196611, 2, 0, 196612, 2, 0, 196613, 2, 0, 196614, 2, 0, 196615, 2, 0, 196616, 3, 0, 327671, 3, 0, 327672, 2, 0, 327673, 2, 0, 327674, 2, 0, 327675, 2, 0, 327676, 3, 0, 327677, 3, 0, 327678, 2, 0, 327679, 2, 0, 262144, 6, 0, 262145, 6, 0, 262146, 2, 0, 262147, 2, 0, 262148, 2, 0, 262149, 2, 0, 262150, 2, 0, 262151, 2, 0, 262152, 3, 0, 393207, 3, 0, 393208, 3, 0, 393209, 3, 0, 393210, 2, 0, 393211, 2, 0, 393212, 3, 0, 393213, 2, 0, 393214, 2, 0, 393215, 2, 0, 327680, 6, 0, 327681, 6, 0, 327682, 2, 0, 327683, 2, 0, 327684, 2, 0, 327685, 2, 0, 327686, 2, 0, 327687, 2, 0, 327688, 3, 0, 458745, 3, 0, 458746, 2, 0, 458747, 2, 0, 458748, 3, 0, 458749, 2, 0, 458750, 2, 0, 458751, 3, 0, 393216, 3, 0, 393217, 3, 0, 393218, 3, 0, 393219, 3, 0, 393220, 3, 0, 393221, 3, 0, 393222, 3, 0, 393223, 3, 0, 393224, 3, 0, 524281, 3, 0, 524282, 2, 0, 524283, 2, 0, 524284, 2, 0, 524285, 2, 0, 524286, 2, 0, 524287, 3, 0, 589817, 3, 0, 589818, 2, 0, 589819, 2, 0, 589820, 2, 0, 589821, 2, 0, 589822, 2, 0, 589823, 3, 0, 655353, 3, 0, 655354, 3, 0, 655355, 3, 0, 655356, 3, 0, 655357, 3, 0, 655358, 3, 0, 655359, 3, 0 )
 
 [node name="entities" type="TileMap" parent="."]
-
-mode = 0
 tile_set = ExtResource( 3 )
-cell/size = Vector2( 16, 16 )
-cell/quadrant_size = 16
-cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-cell/half_offset = 2
-cell/tile_origin = 0
-cell/y_sort = false
-collision/use_kinematic = false
-collision/friction = 1.0
-collision/bounce = 0.0
-collision/layers = 1
-collision/mask = 1
-occluder/light_mask = 1
-tile_data = IntArray( 65532, 8, 196615, 8, 327672, 9, 262147, 10, 262148, 10, 327687, 8, 589820, 8 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 65532, 8, 0, 196615, 8, 0, 327672, 9, 0, 262147, 10, 0, 262148, 10, 0, 327687, 8, 0, 589820, 8, 0 )
 
 [node name="enemies" type="TileMap" parent="."]
-
-mode = 0
 tile_set = ExtResource( 4 )
-cell/size = Vector2( 16, 16 )
-cell/quadrant_size = 16
-cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-cell/half_offset = 2
-cell/tile_origin = 0
-cell/y_sort = false
-collision/use_kinematic = false
-collision/friction = 1.0
-collision/bounce = 0.0
-collision/layers = 1
-collision/mask = 1
-occluder/light_mask = 1
-tile_data = IntArray( 262141, 0, 327678, 0, 393213, 0 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 262141, 0, 0, 327678, 0, 0, 393213, 0, 0 )
 
 [node name="extra" type="TileMap" parent="."]
-
-visibility/visible = false
-mode = 0
+visible = false
 tile_set = ExtResource( 5 )
-cell/size = Vector2( 16, 16 )
-cell/quadrant_size = 16
-cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-cell/half_offset = 2
-cell/tile_origin = 0
-cell/y_sort = false
-collision/use_kinematic = false
-collision/friction = 1.0
-collision/bounce = 0.0
-collision/layers = 1
-collision/mask = 1
-occluder/light_mask = 1
-tile_data = IntArray( 131067, 1, 131068, 1, 131069, 1, 196603, 1, 196605, 1, 262139, 1, 262141, 1, 262142, 1, 327675, 1, 327678, 1, 262149, 0, 393211, 1, 393213, 1, 393214, 1, 458747, 1, 458749, 1, 524283, 1, 524284, 1, 524285, 1 )
-
-
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 131067, 1, 0, 131068, 1, 0, 131069, 1, 0, 196603, 1, 0, 196605, 1, 0, 262139, 1, 0, 262141, 1, 0, 262142, 1, 0, 327675, 1, 0, 327678, 1, 0, 262149, 0, 0, 393211, 1, 0, 393213, 1, 0, 393214, 1, 0, 458747, 1, 0, 458749, 1, 0, 524283, 1, 0, 524284, 1, 0, 524285, 1, 0 )

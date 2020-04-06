@@ -1,14 +1,13 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://data/level_manager/enemy_patrol.png" type="Texture" id=1]
 
 [node name="tileset" type="Node2D"]
 
+
 [node name="Enemy Patrol" type="Sprite" parent="."]
 
 texture = ExtResource( 1 )
 centered = false
-region = true
+region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
-
-

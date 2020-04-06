@@ -15,23 +15,23 @@ func _ready():
 
 
 # Using fixed process so player can hold down buttons for movement
-func _fixed_process(delta):
+func _physics_process(delta):
 	if(!is_moving && !is_sliding):
 		if(Input.is_action_pressed("ui_left")):
-			move(global.DIRECTION.LEFT)
+			move_player(global.DIRECTION.LEFT)
 		elif(Input.is_action_pressed("ui_right")):
-			move(global.DIRECTION.RIGHT)
+			move_player(global.DIRECTION.RIGHT)
 		elif(Input.is_action_pressed("ui_up")):
-			move(global.DIRECTION.UP)
+			move_player(global.DIRECTION.UP)
 		elif(Input.is_action_pressed("ui_down")):
-			move(global.DIRECTION.DOWN)
+			move_player(global.DIRECTION.DOWN)
 
 var facing = global.DIRECTION.RIGHT
 
 # Move player with tween
-func move(direction):
+func move_player(direction):
 	# Do pre_move calculations
-	if(pre_move(direction)):
+	if(pre_move_player(direction)):
 		# Toggle to prevent unfinished movement before new movement
 		is_moving = true
 		
@@ -45,7 +45,7 @@ func move(direction):
 		facing = direction
 		
 		# Get current position
-		var pos = get_pos()
+		var pos = get_position()
 		
 		# Add directional change to position
 		if(direction == global.DIRECTION.LEFT):
@@ -80,8 +80,8 @@ func move(direction):
 		if(tween == null): # Create once
 			tween = Tween.new()
 			get_parent().add_child(tween)
-			tween.connect("tween_complete", self, "_move_complete")
-		tween.interpolate_property(self, "transform/pos", get_pos(), pos, global.player_speed, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+			tween.connect("tween_completed", self, "_move_complete")
+		tween.interpolate_property(self, "position", get_position(), pos, global.player_speed, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 		tween.start()
 
 
@@ -102,7 +102,7 @@ func _move_complete(tween, key):
 	is_moving = false
 	
 	# Stop animation
-	anim_node.stop_all()
+	anim_node.stop()
 
 	if(facing == global.DIRECTION.UP):
 		if(in_water):
@@ -128,7 +128,7 @@ func _move_complete(tween, key):
 
 
 # Returns true if player can move in the requested direction
-func pre_move(direction):
+func pre_move_player(direction):
 	if(!is_moving):
 	
 		var tile_pos = null
@@ -137,7 +137,7 @@ func pre_move(direction):
 		
 		if(tilemap_world != null):
 			# Get tile coordinate of where you currently are
-			tile_pos = tilemap_world.world_to_map(get_pos())
+			tile_pos = tilemap_world.world_to_map(get_position())
 		
 		# Check if we have a solid block in the next block
 		if(direction == global.DIRECTION.LEFT):
@@ -219,7 +219,7 @@ func pre_move(direction):
 							# Remove water instance
 							for c in get_parent().get_node("world").get_children():
 								# Remove water scene with same pos as the new tile pos
-								if(c.get_pos() == tilemap_world.map_to_world(move_to_pos)):
+								if(c.get_position() == tilemap_world.map_to_world(move_to_pos)):
 									c.queue_free()
 							
 							# Add submerged block
@@ -434,9 +434,9 @@ func slide():
 			slide_tween = Tween.new()
 			slide_tween.set_name("Slide tween")
 			get_parent().add_child(slide_tween)
-			slide_tween.connect("tween_complete", self, "_slide_complete")
+			slide_tween.connect("tween_completed", self, "_slide_complete")
 		
-		slide_tween.interpolate_property(self, "transform/pos", get_pos(), slide_to_pos, global.player_speed / 1.0, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+		slide_tween.interpolate_property(self, "position", get_position(), slide_to_pos, global.player_speed / 1.0, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 		slide_tween.start()
 		slide_count += 1
 	else:
@@ -465,7 +465,7 @@ func slide_ice():
 	update_player_facing()
 	
 	# Try to move
-	var continue_sliding = try_to_move()
+	var continue_sliding = try_to_move_player()
 	
 	if(continue_sliding):
 		# Slide to new pos
@@ -473,10 +473,10 @@ func slide_ice():
 			slide_ice_tween = Tween.new()
 			slide_ice_tween.set_name("Slide ice tween")
 			get_parent().add_child(slide_ice_tween)
-			slide_ice_tween.connect("tween_complete", self, "_slide_ice_complete")
+			slide_ice_tween.connect("tween_completed", self, "_slide_ice_complete")
 		
-		print("Current pos: " + str(get_pos()) + ", Next pos: " + str(slide_ice_to_pos))
-		slide_ice_tween.interpolate_property(self, "transform/pos", get_pos(), slide_ice_to_pos, global.player_speed / 1.0, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
+		print("Current pos: " + str(get_position()) + ", Next pos: " + str(slide_ice_to_pos))
+		slide_ice_tween.interpolate_property(self, "position", get_position(), slide_ice_to_pos, global.player_speed / 1.0, Tween.TRANS_LINEAR, Tween.TRANS_LINEAR)
 		slide_ice_tween.start()
 
 func _slide_ice_complete(var1, var2):
@@ -488,10 +488,10 @@ func _slide_ice_complete(var1, var2):
 	pass
 	
 
-func try_to_move():
+func try_to_move_player():
 	# Check if there is an ice tile there
 	var tilemap_world = get_parent().get_node("world")
-	var tile_pos = tilemap_world.world_to_map(get_pos())
+	var tile_pos = tilemap_world.world_to_map(get_position())
 	
 	# Check if we have a solid block in the next block
 	if(facing == global.DIRECTION.LEFT):
@@ -578,3 +578,4 @@ func update_player_facing():
 		anim_node.play("idle_up")
 	elif(facing == global.DIRECTION.DOWN):
 		anim_node.play("idle_right")
+

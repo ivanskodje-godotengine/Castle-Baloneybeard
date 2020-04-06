@@ -4,6 +4,9 @@ You are playing as the castle owner Baloneybeard in search of lost baloney, whic
 
 Navigate through unavoidable puzzles as you scratch your head trying to figure out what to do, and more importantly: Making the ultimate sandwich!
 
+
+Updated April 2020: **Source updated to be compatible with Godot Engine 3!**
+
 ## Screenshots
 ![](http://i.imgur.com/dWOazdW.png)
 ![](http://i.imgur.com/uc2OaFm.png)
@@ -18,15 +21,16 @@ This was developed using Godot Engine, a Unity-like game engine that is 100% fre
 
 Game concept and design was based on the design of Chip's Challenge.
 
+
 #### Download
 You can find the game on [Tybobobo's GameJolt page](http://gamejolt.com/@Tybobobo), and the entry itself can be found on [Tybobobo's itch.io page](https://tybobobo.itch.io).
 
 #### Extra Thanks
-Extra thanks to YeOldeDM for providing the amazing artwork and backstory.
+Extra thanks to YeOldeDM for providing the amazing artwork and backstory, and Ozzed for providing the game music.
 
 ## License
 Castle Baloneybeard - A puzzle game
-Copyright (C) 2016 Ivan P. Skodje, YeOldeDM
+Copyright (C) 2020 Ivan P. Skodje, YeOldeDM
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
