@@ -27,7 +27,7 @@ func _ready():
 
 # Patrols
 func patrol():
-	var next_pos = get_pos()
+	var next_pos = get_position()
 	
 	# NORTH
 	var north_pos = next_pos
@@ -39,8 +39,8 @@ func patrol():
 	
 	if(cell_id == global.EXTRA.PATROL && previous_pos != north_pos):
 		# Move north
-		previous_pos = get_pos()
-		set_pos(north_pos)
+		previous_pos = get_position()
+		set_position(north_pos)
 		
 		return
 	
@@ -51,13 +51,13 @@ func patrol():
 	east_pos.x += global.config.tile_size
 	
 	# Is there a patrol cell?
-	var cell_pos = get_parent().get_parent().get_node("extra").world_to_map(east_pos)
-	var cell_id = get_parent().get_parent().get_node("extra").get_cellv(cell_pos)
+	cell_pos = get_parent().get_parent().get_node("extra").world_to_map(east_pos)
+	cell_id = get_parent().get_parent().get_node("extra").get_cellv(cell_pos)
 	
 	if(cell_id == global.EXTRA.PATROL && previous_pos != east_pos):
 		# Move north
-		previous_pos = get_pos()
-		set_pos(east_pos)
+		previous_pos = get_position()
+		set_position(east_pos)
 		return
 
 	# ------------
@@ -67,13 +67,13 @@ func patrol():
 	south_pos.y += global.config.tile_size
 	
 	# Is there a patrol cell?
-	var cell_pos = get_parent().get_parent().get_node("extra").world_to_map(south_pos)
-	var cell_id = get_parent().get_parent().get_node("extra").get_cellv(cell_pos)
+	cell_pos = get_parent().get_parent().get_node("extra").world_to_map(south_pos)
+	cell_id = get_parent().get_parent().get_node("extra").get_cellv(cell_pos)
 	
 	if(cell_id == global.EXTRA.PATROL && previous_pos != south_pos):
 		# Move north
-		previous_pos = get_pos()
-		set_pos(south_pos)
+		previous_pos = get_position()
+		set_position(south_pos)
 		return
 
 	# ------------
@@ -83,18 +83,18 @@ func patrol():
 	west_pos.x -= global.config.tile_size
 	
 	# Is there a patrol cell?
-	var cell_pos = get_parent().get_parent().get_node("extra").world_to_map(west_pos)
-	var cell_id = get_parent().get_parent().get_node("extra").get_cellv(cell_pos)
+	cell_pos = get_parent().get_parent().get_node("extra").world_to_map(west_pos)
+	cell_id = get_parent().get_parent().get_node("extra").get_cellv(cell_pos)
 	
 	if(cell_id == global.EXTRA.PATROL && previous_pos != west_pos):
 		# Move north
-		previous_pos = get_pos()
-		set_pos(west_pos)
+		previous_pos = get_position()
+		set_position(west_pos)
 		return
 
 
-func move(direction):
-	var pos = get_pos()
+func move_and_collide(direction):
+	var pos = get_position()
 
 	# Left
 	if(direction == 0):
@@ -110,9 +110,10 @@ func move(direction):
 		pos.y += tile_size
 
 	# TODO: Tween
-	set_pos(pos)
+	set_position(pos)
 
 
 func _on_enemy_body_enter( body ):
 	if(body.get_name() == "player"):
 		body.death()
+

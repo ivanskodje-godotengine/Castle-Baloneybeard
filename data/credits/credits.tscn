@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://data/splash/background.png" type="Texture" id=1]
 [ext_resource path="res://fonts/coolvetica rg.ttf" type="DynamicFontData" id=2]
@@ -6,37 +6,38 @@
 
 [sub_resource type="DynamicFont" id=1]
 
-font/size = 32
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 2 )
+size = 32
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
 
-font/size = 14
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 2 )
+size = 14
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
 
-font/size = 10
-font/use_mipmaps = false
-font/use_filter = false
-font/font = ExtResource( 2 )
+size = 10
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
 
 [node name="splash" type="Control"]
 
-anchor/right = 1
-anchor/bottom = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 0.0
-margin/bottom = 0.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+mouse_filter = 0
 
 [node name="background" type="Sprite" parent="."]
 
@@ -45,15 +46,15 @@ centered = false
 
 [node name="label" type="Label" parent="."]
 
-anchor/right = 1
+anchor_right = 1.0
 focus/ignore_mouse = true
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 4.0
-margin/right = 0.0
-margin/bottom = 43.0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 4.0
+margin_right = 0.0
+margin_bottom = 43.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
 text = "#GBJAM5"
@@ -62,47 +63,50 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+mouse_filter = 1
 
 [node name="label_thank_you" type="Label" parent="."]
 
-anchor/right = 1
+anchor_right = 1.0
 focus/ignore_mouse = true
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 53.0
-margin/right = 0.0
-margin/bottom = 92.0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 53.0
+margin_right = 0.0
+margin_bottom = 92.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
-text = "Thank you for playing\nCastle Baloneybeard"
+text = "Thank you for playing
+Castle Baloneybeard"
 align = 1
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+mouse_filter = 1
 
 [node name="copyright label" type="Label" parent="."]
 
-anchor/right = 1
+anchor_right = 1.0
 focus/ignore_mouse = true
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 105.0
-margin/right = 1.0
-margin/bottom = 156.0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+margin_left = 0.0
+margin_top = 105.0
+margin_right = -1.0
+margin_bottom = 156.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.784314, 0.788235, 0.262745, 1 )
-text = "A game inspired by Chip\'s Challenge"
+text = "A game inspired by Chip's Challenge"
 align = 1
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+mouse_filter = 1
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 3 )]
-
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/06 Line Dash.ogg-571b0db8afce7450a12e7a05d161740f.oggstr"
+
+[deps]
+
+source_file="res://data/SFX/music/06 Line Dash.ogg"
+dest_files=[ "res://.import/06 Line Dash.ogg-571b0db8afce7450a12e7a05d161740f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

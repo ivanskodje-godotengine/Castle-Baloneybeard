@@ -1,426 +1,799 @@
-[gd_scene load_steps=19 format=1]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://data/player/player.gd" type="Script" id=1]
 [ext_resource path="res://data/player/player_sheet.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
 extents = Vector2( 2.27477, 3.45052 )
 
 [sub_resource type="Animation" id=2]
-
-resource/name = "idle_left"
-length = 1.0
+resource_name = "idle_left"
 loop = true
 step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 0 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:flip_h")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 tracks/2/type = "value"
-tracks/2/path = NodePath("player_sprite/sprite:transform/rot")
+tracks/2/path = NodePath("player_sprite/sprite:rotation_degrees")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 0.0 ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 tracks/3/type = "value"
 tracks/3/path = NodePath("player_sprite/sprite:offset")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, -16 ) ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ) ]
+}
 tracks/4/type = "value"
 tracks/4/path = NodePath("player_sprite/sprite:vframes")
 tracks/4/interp = 1
+tracks/4/loop_wrap = true
 tracks/4/imported = false
-tracks/4/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 4 ] }
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
 
 [sub_resource type="Animation" id=3]
-
-resource/name = "idle_left_in_water"
-length = 1.0
-loop = false
+resource_name = "idle_left_in_water"
 step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 0 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:flip_h")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 tracks/2/type = "value"
-tracks/2/path = NodePath("player_sprite/sprite:transform/rot")
+tracks/2/path = NodePath("player_sprite/sprite:rotation_degrees")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 0.0 ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 tracks/3/type = "value"
 tracks/3/path = NodePath("player_sprite/sprite:offset")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, 0 ) ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 tracks/4/type = "value"
 tracks/4/path = NodePath("player_sprite/sprite:vframes")
 tracks/4/interp = 1
+tracks/4/loop_wrap = true
 tracks/4/imported = false
-tracks/4/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 8 ] }
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
 
 [sub_resource type="Animation" id=4]
-
-length = 1.0
-loop = false
 step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 0 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:flip_h")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 tracks/2/type = "value"
-tracks/2/path = NodePath("player_sprite/sprite:transform/rot")
+tracks/2/path = NodePath("player_sprite/sprite:rotation_degrees")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 0.0 ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 tracks/3/type = "value"
 tracks/3/path = NodePath("player_sprite/sprite:offset")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, -16 ) ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ) ]
+}
 tracks/4/type = "value"
 tracks/4/path = NodePath("player_sprite/sprite:vframes")
 tracks/4/interp = 1
+tracks/4/loop_wrap = true
 tracks/4/imported = false
-tracks/4/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 4 ] }
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
 
 [sub_resource type="Animation" id=5]
-
-resource/name = "idle_right_in_water"
-length = 1.0
-loop = false
+resource_name = "idle_right_in_water"
 step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 0 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:flip_h")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 tracks/2/type = "value"
-tracks/2/path = NodePath("player_sprite/sprite:transform/rot")
+tracks/2/path = NodePath("player_sprite/sprite:rotation_degrees")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 0.0 ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 tracks/3/type = "value"
 tracks/3/path = NodePath("player_sprite/sprite:offset")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, 0 ) ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 tracks/4/type = "value"
 tracks/4/path = NodePath("player_sprite/sprite:vframes")
 tracks/4/interp = 1
+tracks/4/loop_wrap = true
 tracks/4/imported = false
-tracks/4/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 8 ] }
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
 
 [sub_resource type="Animation" id=6]
-
-resource/name = "idle_up"
-length = 1.0
+resource_name = "idle_up"
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 6 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:vframes")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 4 ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
 tracks/2/type = "value"
 tracks/2/path = NodePath("player_sprite/sprite:offset")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, -16 ) ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ) ]
+}
 tracks/3/type = "value"
-tracks/3/path = NodePath("player_sprite/sprite:transform/rot")
+tracks/3/path = NodePath("player_sprite/sprite:rotation_degrees")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 0.0 ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=7]
-
-resource/name = "idle_up_in_water"
-length = 1.0
+resource_name = "idle_up_in_water"
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 12 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:vframes")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 8 ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
 tracks/2/type = "value"
 tracks/2/path = NodePath("player_sprite/sprite:offset")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, 0 ) ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 tracks/3/type = "value"
-tracks/3/path = NodePath("player_sprite/sprite:transform/rot")
+tracks/3/path = NodePath("player_sprite/sprite:rotation_degrees")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 0.0 ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=8]
-
-resource/name = "on_ice_left"
-length = 1.0
+resource_name = "on_ice_left"
 loop = true
 step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 0 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:flip_h")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 tracks/2/type = "value"
-tracks/2/path = NodePath("player_sprite/sprite:transform/rot")
+tracks/2/path = NodePath("player_sprite/sprite:rotation_degrees")
 tracks/2/interp = 0
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 90.0 ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
 tracks/3/type = "value"
 tracks/3/path = NodePath("player_sprite/sprite:offset")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( -16, 0 ) ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -16, 0 ) ]
+}
 tracks/4/type = "value"
 tracks/4/path = NodePath("player_sprite/sprite:flip_v")
 tracks/4/interp = 1
+tracks/4/loop_wrap = true
 tracks/4/imported = false
-tracks/4/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=9]
-
-resource/name = "on_ice_right"
-length = 1.0
+resource_name = "on_ice_right"
 loop = true
 step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 0 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:flip_h")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 tracks/2/type = "value"
-tracks/2/path = NodePath("player_sprite/sprite:transform/rot")
+tracks/2/path = NodePath("player_sprite/sprite:rotation_degrees")
 tracks/2/interp = 0
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 90.0 ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
 tracks/3/type = "value"
 tracks/3/path = NodePath("player_sprite/sprite:offset")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( -16, -16 ) ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -16, -16 ) ]
+}
 tracks/4/type = "value"
 tracks/4/path = NodePath("player_sprite/sprite:flip_v")
 tracks/4/interp = 1
+tracks/4/loop_wrap = true
 tracks/4/imported = false
-tracks/4/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=10]
-
 length = 0.5
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 1, 2, 3, 4, 5, 1 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 1 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:flip_h")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 tracks/2/type = "value"
 tracks/2/path = NodePath("player_sprite/sprite:vframes")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 4 ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
 tracks/3/type = "value"
 tracks/3/path = NodePath("player_sprite/sprite:offset")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, -16 ) ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ) ]
+}
 
 [sub_resource type="Animation" id=11]
-
-resource/name = "walk_left_in_water"
+resource_name = "walk_left_in_water"
 length = 0.5
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 1, 2, 3, 4, 5, 1 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 1 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:flip_h")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 tracks/2/type = "value"
 tracks/2/path = NodePath("player_sprite/sprite:offset")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, 0 ) ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 tracks/3/type = "value"
 tracks/3/path = NodePath("player_sprite/sprite:vframes")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 8 ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
 
 [sub_resource type="Animation" id=12]
-
 length = 0.5
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 1, 2, 3, 4, 5, 1 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 1 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:flip_h")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 tracks/2/type = "value"
 tracks/2/path = NodePath("player_sprite/sprite:vframes")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 4 ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
 tracks/3/type = "value"
 tracks/3/path = NodePath("player_sprite/sprite:offset")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, -16 ) ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ) ]
+}
 
 [sub_resource type="Animation" id=13]
-
-resource/name = "walk_right_in_water"
+resource_name = "walk_right_in_water"
 length = 0.5
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 1, 2, 3, 4, 5, 1 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 1 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:flip_h")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 tracks/2/type = "value"
 tracks/2/path = NodePath("player_sprite/sprite:offset")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, 0 ) ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 tracks/3/type = "value"
 tracks/3/path = NodePath("player_sprite/sprite:vframes")
 tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 8 ] }
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
 
 [sub_resource type="Animation" id=14]
-
 length = 0.5
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4 ), "transitions":FloatArray( 1, 1, 1, 1, 1 ), "update":1, "values":[ 6, 7, 8, 9, 10 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9, 10 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:offset")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, -16 ) ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ) ]
+}
 tracks/2/type = "value"
 tracks/2/path = NodePath("player_sprite/sprite:vframes")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 4 ] }
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
 
 [sub_resource type="Animation" id=15]
-
-resource/name = "walk_up_in_water"
+resource_name = "walk_up_in_water"
 length = 0.5
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("player_sprite/sprite:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3, 0.4 ), "transitions":FloatArray( 1, 1, 1, 1, 1 ), "update":1, "values":[ 12, 13, 14, 15, 16 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15, 16 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("player_sprite/sprite:offset")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0, 0 ) ] }
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 tracks/2/type = "value"
 tracks/2/path = NodePath("player_sprite/sprite:vframes")
 tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 8 ] }
-
-[sub_resource type="SampleLibrary" id=16]
-
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
 
 [node name="player" type="KinematicBody2D"]
-
-process/pause_mode = 1
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 7.84084, 8.50212 )
-shapes/0/trigger = true
-collision/layers = 1
-collision/mask = 1
-collision/margin = 0.08
-script/script = ExtResource( 1 )
+pause_mode = 1
+script = ExtResource( 1 )
 
 [node name="player_sprite" type="Node2D" parent="."]
 
 [node name="sprite" type="Sprite" parent="player_sprite"]
-
 texture = ExtResource( 2 )
 centered = false
 offset = Vector2( 0, -16 )
@@ -431,39 +804,21 @@ frame = 1
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="camera" type="Camera2D" parent="."]
-
-process/pause_mode = 2
+pause_mode = 2
 offset = Vector2( 8, 8 )
-anchor_mode = 1
-rotating = false
 current = true
-zoom = Vector2( 1, 1 )
-limit/left = -10000000
-limit/top = -10000000
-limit/right = 10000000
-limit/bottom = 10000000
-limit/smoothed = false
-drag_margin/h_enabled = true
-drag_margin/v_enabled = true
-smoothing/enable = false
-smoothing/speed = 5.0
-drag_margin/left = 0.02
-drag_margin/top = 0.02
-drag_margin/right = 0.02
-drag_margin/bottom = 0.02
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 0.02
+drag_margin_top = 0.02
+drag_margin_right = 0.02
+drag_margin_bottom = 0.02
 
 [node name="collision_shape" type="CollisionShape2D" parent="."]
-
-transform/pos = Vector2( 7.84084, 8.50212 )
+position = Vector2( 7.84084, 8.50212 )
 shape = SubResource( 1 )
-trigger = true
-_update_shape_index = 0
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
-
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
 anims/idle_left = SubResource( 2 )
 anims/idle_left_in_water = SubResource( 3 )
 anims/idle_right = SubResource( 4 )
@@ -478,26 +833,5 @@ anims/walk_right = SubResource( 12 )
 anims/walk_right_in_water = SubResource( 13 )
 anims/walk_up = SubResource( 14 )
 anims/walk_up_in_water = SubResource( 15 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = ""
 
-[node name="sound" type="SamplePlayer" parent="."]
-
-config/polyphony = 1
-config/samples = SubResource( 16 )
-default/volume_db = 0.0
-default/pitch_scale = 1.0
-default/pan = 0.0
-default/depth = 0.0
-default/height = 0.0
-default/filter/type = 0
-default/filter/cutoff = 20.0
-default/filter/resonance = 0.0
-default/filter/gain = 0.0
-default/reverb_room = 2
-default/reverb_send = 0.0
-default/chorus_send = 0.0
-
-
+[node name="sound" type="Node" parent="."]

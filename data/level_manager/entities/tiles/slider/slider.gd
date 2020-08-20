@@ -34,7 +34,7 @@ func update_direction():
 # Check the next tile and see if there is another slider
 func check_for_next():
 		# Get next pos and check if there is a slider
-		next_pos = get_pos()
+		next_pos = get_position()
 		
 		if(direction == global.DIRECTION.UP):
 			next_pos.y -= global.config.tile_size
@@ -61,3 +61,4 @@ func _on_slider_body_enter( body ):
 			body.slide_to_next(next_pos, false) # We do not have next, so we move and enable player movement
 	pass
 	
+

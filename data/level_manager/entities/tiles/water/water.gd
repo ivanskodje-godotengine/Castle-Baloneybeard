@@ -9,3 +9,4 @@ func _on_water_body_enter( body ):
 func _on_water_body_exit( body ):
 	if(body.get_name() == "player"):
 		body.out_of_water()
+

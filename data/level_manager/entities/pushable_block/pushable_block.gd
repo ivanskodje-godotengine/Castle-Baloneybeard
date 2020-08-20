@@ -12,7 +12,7 @@ func patrol(counterclock = false):
 		
 		
 		# Check north
-		var next_pos = get_pos()
+		var next_pos = get_position()
 		next_pos.y -= global.config.tile_size
 		
 		# Check east
@@ -24,8 +24,8 @@ func patrol(counterclock = false):
 	else:
 		pass
 
-func move(direction):
-	var pos = get_pos()
+func move_and_collide(direction):
+	var pos = get_position()
 
 	# Left
 	if(direction == 0):
@@ -41,7 +41,7 @@ func move(direction):
 		pos.y += tile_size
 	
 	# TODO: Tween
-	set_pos(pos)
+	set_position(pos)
 
 
 func _on_enemy_area_enter( area ):
@@ -53,3 +53,4 @@ func _on_enemy_body_enter( body ):
 		print("Kill player")
 	else:
 		print("----> " + str(body.get_name()))
+

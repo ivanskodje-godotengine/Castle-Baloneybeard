@@ -42,7 +42,7 @@ func wait_then_music(wait):
 	delay_timer.start()
 
 func _play_music():
-	global.play_music(0)
+	global.play_menu_music()
 	delay_timer.queue_free()
 
 # Input events
@@ -173,4 +173,5 @@ func change_selection(id = null):
 			c.set_text(item_names[count] + extra)
 			c.set_color(2)
 		count += 1
+
 

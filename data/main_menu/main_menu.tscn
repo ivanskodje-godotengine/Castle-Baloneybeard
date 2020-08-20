@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://data/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://data/main_menu/background.png" type="Texture" id=2]
@@ -7,17 +7,18 @@
 
 [node name="main_menu" type="Control"]
 
-anchor/right = 1
-anchor/bottom = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 0.0
-margin/bottom = 0.0
-script/script = ExtResource( 1 )
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+script = ExtResource( 1 )
+mouse_filter = 0
 
 [node name="background_image" type="Sprite" parent="."]
 
@@ -26,55 +27,56 @@ centered = false
 
 [node name="container" type="Container" parent="."]
 
-anchor/right = 1
-anchor/bottom = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 0.0
-margin/bottom = 0.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+mouse_filter = 0
 
 [node name="vbox_container" type="VBoxContainer" parent="container"]
 
-anchor/right = 1
-anchor/bottom = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
 focus/ignore_mouse = false
 focus/stop_mouse = false
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 69.0
-margin/right = 0.0
-margin/bottom = 0.0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+margin_left = 0.0
+margin_top = 69.0
+margin_right = 0.0
+margin_bottom = 0.0
 alignment = 1
+mouse_filter = 0
 
 [node name="hbox_container" parent="container/vbox_container" instance=ExtResource( 3 )]
 
-anchor/right = 0
-margin/top = 11.0
-margin/right = 160.0
-margin/bottom = 26.0
+anchor_right = 0.0
+margin_top = 11.0
+margin_right = 160.0
+margin_bottom = 26.0
 text = "Start"
 
 [node name="hbox_container1" parent="container/vbox_container" instance=ExtResource( 3 )]
 
-anchor/right = 0
-margin/top = 30.0
-margin/right = 160.0
-margin/bottom = 45.0
+anchor_right = 0.0
+margin_top = 30.0
+margin_right = 160.0
+margin_bottom = 45.0
 text = "Level: "
 
 [node name="hbox_container2" parent="container/vbox_container" instance=ExtResource( 3 )]
 
-anchor/right = 0
-margin/top = 49.0
-margin/right = 160.0
-margin/bottom = 64.0
+anchor_right = 0.0
+margin_top = 49.0
+margin_right = 160.0
+margin_bottom = 64.0
 text = "Music: "
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 4 )]
-
 

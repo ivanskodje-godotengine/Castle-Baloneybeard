@@ -46,7 +46,7 @@ func add_to_sandwich():
 	animation_container.add_child(scene)
 	
 	# Set position
-	scene.set_pos(Vector2(80, 120 - (stack_size * 4)))
+	scene.set_position(Vector2(80, 120 - (stack_size * 4)))
 	
 	# Increment stack size by one
 	stack_size += 1

@@ -44,7 +44,7 @@ func _ready():
 	load_level(global.config["level"]["current"])
 	
 	# Start music
-	global.play_music(1, true)
+	global.play_level_music()
 
 # Input Events
 func _input(event):
@@ -135,7 +135,7 @@ func _input(event):
 # Spawn player
 func spawn_player():
 	# Get the cell position of the player SPAWN tile; found in the 'Extra' tileset
-	var tilemap = get_child(0).get_node("extra")
+	var tilemap = $level/extra
 	var used_cells = tilemap.get_used_cells()
 	var cell_pos = null
 	
@@ -150,9 +150,9 @@ func spawn_player():
 	if(cell_pos != null):
 		var spawn_pos = tilemap.map_to_world(cell_pos)
 		var player = load("res://data/player/player.tscn").instance()
-		player.set_pos(spawn_pos)
+		player.set_position(spawn_pos)
 		get_child(0).add_child(player)
-		player.set_fixed_process(false)
+		player.set_physics_process(false)
 	 
 	# No spawn tile found
 	else:
@@ -162,8 +162,8 @@ func spawn_player():
 # Toggles player processing (on / off) and returns the current activity result
 func toggle_player_processing():
 	var player = get_child(0).get_node("player")
-	var fixed_processing = !player.is_fixed_processing() # Toggle
-	player.set_fixed_process(fixed_processing)
+	var fixed_processing = !player.is_physics_processing() # Toggle
+	player.set_physics_process(fixed_processing)
 	return fixed_processing
 
 
@@ -178,7 +178,7 @@ func load_level(level):
 	timer.stop()
 	
 	# Start music
-	global.play_music(1)
+	global.play_level_music()
 	
 	# Remove level if it already exist
 	if(get_child(0)):
@@ -265,7 +265,7 @@ func update_tiles(level_scene):
 			sandwich_scene = sandwich.instance()
 			
 			# Set sandwich position on tile
-			sandwich_scene.set_pos(tile_pos)
+			sandwich_scene.set_position(tile_pos)
 			
 			# Add sandwich to scene
 			level_scene.get_node("items").add_child(sandwich_scene)
@@ -280,7 +280,7 @@ func update_tiles(level_scene):
 		# Fire
 		elif(cell_id == global.ENTITIES.BLOCK.FIRE):
 			var fire = fire_tile.instance()
-			fire.set_pos(tile_pos)
+			fire.set_position(tile_pos)
 			level_scene.get_node("items").add_child(fire)
 			
 			# Remove the original cell
@@ -294,11 +294,11 @@ func update_tiles(level_scene):
 		if(cell_id == global.WORLD.WATER): # Water
 			# Add animated water tiles
 			var water = water_tile.instance()
-			water.set_pos(tile_pos)
+			water.set_position(tile_pos)
 			world_tilemap.add_child(water)
 		elif(cell_id == global.WORLD.ICE): # Ice
 			var ice = ice_tile.instance()
-			ice.set_pos(tile_pos)
+			ice.set_position(tile_pos)
 			world_tilemap.add_child(ice)
 		elif(cell_id == global.WORLD.SLIDER): # Slider
 			var slider = null
@@ -315,7 +315,7 @@ func update_tiles(level_scene):
 			
 			slider.set_flip_h(flipped_x)
 			slider.set_flip_v(flipped_y)
-			slider.set_pos(tile_pos)
+			slider.set_position(tile_pos)
 			world_tilemap.add_child(slider)
 	
 	# Replace enemy cells with instances
@@ -327,7 +327,7 @@ func update_tiles(level_scene):
 			if(cell_id == global.ENEMIES.PATROL):
 				# Add enemy instances
 				var enemy = enemy_patrol.instance()
-				enemy.set_pos(tile_pos)
+				enemy.set_position(tile_pos)
 				enemies_tilemap.add_child(enemy)
 				
 				# Remove the original cellww
