@@ -6,6 +6,7 @@ Navigate through unavoidable puzzles as you scratch your head trying to figure o
 
 
 Updated April 2020: **Source updated to be compatible with Godot Engine 3!**
+Updated May 2021: **Still works!**
 
 ## Screenshots
 ![](http://i.imgur.com/dWOazdW.png)
