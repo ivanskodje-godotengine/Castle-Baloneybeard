@@ -1,17 +1,19 @@
 pipeline {
     agent any 
     stages {
-        stage('Compile') {
+        stage('Build') {
             steps {
+				
                 echo 'Compiling....' 
+				godot --export web \var\www\test.ivsk.dev\index.html
             }
         }
-        stage('Run Tests') {
+        stage('Test') {
             steps {
                 echo 'Running tests...' 
             }
         }
-        stage('Publish') {
+        stage('Deploy') {
             steps {
                 echo 'Publishing... ' 
             }
