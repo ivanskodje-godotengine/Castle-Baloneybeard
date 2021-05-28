@@ -3,9 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-				
                 echo 'Compiling....' 
-				sh 'godot --export web \var\www\test.ivsk.dev\index.html'
+                sh 'godot --export web \var\www\test.ivsk.dev\index.html'
             }
         }
         stage('Test') {
