@@ -5,7 +5,7 @@ pipeline {
             steps {
 				
                 echo 'Compiling....' 
-				bash godot --export web \var\www\test.ivsk.dev\index.html
+				sh 'godot --export web \var\www\test.ivsk.dev\index.html'
             }
         }
         stage('Test') {
