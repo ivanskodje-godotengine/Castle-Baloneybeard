@@ -13,7 +13,7 @@ func _ready():
 	# Add UI to screen
 	var ui_scene = ui.instance()
 	add_child(ui_scene)
-	
+
 	var screen_scene = screen_overlay.instance()
 	add_child(screen_scene)
 

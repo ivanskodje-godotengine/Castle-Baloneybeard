@@ -9,16 +9,16 @@ func _ready():
 func patrol(counterclock = false):
 	# Check for nearest patrol route
 	if(!counterclock):
-		
-		
+
+
 		# Check north
 		var next_pos = get_position()
 		next_pos.y -= global.config.tile_size
-		
+
 		# Check east
-		
+
 		# Check south
-		
+
 		# Check west
 		pass
 	else:
@@ -39,7 +39,7 @@ func move_and_collide(direction):
 	# Down
 	elif(direction == 3):
 		pos.y += tile_size
-	
+
 	# TODO: Tween
 	set_position(pos)
 

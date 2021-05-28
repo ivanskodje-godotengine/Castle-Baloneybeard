@@ -7,7 +7,7 @@ var config = {
 	screen_scale = 3,
 	tile_size = 16,
 	music = {
-		current = 0,
+		current = 100,
 		total = 100
 	},
 	level = {
@@ -173,7 +173,7 @@ enum SOUND {
 }
 
 # Music
-enum MUSIC { 
+enum MUSIC {
 	MENU,
 	LEVEL1,
 }
@@ -184,7 +184,7 @@ func play_sound(sound):
 	if(sfx == null):
 		sfx = load("res://data/SFX/SFX.tscn").instance()
 		self.add_child(sfx)
-	
+
 	if(sfx != null):
 		if(sound == SOUND.ITEM_CHANGED):
 			play_sfx("menu_move")
@@ -217,7 +217,7 @@ func play_sound(sound):
 		elif(sound == SOUND.SPECIAL):
 			play_sfx("player_special")
 
-func play_sfx(audio_node): 
+func play_sfx(audio_node):
 	sfx.find_node(audio_node).play()
 
 # Play Music
@@ -226,7 +226,7 @@ var music = null
 func play_menu_music():
 	if(music != null):
 		music.queue_free()
-	
+
 	music = load("res://data/SFX/music/music_menu.tscn").instance()
 	music.set_name("menu_music")
 	get_parent().add_child(music)
@@ -238,7 +238,7 @@ func play_level_music(): # TODO: Replace this horrid "music" system. Each level/
 	if(music != null):
 		music.queue_free()
 		music = null
-	
+
 	music = load("res://data/SFX/music/music.tscn").instance()
 	music.set_name("game_music")
 	get_parent().add_child(music)
@@ -265,7 +265,7 @@ const FILE_MANAGER = preload("res://data/file_manager.gd")
 
 func load_data():
 	var total_levels = FILE_MANAGER.new().get_total_levels()
-	
+
 	# If we get false, it means no previous levels stored
 	if(!total_levels):
 		FILE_MANAGER.new().set_total_levels(1) # Set access to level 1

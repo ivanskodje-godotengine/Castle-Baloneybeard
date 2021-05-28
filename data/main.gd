@@ -13,16 +13,16 @@ func _ready():
 	var width = global.config["screen_width"]
 	var height = global.config["screen_height"]
 	var scale = global.config["screen_scale"]
-	
+
 	# Set window size
 	OS.set_window_size(Vector2(width*scale, height*scale))
-	
+
 	# Enable user input
 	set_process_input(true)
-	
+
 	# Show splash screen
 	splash_screen()
-	
+
 	# Load data
 	global.load_data()
 
@@ -55,13 +55,13 @@ func title_screen():
 func main_menu():
 	# Clear nodes
 	clear_nodes()
-	
+
 	# Instantiate main menu
 	var main_menu_scene = MAIN_MENU.instance()
-	
+
 	# Connect signal to start the game
 	main_menu_scene.connect("start", self, "start")
-	
+
 	# Add the main menu to main scene
 	add_child(main_menu_scene)
 
@@ -77,10 +77,10 @@ func start(level):
 func level_manager():
 	# Clear nodes
 	clear_nodes()
-	
+
 	# Set initial state to INTRO
 	global.current_state = global.STATE.INTRO
-	
+
 	# Create world node and add to scene
 	var level_manager_scene = LEVEL_MANAGER.instance()
 	add_child(level_manager_scene)
