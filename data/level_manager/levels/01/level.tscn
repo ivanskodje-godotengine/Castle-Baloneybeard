@@ -34,11 +34,10 @@ tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 262147, 1, 0, 262148, 0, 0, 262149, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0 )
+tile_data = PoolIntArray( 262148, 0, 0 )
 
 [node name="enemies" type="TileMap" parent="."]
 tile_set = ExtResource( 5 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
-tile_data = PoolIntArray( 196612, 0, 0 )
